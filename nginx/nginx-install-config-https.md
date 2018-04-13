@@ -54,7 +54,7 @@ cd nginx-1.12.2
 
 ## 配置
 
-### nginx 自动启动
+### nginx 自启动
 
 安装完成过后，首先我们要配置的就是让 `nginx` 随系统自动启动：
 
@@ -71,9 +71,9 @@ sudo vi /etc/rc.local
 ls -s /export/servers/nginx/sbin/nginx /usr/local/bin/nginx
 ```
 
-### nginx 支持多个网站域名
+### nginx 支持多网站多域名
 
-支持多个网站，我们只需要在 `nginx` 配置文件增加 `server` 节点就可以实现。我们的 `nginx` 配置文件在安装目录中 `/export/servers/nginx/conf/nginx.conf`（这就是为什么我喜欢指定`nginx` 的安装目录了，因为默认安装时各种文件会放在不同的目录中）。
+支持多个网站，我们只需要在 `nginx` 配置文件增加 `server` 节点就可以实现。我们的 `nginx` 配置文件在安装目录中 `/export/servers/nginx/conf/nginx.conf`（这就是为什么我喜欢指定`nginx` 的安装目录了，因为默认安装时各种文件会放在不同的目录中）。
 
 ```shell
 cd /export/servers/nginx/conf/
@@ -95,7 +95,7 @@ touch server1.conf
 ```
 server {
   listen 80; # 监听80端口
-  server_name abc.com; # 网站域名
+  server_name abc.com; # 网站域名
   root /export/wwwroot/abc.com/; # 网站根目录
 
   # nginx 日志存放位置
@@ -104,7 +104,7 @@ server {
 }
 ```
 
-如果我们的网站是 `java` 或者 `nodejs` 写的，那么我们就需要通过配置 `nginx` 代理将请求代理到我们的 `java` 或者 `nodejs` 服务了：
+如果我们的网站是 `java` 或者 `nodejs` 写的，那么我们就需要通过配置 `nginx` 代理将请求代理到我们的 `java` 或者 `nodejs` 服务了：
 
 ```
 server {
@@ -120,14 +120,14 @@ server {
 
 然后运行命令 `nginx -s reload` 重新加载一下 `nginx` 配置，配置就生效了。更多 `nginx` 的配置信息可以查看文档：http://nginx.org/en/docs/
 
-### nginx 日志按日期分割
+### nginx 日志按日期分割
 
 `nginx` 可以为每一个 `server` 节点指定日志文件，但是久而久之，这个文件会越来越大。通常的处理方法是将日志文件按日期分割，并且定期删除旧的日志文件。
 
 假设我们 `nginx` 日志文件目录结构如下：
 
 ```
-# 每个网站单独一个目录，来存放各自的日志文件
+# 每个网站单独一个目录，来存放各自的日志文件
 /export/server/nginx/logs/
  ├ abc.com
  │ ├ access.log
@@ -137,7 +137,7 @@ server {
    └ error.log
 ```
 
-首先来看如何将日志文件按日期分割：
+首先来看如何将日志文件按日期分割：
 
 创建一个 `sh` 文件：`touch nginxLogRotate.sh`。文件内容如下：
 
@@ -177,7 +177,7 @@ done
 kill -USR1 $(cat nginx.pid)
 ```
 
-将 `nginxLogRotate.sh` 添加执行权限：`chmod +x nginxLogRotate.sh`，这样我们每运行一次这个文件就会分割一次日志文件。所以我们需要让服务器每天零晨能够自动运行这个文件，以达到按天分割日志，并清除 7 天前旧文件的目的。
+将 `nginxLogRotate.sh` 添加执行权限：`chmod +x nginxLogRotate.sh`，这样我们每运行一次这个文件就会分割一次日志文件。所以我们需要让服务器每天零时能够自动运行这个文件，以达到按天分割日志，并清除 7 天前旧文件的目的。
 
 这时候我们需要用到 `linux` 的计划任务配置：`cron`。`windows` 的定时计划任务我们很熟悉了，`cron` 也有类似的功能：指定某个时间执行特定的任务，这里我们需要让 `cron` 每天零时执行 `nginxLogRotate.sh` 这个文件。
 
@@ -197,7 +197,7 @@ crond restart
 
 ## 让 nginx 支持 https
 
-支持 `https` 也比较简单，主要包含两部分：签署第三方可信任的 `SSL` 证书 和 配置 `HTTPS`，
+支持 `https` 也比较简单，主要包含两部分：签署第三方可信任的 `SSL` 证书 和 配置 `HTTPS`，
 我们在安装 `nginx` 的时候已经开启了 `https` 模块，所以只需要配置就行了，现在我们来看看如何签署第三方可信任的 `SSL` 证书。
 
 第三方证书有很多机构可以提供，这里以 [Let’s Encrypt](https://letsencrypt.org/) 推荐的[certbot](https://certbot.eff.org) 为例。
