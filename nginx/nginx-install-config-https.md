@@ -59,7 +59,7 @@ cd nginx-1.12.2
 安装完成过后，首先我们要配置的就是让 `nginx` 随系统自动启动：
 
 ```shell
-# 编辑 /etc/rc.local 文件（这里需要 root 权限） 
+# 编辑 /etc/rc.local 文件（这里需要 root 权限） 
 sudo vi /etc/rc.local
 # 在文件中添加 /export/servers/nginx/sbin/nginx
 # 然后保存退出
@@ -150,7 +150,7 @@ cd /export/servers/nginx/logs/
 # 获取昨天的日期组成字符串 YYYY-mm-dd
 YESTERDAY=$(date -d "yesterday" +%Y-%m-%d)
 
-# 复制文件的函数 rotate src dist
+# 复制文件的函数 rotate src dist
 function rotate() {
   local src=$1
   local dist=$2
@@ -164,7 +164,7 @@ function rotate() {
 # 遍历当前目录
 for dir in $(ls .)
 do
-  # 复制每个目录下的日志文件并以日期命名
+  # 复制每个目录下的日志文件并以日期命名
   if test -d ${dir}; then
     rotate ${dir}/access.log ${dir}/access_${YESTERDAY}.log
     rotate ${dir}/error.log ${dir}/error_${YESTERDAY}.log
