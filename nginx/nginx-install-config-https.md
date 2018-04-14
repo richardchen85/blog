@@ -194,7 +194,7 @@ crond restart
 
 ### 安装 certbot
 
-`certbot` 依赖 `python`，所以先确认您已经安装了 `python` 2.7 或者 3.4+。
+`certbot` 依赖 `python`，所以先确认您已经安装了 `python` 2.7 或者 3.4+。并且需要先安装 `epel-release`（可以通过包管理工具安装）。
 
 `certbot` 官方首页（ https://certbot.eff.org/ ）提供了如何在不同系统下安装 `certbot` 的教程，这里不做详细介绍。需要注意一点是，因为我们的 `nginx` 是自己编译安装的，所以我们在第一个下拉选项框里应该选择 `None of the above` 而不是 `nginx`。
 
