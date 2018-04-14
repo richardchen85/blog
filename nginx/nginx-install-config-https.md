@@ -8,24 +8,7 @@
 
 首先是安装依赖：
 
-```shell
-# zlib
-wget http://zlib.net/zlib-1.2.5.tar.gz
-tar -zxf zlib-1.2.5.tar.gz
-cd zlib-1.2.5/
-./configure --prefix=/usr/local
-make && make install
-
-# OpenSSL
-wget ftp://ftp.openssl.org/source/openssl-1.0.0c.tar.gz
-tar -zxf openssl-1.0.0c.tar.gz
-cd openssl-1.0.0c/
-./config  --prefix=/usr/local --openssldir=/usr/local/ssl
-make && make install
-./config shared --prefix=/usr/local --openssldir=/usr/local/ssl
-make clean
-make && make install
-```
+`nginx` 安装前需要安装几个依赖：`zlib` 、 `zlib-devel`、`openssl`、`openssl-devel`、`pcre` 和 `pcre-devel`，大多数主机都默认安装了，如果没有安装的话，可以通过自带的包管理工具 `yum` 或 `apt-get` 安装。
 
 这里我们下载 `nginx-1.12.2` 最新的稳定版本。
 
@@ -39,15 +22,18 @@ tar -zxf nginx-1.12.2.tar.gz
 # 转到目录
 cd nginx-1.12.2
 
+# 创建安装目录
+mkdir -p /export/servers/nginx
+
 # 执行配置命令
-# --prefix 表示要安装的路径，这里安装到 /export/servers/nginx 下
+# --prefix 表示要安装的路径
 # --with 表示要安装哪些模块，这里我们安装 http_ssl_module 用于支持 https
 # 注意：要用 https 需要依赖 OpenSSL 库
 # 具体查看： http://nginx.org/en/docs/configure.html
 ./configure --prefix=/export/servers/nginx --with-http_ssl_module
 
 # 执行 make 安装
-./make
+make && make install
 ```
 
 到此，安装就已经完成了，你可以到 `/export/servers/nginx/` 目录看到安装好的 `nginx` 的文件。
@@ -68,7 +54,7 @@ sudo vi /etc/rc.local
 因为我们将 `nginx` 安装到了 `/export/servers/nginx/` 目录，所以每次要执行 `nginx` 命令都要写全路径。所以最好是建立一个 `nginx` 软链接到 `/usr/local/bin/` 目录：
 
 ```shell
-ls -s /export/servers/nginx/sbin/nginx /usr/local/bin/nginx
+ln -s /export/servers/nginx/sbin/nginx /usr/local/bin/nginx
 ```
 
 ### nginx 支持多网站多域名
@@ -206,4 +192,4 @@ crond restart
 
 `certbot` 依赖 `python`，所以先确认您已经安装了 `python` 2.7 或者 3.4+。
 
-`certbot` 官方首页（ https://certbot.eff.org/ ）提供了如何在不同系统下安装 `certbot` 的教程，这里不做详细介绍。
+`certbot` 官方首页（ https://certbot.eff.org/ ）提供了如何在不同系统下安装 `certbot` 的教程，这里不做详细介绍。需要注意一点是，因为我们的 `nginx` 是自己编译安装的，所以我们在第一个下拉选项框里应该选择 `None of the above` 而不是 `nginx`。
