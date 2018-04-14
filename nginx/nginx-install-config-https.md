@@ -76,9 +76,10 @@ mkdir domains
 cd domains
 touch server1.conf
 ```
+
 增加一个 server 节点配置 比如
 
-```
+```conf
 server {
   listen 80; # 监听80端口
   server_name abc.com; # 网站域名
@@ -92,7 +93,7 @@ server {
 
 如果我们的网站是 `java` 或者 `nodejs` 写的，那么我们就需要通过配置 `nginx` 代理将请求代理到我们的 `java` 或者 `nodejs` 服务了：
 
-```
+```conf
 server {
   listen 80;
   server_name abc.com;
@@ -112,7 +113,7 @@ server {
 
 假设我们 `nginx` 日志文件目录结构如下：
 
-```
+```conf
 # 每个网站单独一个目录，来存放各自的日志文件
 /export/server/nginx/logs/
  ├ abc.com
@@ -193,3 +194,43 @@ crond restart
 `certbot` 依赖 `python`，所以先确认您已经安装了 `python` 2.7 或者 3.4+。
 
 `certbot` 官方首页（ https://certbot.eff.org/ ）提供了如何在不同系统下安装 `certbot` 的教程，这里不做详细介绍。需要注意一点是，因为我们的 `nginx` 是自己编译安装的，所以我们在第一个下拉选项框里应该选择 `None of the above` 而不是 `nginx`。
+
+```shell
+# 先停掉 nginx
+nginx -s stop
+
+# 生成证书
+# 这里需要注意一下，因为 let's encrypt 会验证域名的所有权，你必须将域名先解析到你的主机上
+certbot certonly --standalone --email xxx@xx.com -d abc.com
+
+# 查看证书
+cd /etc/letsencrypt/live/abc.com/
+ls
+```
+
+接下来配置 nginx 的 server1.conf 配置文件，然后重启 `nginx`：`nginx -s reload`。
+
+```conf
+server {
+  # 添加以下几行
+  listen 443 ssl;
+
+  ssl_certificate /etc/letsencrypt/live/abc.com/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/abc.com/privkey.pem;
+}
+```
+
+### 自动续签证书
+
+因为 `Let's Encrypt` 的证书只能免费使用 90 天，过期后必须运行命令 `certbot renew` 重新续签。为了省心，我们再次使用 `linux` 的计划任务配置 `cron`。
+
+```shell
+vi /etc/crontab
+
+# 表示每天 0 点和 12 都执行一次命令
+0 0,12 * * * root certbot renew
+# 保存退出
+
+# 重启 cron
+crond restart
+```
