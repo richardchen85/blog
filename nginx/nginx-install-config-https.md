@@ -45,9 +45,10 @@ make && make install
 安装完成过后，首先我们要配置的就是让 `nginx` 随系统自动启动：
 
 ```shell
-# 编辑 /etc/rc.local 文件（这里需要 root 权限） 
+# 编辑 /etc/rc.local 文件（这里需要 root 权限）
 sudo vi /etc/rc.local
-# 在文件中添加 /export/servers/nginx/sbin/nginx
+# 在文件中添加如下内容
+/export/servers/nginx/sbin/nginx
 # 然后保存退出
 ```
 
@@ -57,9 +58,11 @@ sudo vi /etc/rc.local
 ln -s /export/servers/nginx/sbin/nginx /usr/local/bin/nginx
 ```
 
+这样，我们可以直接运行 `nginx -s stop` 或 `nginx -s reload` 来停止或者重启 `nginx` 了。
+
 ### nginx 支持多网站多域名
 
-支持多个网站，我们只需要在 `nginx` 配置文件增加 `server` 节点就可以实现。我们的 `nginx` 配置文件在安装目录中 `/export/servers/nginx/conf/nginx.conf`（这就是为什么我喜欢指定`nginx` 的安装目录了，因为默认安装时各种文件会放在不同的目录中）。
+支持多个网站，我们只需要在 `nginx` 配置文件增加 `server` 节点就可以实现。配置文件在安装目录中 `/export/servers/nginx/conf/nginx.conf`（这就是为什么我喜欢指定`nginx` 的安装目录了，因为默认安装时各种文件会放在不同的目录中）。
 
 ```shell
 cd /export/servers/nginx/conf/
@@ -67,8 +70,8 @@ cd /export/servers/nginx/conf/
 # 修改 nginx.conf
 vi nginx.conf
 # 在 http 节点最后增加一行配置
-# include domains/*.conf;
 # 这里表示将 domains 目录下所有以 .conf 结尾的文件都包含进配置文件中
+include domains/*.conf;
 # 保存退出
 
 # 创建一个网站配置文件
@@ -77,12 +80,12 @@ cd domains
 touch server1.conf
 ```
 
-增加一个 server 节点配置 比如
+在 `server1.conf` 文件中增加一个 server 节点配置 比如
 
 ```conf
 server {
   listen 80; # 监听80端口
-  server_name abc.com; # 网站域名
+  server_name abc.com; # 网站域名，多个域名用空格隔开
   root /export/wwwroot/abc.com/; # 网站根目录
 
   # nginx 日志存放位置
@@ -234,3 +237,11 @@ vi /etc/crontab
 # 重启 cron
 crond restart
 ```
+
+以上就是关于如何安装 `nginx`，如果配置 `nginx` 多网站多域名，以及支持 `http` 的过程，若本文有什么遗漏或者失误，会及时更新到本文。
+
+## 参考资料
+
+* http://nginx.org/en/docs/
+* https://letsencrypt.org/getting-started/
+* https://certbot.eff.org/
