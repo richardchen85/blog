@@ -52,6 +52,8 @@ sudo vi /etc/rc.local
 # 然后保存退出
 ```
 
+> 注意：从 centos7 开始，开机时默认将不执行 /etc/rc.local，如果想要让它执行，必须更改该文件的权限 `chmod +x /etc/rc.d/rc.local`。当然也可以通过增加 systemctl service 的方式来实现。
+
 因为我们将 `nginx` 安装到了 `/export/servers/nginx/` 目录，所以每次要执行 `nginx` 命令都要写全路径。所以最好是建立一个 `nginx` 软链接到 `/usr/local/bin/` 目录：
 
 ```shell
