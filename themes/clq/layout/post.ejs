@@ -1,0 +1,56 @@
+<div id="page-post">
+  <article class="post detail">
+    <div class="meta">
+      <div class="date"><%= date(page.date, 'MM月DD, YYYY') %></div>
+    </div>
+    <h1 class="title"><%= page.title %></h1>
+    <div class="entry-content">
+      <%- page.content %>
+    </div>
+    <p>本文链接：<a href="<%= url_for(page.path) %>"><%- page.permalink %></a></p>
+    <p>-- <acronym title="End of File">EOF</acronym> --</p>
+
+    <div class="post-info">
+      <p>
+        作者
+        <%= page.user %>
+        发表于
+        <i><%= date(page.date, 'YYYY-MM-DD HH:mm:ss') %></i>
+
+        <% if (page.categories.length) { %>
+        ，添加在分类
+        <% page.categories.data.forEach(function (cate, index) { %>
+        <a href="<%= url_for(cate.path) %>" data-cate="<%= cate.name %>">
+          <code class="notebook"><%= cate.name %></code>
+        </a>
+        <% }) %>
+        下
+        <% } %>
+
+        <% if (page.tags.length) { %>
+        ，并被添加「
+        <% page.tags.forEach(function (tag, index) { %>
+        <a href="<%= url_for(tag.path) %>" data-tag="<%= tag.name %>">
+          <code class="notebook"><%= tag.name %></code>
+        </a>
+        <% }) %>
+        」标签
+        <% } %>
+
+        ，最后修改于
+        <i><%= date(page.updated, 'YYYY-MM-DD HH:mm:ss') %></i>
+      </p>
+    </div>
+  </article>
+  <%if (page.prev || page.next) { %>
+  <nav class="pagination">
+    <% if (page.prev) { %>
+    <a href="<%= url_for(page.prev.path) %>" class="prev">&laquo; <%= page.prev.title %></a>
+    <% } %>
+
+    <% if (page.next) { %>
+    <a href="<%= url_for(page.next.path) %>" class="next"><%= page.next.title %> &raquo;</a>
+    <% } %>
+  </nav>
+  <% } %>
+</div>

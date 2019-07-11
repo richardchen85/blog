@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+  
+  <title>浏览器API学习——BOM浏览器对象模型 | Richard Chen</title>
+  
+  <meta name="keywords" content="web前端,SEO,搜索擎优化,网站开发">
+  
+  <meta name="description" content="关注web前端技术_搜索引擎优化_网站建设">
+  <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/rss.html">
+  <link rel="stylesheet" href="/css/all.css">
+
+  <script>
+    var prfm_config = { id: 1 };
+  </script>
+  <script src="//misc.chenliqiang.cn/prfm/1.0.0/perfm.min.js"></script>
+  
+</head>
+
+<body>
+  <nav id="sidebar" class="behavior_1">
+    <div class="wrap">
+      <div class="profile">
+        <a href="/">
+          <img src="https://misc.chenliqiang.cn/blog/logo.png" alt="关注WEB前端技术_搜索引擎优化_网站建设">
+        </a>
+        <span>Richard Chen</span>
+      </div>
+      <ul class="buttons">
+        
+        
+        <li>
+          <a class href="/" title="首页">
+            <i class="iconfont icon-home"></i>
+            <span>首页</span>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class href="/archives/" title="归档">
+            <i class="iconfont icon-archive"></i>
+            <span>归档</span>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class href="/page/about.html" title="关于">
+            <i class="iconfont icon-user"></i>
+            <span>关于</span>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class href="/links" title="友链">
+            <i class="iconfont icon-link"></i>
+            <span>友链</span>
+          </a>
+        </li>
+        
+      </ul>
+      <ul class="buttons">
+        <li>
+          
+          <a class="inline" rel="nofollow" target="_blank" href="https://github.com/richard-chen-1985">
+            <i class="iconfont icon-github-v" title="GitHub"></i>
+          </a>
+          
+          
+          <a class="inline" href="/">
+            <i class="iconfont icon-rss-v" title="RSS"></i>
+          </a>
+          <a class="inline" href="/search.html">
+            <i class="iconfont icon-search" title="Search"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div id="header">
+    <div class="btn-bar"><i></i></div>
+    <h1><a href="/">关注WEB前端技术_搜索引擎优化_网站建设</a></h1>
+    <a class="me" href="/page/about.html"><img src="https://misc.chenliqiang.cn/blog/logo.png" alt="Richard Chen"></a>
+  </div>
+  <div id="sidebar-mask"></div>
+  <div id="main">
+    <div id="page-post">
+  <article class="post detail">
+    <div class="meta">
+      <div class="date">02月03, 2019</div>
+    </div>
+    <h1 class="title">浏览器API学习——BOM浏览器对象模型</h1>
+    <div class="entry-content">
+      <p>window 对象是 BOM 的核心，可以控制窗口、框架和弹出窗口，也扮演着 ECMAScript 中 Global 对象的角色。</p>
+<p>定义全局变量与在 window 对象上直接定义属性的差别：全局变量不能通过 delete 操作符删除，而定义在 window 对象上的属性是可以的。</p>
+<a id="more"></a>
+
+<h2 id="窗口和框架"><a href="#窗口和框架" class="headerlink" title="窗口和框架"></a>窗口和框架</h2><ul>
+<li>窗口切换：top、self、parent</li>
+<li>框架：window.frames[0] 或者 window.frames[‘name’]</li>
+</ul>
+<h2 id="系统对话框"><a href="#系统对话框" class="headerlink" title="系统对话框"></a>系统对话框</h2><p>alert()、confirm() 和 promot()。</p>
+<h2 id="location-对象"><a href="#location-对象" class="headerlink" title="location 对象"></a>location 对象</h2><table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>例子</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>hash</td>
+<td>#contents</td>
+<td>返回 URL 中的 hash 或空字符串</td>
+</tr>
+<tr>
+<td>host</td>
+<td><a href="http://www.wrox.com:80" target="_blank" rel="noopener">www.wrox.com:80</a></td>
+<td>服务器名称和端口号（如果有）</td>
+</tr>
+<tr>
+<td>hostname</td>
+<td><a href="http://www.wrox.com" target="_blank" rel="noopener">www.wrox.com</a></td>
+<td>不带端口号的服务器名称</td>
+</tr>
+<tr>
+<td>href</td>
+<td><a href="http://www.wrox.com/xx/" target="_blank" rel="noopener">http://www.wrox.com/xx/</a></td>
+<td>返回当前加载的完整 URL，同 location.toString()</td>
+</tr>
+<tr>
+<td>pathname</td>
+<td>/WileyCDA/</td>
+<td>返回 URL 中的目录和（或）文件名</td>
+</tr>
+<tr>
+<td>port</td>
+<td>8080</td>
+<td>端口号或空字符串</td>
+</tr>
+<tr>
+<td>protocol</td>
+<td>http:</td>
+<td>返回页面使用的协议</td>
+</tr>
+<tr>
+<td>search</td>
+<td>?q=javascript</td>
+<td>返回以问号开头的 URL 的查询字符串</td>
+</tr>
+<tr>
+<td>origin</td>
+<td><a href="http://www.wrox.com" target="_blank" rel="noopener">http://www.wrox.com</a></td>
+<td>返回 URL 的源信息</td>
+</tr>
+</tbody></table>
+<p>每次修改 location 的属性（hash除外），页面都会以新 URL 重新加载。</p>
+<h3 id="location-的方法"><a href="#location-的方法" class="headerlink" title="location 的方法"></a>location 的方法</h3><ul>
+<li>assign(url)： 打开新 URL 并在浏览器的历史记录中生成一条记录</li>
+<li>replace(url)：导航到新的 URL，但不生成浏览器记录</li>
+<li>reload(true|false)：为 false 可能从缓存加载，为 true 从服务器重新加载， 调用之后不阻塞后面的代码，所以最好放在代码最后一行</li>
+</ul>
+<h2 id="navigator-对象"><a href="#navigator-对象" class="headerlink" title="navigator 对象"></a>navigator 对象</h2><table>
+<thead>
+<tr>
+<th>属性或方法</th>
+<th>参考值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>appCodeName</td>
+<td>“Mozilla”</td>
+</tr>
+<tr>
+<td>appName</td>
+<td>“Netscape”</td>
+</tr>
+<tr>
+<td>appVersion</td>
+<td>“5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36”</td>
+</tr>
+<tr>
+<td>connection</td>
+<td>NetworkInformation</td>
+</tr>
+<tr>
+<td>cookieEnabled</td>
+<td>true</td>
+</tr>
+<tr>
+<td>doNotTrack</td>
+<td>null</td>
+</tr>
+<tr>
+<td>geolocation</td>
+<td>Geolocation</td>
+</tr>
+<tr>
+<td>hardwareConcurrency</td>
+<td>8</td>
+</tr>
+<tr>
+<td>language</td>
+<td>“zh-CN”</td>
+</tr>
+<tr>
+<td>languages</td>
+<td>(3) [“zh-CN”, “zh”, “en”]</td>
+</tr>
+<tr>
+<td>maxTouchPoints</td>
+<td>0</td>
+</tr>
+<tr>
+<td>mediaCapabilities</td>
+<td>MediaCapabilities</td>
+</tr>
+<tr>
+<td>mediaDevices</td>
+<td>MediaDevices</td>
+</tr>
+<tr>
+<td>mimeTypes</td>
+<td>MimeTypeArray</td>
+</tr>
+<tr>
+<td>onLine</td>
+<td>true</td>
+</tr>
+<tr>
+<td>permissions</td>
+<td>Permissions</td>
+</tr>
+<tr>
+<td>platform</td>
+<td>“MacIntel”</td>
+</tr>
+<tr>
+<td>plugins</td>
+<td>PluginArray</td>
+</tr>
+<tr>
+<td>presentation</td>
+<td>Presentation</td>
+</tr>
+<tr>
+<td>product</td>
+<td>“Gecko”</td>
+</tr>
+<tr>
+<td>productSub</td>
+<td>“20030107”</td>
+</tr>
+<tr>
+<td>userAgent</td>
+<td>“Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36”</td>
+</tr>
+<tr>
+<td>vendor</td>
+<td>“Google Inc.”</td>
+</tr>
+<tr>
+<td>vendorSub</td>
+<td>“”</td>
+</tr>
+</tbody></table>
+<h2 id="screen-对象"><a href="#screen-对象" class="headerlink" title="screen 对象"></a>screen 对象</h2><table>
+<thead>
+<tr>
+<th>属性或方法</th>
+<th>参考值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>availHeight</td>
+<td>971</td>
+</tr>
+<tr>
+<td>availLeft</td>
+<td>0</td>
+</tr>
+<tr>
+<td>availTop</td>
+<td>23</td>
+</tr>
+<tr>
+<td>availWidth</td>
+<td>1680</td>
+</tr>
+<tr>
+<td>colorDepth</td>
+<td>24</td>
+</tr>
+<tr>
+<td>height</td>
+<td>1050</td>
+</tr>
+<tr>
+<td>orientation</td>
+<td>ScreenOrientation</td>
+</tr>
+<tr>
+<td>pixelDepth</td>
+<td>24</td>
+</tr>
+<tr>
+<td>width</td>
+<td>1680</td>
+</tr>
+</tbody></table>
+<h2 id="history-对象"><a href="#history-对象" class="headerlink" title="history 对象"></a>history 对象</h2><ul>
+<li>go(number|url)：在历史记录中随意跳转，正数向前，负数向后，url 跳转到历史记录中包含该字符串的第一个位置</li>
+<li>back()：后退</li>
+<li>forward()：前进</li>
+</ul>
+
+    </div>
+    <p>本文链接：<a href="/post/browser-api-bom.html">https://www.chenliqiang.cn/post/browser-api-bom.html</a></p>
+    <p>-- <acronym title="End of File">EOF</acronym> --</p>
+
+    <div class="post-info">
+      <p>
+        作者
+        Richard Chen
+        发表于
+        <i>2019-02-03 14:22:45</i>
+
+        
+        ，添加在分类
+        
+        <a href="/cate/browser/" data-cate="浏览器">
+          <code class="notebook">浏览器</code>
+        </a>
+        
+        下
+        
+
+        
+
+        ，最后修改于
+        <i>2019-02-03 14:20:20</i>
+      </p>
+    </div>
+  </article>
+  
+  <nav class="pagination">
+    
+
+    
+    <a href="/post/html-semantics-tags.html" class="next">HTML学习之—语义化标签 &raquo;</a>
+    
+  </nav>
+  
+</div>
+    <footer id="footer" class="inner">
+      &copy; 2019&nbsp;-&nbsp; Richard Chen
+    </footer>
+  </div>
+  <script src="/js/firekylin.js"></script>
+  
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?78b5e2f61bcb1be04b8e24101cc27f17";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+</body>
+</html>

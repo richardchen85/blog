@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+  
+  <title>nginx安装、配置及支持https不完全手册 | Richard Chen</title>
+  
+  <meta name="keywords" content="web前端,SEO,搜索擎优化,网站开发">
+  
+  <meta name="description" content="关注web前端技术_搜索引擎优化_网站建设">
+  <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/rss.html">
+  <link rel="stylesheet" href="/css/all.css">
+
+  <script>
+    var prfm_config = { id: 1 };
+  </script>
+  <script src="//misc.chenliqiang.cn/prfm/1.0.0/perfm.min.js"></script>
+  
+</head>
+
+<body>
+  <nav id="sidebar" class="behavior_1">
+    <div class="wrap">
+      <div class="profile">
+        <a href="/">
+          <img src="https://misc.chenliqiang.cn/blog/logo.png" alt="关注WEB前端技术_搜索引擎优化_网站建设">
+        </a>
+        <span>Richard Chen</span>
+      </div>
+      <ul class="buttons">
+        
+        
+        <li>
+          <a class href="/" title="首页">
+            <i class="iconfont icon-home"></i>
+            <span>首页</span>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class href="/archives/" title="归档">
+            <i class="iconfont icon-archive"></i>
+            <span>归档</span>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class href="/page/about.html" title="关于">
+            <i class="iconfont icon-user"></i>
+            <span>关于</span>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class href="/links" title="友链">
+            <i class="iconfont icon-link"></i>
+            <span>友链</span>
+          </a>
+        </li>
+        
+      </ul>
+      <ul class="buttons">
+        <li>
+          
+          <a class="inline" rel="nofollow" target="_blank" href="https://github.com/richard-chen-1985">
+            <i class="iconfont icon-github-v" title="GitHub"></i>
+          </a>
+          
+          
+          <a class="inline" href="/">
+            <i class="iconfont icon-rss-v" title="RSS"></i>
+          </a>
+          <a class="inline" href="/search.html">
+            <i class="iconfont icon-search" title="Search"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div id="header">
+    <div class="btn-bar"><i></i></div>
+    <h1><a href="/">关注WEB前端技术_搜索引擎优化_网站建设</a></h1>
+    <a class="me" href="/page/about.html"><img src="https://misc.chenliqiang.cn/blog/logo.png" alt="Richard Chen"></a>
+  </div>
+  <div id="sidebar-mask"></div>
+  <div id="main">
+    <div id="page-post">
+  <article class="post detail">
+    <div class="meta">
+      <div class="date">04月14, 2018</div>
+    </div>
+    <h1 class="title">nginx安装、配置及支持https不完全手册</h1>
+    <div class="entry-content">
+      <p><code>nginx</code> 已经成为 <code>web</code> 开发者不可或缺的工具，虽然平时我们用到的服务器，运维都已经帮我们安装配置好了 <code>nginx</code> ，但作为开发人员，掌握如何搭建和配置服务器环境，能让我们的工作更加得心应手。</p>
+<a id="more"></a>
+<h2 id="安装-nginx"><a href="#安装-nginx" class="headerlink" title="安装 nginx"></a>安装 nginx</h2><p><code>nginx</code> 安装方式有两种，一种是直接通过包管理工具（如：<code>yum</code> 或 <code>apt-get</code>）安装，另一种方式是通过编译源码安装。这里我们选择自由度更高（当然也更麻烦）的编译源码安装。</p>
+<p>首先是安装依赖：</p>
+<p><code>nginx</code> 安装前需要安装几个依赖：<code>zlib</code> 、 <code>zlib-devel</code>、<code>openssl</code>、<code>openssl-devel</code>、<code>pcre</code> 和 <code>pcre-devel</code>，大多数主机都默认安装了，如果没有安装的话，可以通过自带的包管理工具 <code>yum</code> 或 <code>apt-get</code> 安装。</p>
+<p>这里我们下载 <code>nginx-1.12.2</code> 最新的稳定版本。</p>
+<pre><code class="hljs shell"><span class="hljs-meta">#</span> 下载
+curl -O http://nginx.org/download/nginx-1.12.2.tar.gz
+<span class="hljs-meta">
+#</span> 解压
+tar -zxf nginx-1.12.2.tar.gz
+<span class="hljs-meta">
+#</span> 转到目录
+cd nginx-1.12.2
+<span class="hljs-meta">
+#</span> 创建安装目录
+mkdir -p /export/servers/nginx
+<span class="hljs-meta">
+#</span> 执行配置命令
+<span class="hljs-meta">#</span> --prefix 表示要安装的路径
+<span class="hljs-meta">#</span> --with 表示要安装哪些模块，这里我们安装 http_ssl_module 用于支持 https
+<span class="hljs-meta">#</span> 注意：要用 https 需要依赖 OpenSSL 库
+<span class="hljs-meta">#</span> 具体查看： http://nginx.org/en/docs/configure.html
+./configure --prefix=/export/servers/nginx --with-http_ssl_module
+<span class="hljs-meta">
+#</span> 执行 make 安装
+make &amp;&amp; make install</code></pre>
+
+<p>到此，安装就已经完成了，你可以到 <code>/export/servers/nginx/</code> 目录看到安装好的 <code>nginx</code> 的文件。</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="nginx-自启动"><a href="#nginx-自启动" class="headerlink" title="nginx 自启动"></a>nginx 自启动</h3><p>安装完成过后，首先我们要配置的就是让 <code>nginx</code> 随系统自动启动：</p>
+<pre><code class="hljs shell"><span class="hljs-meta">#</span> 编辑 /etc/rc.local 文件（这里需要 root 权限）
+sudo vi /etc/rc.local
+<span class="hljs-meta">#</span> 在文件中添加如下内容
+/export/servers/nginx/sbin/nginx
+<span class="hljs-meta">#</span> 然后保存退出</code></pre>
+
+<blockquote>
+<p>注意：从 centos7 开始，开机时默认将不执行 /etc/rc.local，如果想要让它执行，必须更改该文件的权限 <code>chmod +x /etc/rc.d/rc.local</code>。当然也可以通过增加 systemctl service 的方式来实现。</p>
+</blockquote>
+<p>因为我们将 <code>nginx</code> 安装到了 <code>/export/servers/nginx/</code> 目录，所以每次要执行 <code>nginx</code> 命令都要写全路径。所以最好是建立一个 <code>nginx</code> 软链接到 <code>/usr/local/bin/</code> 目录：</p>
+<pre><code class="hljs shell">ln -s /export/servers/nginx/sbin/nginx /usr/local/bin/nginx</code></pre>
+
+<p>这样，我们可以直接运行 <code>nginx -s stop</code> 或 <code>nginx -s reload</code> 来停止或者重启 <code>nginx</code> 了。</p>
+<h3 id="nginx-支持多网站多域名"><a href="#nginx-支持多网站多域名" class="headerlink" title="nginx 支持多网站多域名"></a>nginx 支持多网站多域名</h3><p>支持多个网站，我们只需要在 <code>nginx</code> 配置文件增加 <code>server</code> 节点就可以实现。配置文件在安装目录中 <code>/export/servers/nginx/conf/nginx.conf</code>（这就是为什么我喜欢指定<code>nginx</code> 的安装目录了，因为默认安装时各种文件会放在不同的目录中）。</p>
+<pre><code class="hljs shell">cd /export/servers/nginx/conf/
+<span class="hljs-meta">
+#</span> 修改 nginx.conf
+vi nginx.conf
+<span class="hljs-meta">#</span> 在 http 节点最后增加一行配置
+<span class="hljs-meta">#</span> 这里表示将 domains 目录下所有以 .conf 结尾的文件都包含进配置文件中
+include domains/*.conf;
+<span class="hljs-meta">#</span> 保存退出
+<span class="hljs-meta">
+#</span> 创建一个网站配置文件
+mkdir domains
+cd domains
+touch server1.conf</code></pre>
+
+<p>在 <code>server1.conf</code> 文件中增加一个 server 节点配置 比如</p>
+<pre><code class="hljs conf">server &#123;
+  listen 80; # 监听80端口
+  server_name abc.com; # 网站域名，多个域名用空格隔开
+  root /export/wwwroot/abc.com/; # 网站根目录
+
+  # nginx 日志存放位置
+  access_log /export/servers/nginx/logs/abc.com/access.log;
+  error_log  /export/servers/nginx/logs/abc.com/error.log;
+&#125;</code></pre>
+
+<p>如果我们的网站是 <code>java</code> 或者 <code>nodejs</code> 写的，那么我们就需要通过配置 <code>nginx</code> 代理将请求代理到我们的 <code>java</code> 或者 <code>nodejs</code> 服务了：</p>
+<pre><code class="hljs conf">server &#123;
+  listen 80;
+  server_name abc.com;
+  # 匹配所有请求
+  location / &#123;
+    # 代理请求，假如我们的应用监听了 8080 端口
+    proxy_pass http://127.0.0.1:8080;
+  &#125;
+&#125;</code></pre>
+
+<p>然后运行命令 <code>nginx -s reload</code> 重新加载一下 <code>nginx</code> 配置，配置就生效了。更多 <code>nginx</code> 的配置信息可以查看文档：<a href="http://nginx.org/en/docs/" target="_blank" rel="noopener">http://nginx.org/en/docs/</a></p>
+<h3 id="nginx-日志按日期分割"><a href="#nginx-日志按日期分割" class="headerlink" title="nginx 日志按日期分割"></a>nginx 日志按日期分割</h3><p><code>nginx</code> 可以为每一个 <code>server</code> 节点指定日志文件，但是久而久之，这个文件会越来越大。通常的处理方法是将日志文件按日期分割，并且定期删除旧的日志文件。</p>
+<p>假设我们 <code>nginx</code> 日志文件目录结构如下：</p>
+<pre><code class="hljs conf"># 每个网站单独一个目录，来存放各自的日志文件
+/export/server/nginx/logs/
+ ├ abc.com
+ │ ├ access.log
+ │ └ error.log
+ └ def.com
+   ├ access.log
+   └ error.log</code></pre>
+
+<p>首先来看如何将日志文件按日期分割：</p>
+<p>创建一个 <code>sh</code> 文件：<code>touch nginxLogRotate.sh</code>。文件内容如下：</p>
+<pre><code class="hljs shell"><span class="hljs-meta">#</span>!/bin/bash
+<span class="hljs-meta">
+#</span> 到 nginx 日志目录
+cd /export/servers/nginx/logs/
+<span class="hljs-meta">
+#</span> 获取昨天的日期组成字符串 YYYY-mm-dd
+YESTERDAY=$(date -d "yesterday" +%Y-%m-%d)
+<span class="hljs-meta">
+#</span> 复制文件的函数 rotate src dist
+function rotate() &#123;
+  local src=$1
+  local dist=$2
+  if test -f $&#123;src&#125;; then
+    mv $&#123;src&#125; $&#123;dist&#125;
+  else
+    echo "can not find: " $&#123;src&#125;
+  fi
+&#125;
+<span class="hljs-meta">
+#</span> 遍历当前目录
+for dir in $(ls .)
+do
+<span class="hljs-meta">  #</span> 复制每个目录下的日志文件并以日期命名
+  if test -d $&#123;dir&#125;; then
+    rotate $&#123;dir&#125;/access.log $&#123;dir&#125;/access_$&#123;YESTERDAY&#125;.log
+    rotate $&#123;dir&#125;/error.log $&#123;dir&#125;/error_$&#123;YESTERDAY&#125;.log
+    # 删除 7 天以前的日志文件
+    find $dir -mtime +7 -type f -name '*.log' -exec rm -f &#123;&#125; \;
+  fi
+done
+<span class="hljs-meta">
+#</span> 重新加载日志文件
+kill -USR1 $(cat nginx.pid)</code></pre>
+
+<p>将 <code>nginxLogRotate.sh</code> 添加执行权限：<code>chmod +x nginxLogRotate.sh</code>，这样我们每运行一次这个文件就会分割一次日志文件。所以我们需要让服务器每天零时能够自动运行这个文件，以达到按天分割日志，并清除 7 天前旧文件的目的。</p>
+<p>这时候我们需要用到 <code>linux</code> 的计划任务配置：<code>cron</code>。<code>windows</code> 的定时计划任务我们很熟悉了，<code>cron</code> 也有类似的功能：指定某个时间执行特定的任务，这里我们需要让 <code>cron</code> 每天零时执行 <code>nginxLogRotate.sh</code> 这个文件。</p>
+<p><code>cron</code> 有个配置文件： <code>/etc/crontab</code>，我们可以在这个配置文件里配置我们的任务：</p>
+<pre><code class="hljs shell">vi /etc/crontab
+<span class="hljs-meta">
+#</span> 内容如下：
+<span class="hljs-meta">#</span> 表示在每天 00:01 时执行
+1 0 * * * root /export/servers/nginx/logs/nginxLogRotate.sh
+<span class="hljs-meta">#</span> 保存退出
+<span class="hljs-meta">
+#</span> 重启 cron
+crond restart</code></pre>
+
+<h2 id="让-nginx-支持-https"><a href="#让-nginx-支持-https" class="headerlink" title="让 nginx 支持 https"></a>让 nginx 支持 https</h2><p>支持 <code>https</code> 也比较简单，主要包含两部分：签署第三方可信任的 <code>SSL</code> 证书 和 配置 <code>HTTPS</code>，<br>我们在安装 <code>nginx</code> 的时候已经开启了 <code>https</code> 模块，所以只需要配置就行了，现在我们来看看如何签署第三方可信任的 <code>SSL</code> 证书。</p>
+<p>第三方证书有很多机构可以提供，这里以 <a href="https://letsencrypt.org/" target="_blank" rel="noopener">Let’s Encrypt</a> 推荐的<a href="https://certbot.eff.org" target="_blank" rel="noopener">certbot</a> 为例。</p>
+<h3 id="安装-certbot"><a href="#安装-certbot" class="headerlink" title="安装 certbot"></a>安装 certbot</h3><p><code>certbot</code> 依赖 <code>python</code>，所以先确认您已经安装了 <code>python</code> 2.7 或者 3.4+。并且需要先安装 <code>epel-release</code>（可以通过包管理工具安装）。</p>
+<p><code>certbot</code> 官方首页（ <a href="https://certbot.eff.org/" target="_blank" rel="noopener">https://certbot.eff.org/</a> ）提供了如何在不同系统下安装 <code>certbot</code> 的教程，这里不做详细介绍。需要注意一点是，因为我们的 <code>nginx</code> 是自己编译安装的，所以我们在第一个下拉选项框里应该选择 <code>None of the above</code> 而不是 <code>nginx</code>。</p>
+<pre><code class="hljs shell"><span class="hljs-meta">#</span> 先停掉 nginx
+nginx -s stop
+<span class="hljs-meta">
+#</span> 生成证书
+<span class="hljs-meta">#</span> 这里需要注意一下，因为 let's encrypt 会验证域名的所有权，你必须将域名先解析到你的主机上
+certbot certonly --standalone --email xxx@xx.com -d abc.com
+<span class="hljs-meta">
+#</span> 查看证书
+cd /etc/letsencrypt/live/abc.com/
+ls</code></pre>
+
+<p>接下来配置 nginx 的 server1.conf 配置文件，然后重启 <code>nginx</code>：<code>nginx -s reload</code>。</p>
+<pre><code class="hljs conf">server &#123;
+  # 添加以下几行
+  listen 443 ssl;
+
+  ssl_certificate /etc/letsencrypt/live/abc.com/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/abc.com/privkey.pem;
+&#125;</code></pre>
+
+<h3 id="自动续签证书"><a href="#自动续签证书" class="headerlink" title="自动续签证书"></a>自动续签证书</h3><p>因为 <code>Let&#39;s Encrypt</code> 的证书只能免费使用 90 天，过期后必须运行命令 <code>certbot renew</code> 重新续签。为了省心，我们再次使用 <code>linux</code> 的计划任务配置 <code>cron</code>。</p>
+<pre><code class="hljs shell">vi /etc/crontab
+<span class="hljs-meta">
+#</span> 表示每天 0 点和 12 都执行一次命令
+0 0,12 * * * root certbot renew
+<span class="hljs-meta">#</span> 保存退出
+<span class="hljs-meta">
+#</span> 重启 cron
+crond restart</code></pre>
+
+<p>以上就是关于如何安装 <code>nginx</code>，如果配置 <code>nginx</code> 多网站多域名，以及支持 <code>http</code> 的过程，若本文有什么遗漏或者失误，会及时更新到本文。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="http://nginx.org/en/docs/" target="_blank" rel="noopener">http://nginx.org/en/docs/</a></li>
+<li><a href="https://letsencrypt.org/getting-started/" target="_blank" rel="noopener">https://letsencrypt.org/getting-started/</a></li>
+<li><a href="https://certbot.eff.org/" target="_blank" rel="noopener">https://certbot.eff.org/</a></li>
+</ul>
+
+    </div>
+    <p>本文链接：<a href="/post/nginx-install-config-supoort-https.html">https://www.chenliqiang.cn/post/nginx-install-config-supoort-https.html</a></p>
+    <p>-- <acronym title="End of File">EOF</acronym> --</p>
+
+    <div class="post-info">
+      <p>
+        作者
+        
+        发表于
+        <i>2018-04-14 21:23:14</i>
+
+        
+        ，添加在分类
+        
+        <a href="/cate/servers/" data-cate="服务器">
+          <code class="notebook">服务器</code>
+        </a>
+        
+        下
+        
+
+        
+
+        ，最后修改于
+        <i>2019-05-15 13:52:29</i>
+      </p>
+    </div>
+  </article>
+  
+  <nav class="pagination">
+    
+    <a href="/post/html-semantics-tags.html" class="prev">&laquo; HTML学习之—语义化标签</a>
+    
+
+    
+    <a href="/post/webpack-react-without-create-react-app.html" class="next">不用create-react-app搭建基于webpack的react项目 &raquo;</a>
+    
+  </nav>
+  
+</div>
+    <footer id="footer" class="inner">
+      &copy; 2019&nbsp;-&nbsp; Richard Chen
+    </footer>
+  </div>
+  <script src="/js/firekylin.js"></script>
+  
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?78b5e2f61bcb1be04b8e24101cc27f17";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+  
+  <title>C#.Net中使用WebBrowser请记得及时释放页面及缓存 | Richard Chen</title>
+  
+  <meta name="keywords" content="web前端,SEO,搜索擎优化,网站开发">
+  
+  <meta name="description" content="关注web前端技术_搜索引擎优化_网站建设">
+  <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/rss.html">
+  <link rel="stylesheet" href="/css/all.css">
+
+  <script>
+    var prfm_config = { id: 1 };
+  </script>
+  <script src="//misc.chenliqiang.cn/prfm/1.0.0/perfm.min.js"></script>
+  
+</head>
+
+<body>
+  <nav id="sidebar" class="behavior_1">
+    <div class="wrap">
+      <div class="profile">
+        <a href="/">
+          <img src="https://misc.chenliqiang.cn/blog/logo.png" alt="关注WEB前端技术_搜索引擎优化_网站建设">
+        </a>
+        <span>Richard Chen</span>
+      </div>
+      <ul class="buttons">
+        
+        
+        <li>
+          <a class href="/" title="首页">
+            <i class="iconfont icon-home"></i>
+            <span>首页</span>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class href="/archives/" title="归档">
+            <i class="iconfont icon-archive"></i>
+            <span>归档</span>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class href="/page/about.html" title="关于">
+            <i class="iconfont icon-user"></i>
+            <span>关于</span>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class href="/links" title="友链">
+            <i class="iconfont icon-link"></i>
+            <span>友链</span>
+          </a>
+        </li>
+        
+      </ul>
+      <ul class="buttons">
+        <li>
+          
+          <a class="inline" rel="nofollow" target="_blank" href="https://github.com/richard-chen-1985">
+            <i class="iconfont icon-github-v" title="GitHub"></i>
+          </a>
+          
+          
+          <a class="inline" href="/">
+            <i class="iconfont icon-rss-v" title="RSS"></i>
+          </a>
+          <a class="inline" href="/search.html">
+            <i class="iconfont icon-search" title="Search"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div id="header">
+    <div class="btn-bar"><i></i></div>
+    <h1><a href="/">关注WEB前端技术_搜索引擎优化_网站建设</a></h1>
+    <a class="me" href="/page/about.html"><img src="https://misc.chenliqiang.cn/blog/logo.png" alt="Richard Chen"></a>
+  </div>
+  <div id="sidebar-mask"></div>
+  <div id="main">
+    <div id="page-post">
+  <article class="post detail">
+    <div class="meta">
+      <div class="date">03月07, 2018</div>
+    </div>
+    <h1 class="title">C#.Net中使用WebBrowser请记得及时释放页面及缓存</h1>
+    <div class="entry-content">
+      <p>最近在一个C#.NET项目中，需要一个WebBrowser去打开网页并显示其内容。操作很简单，这里就不具体说了，程序运行得很好，没有任何问题，于是放到服务器上。过了几天，悲剧发生了。</p>
+<a id="more"></a>
+
+<p>几天过后，发现服务器没响应了，远程连接上去一看，提示内存不足，于是查看任务管理器，那个.net程序占用了1G多内存。想了好久，程序也不大，内存占用不该那么高啊，突然灵光一现，是不是用了WebBrowser打开网页，但是没释放呢，就像你在浏览器中打开一个网页不关闭一样，如果这个网页各种JS各种统计代码，那它不是会一直运行，一直加载新内容啊，内在占用不高才怪。</p>
+<p>原因找到了，在代码里将WebBrowser下载完网页内容过后，随即将它的页面释放，编译过后放到服务器，再过了几天，回到服务器上一看，妥妥的，内存占用小了好多。</p>
+<p>具体方法如下：</p>
+<pre><code class="hljs c#">webBrowser.Url = null;
+webBrowser.Document.OpenNew(false);
+webBrowser = null;</code></pre>
+
+<p>当然如果在当时申明了某些变量来保存网页的内容，也将变量设置为NULL吧。</p>
+
+    </div>
+    <p>本文链接：<a href="/post/20.html">https://www.chenliqiang.cn/post/20.html</a></p>
+    <p>-- <acronym title="End of File">EOF</acronym> --</p>
+
+    <div class="post-info">
+      <p>
+        作者
+        
+        发表于
+        <i>2018-03-07 23:48:56</i>
+
+        
+        ，添加在分类
+        
+        <a href="/cate/csharp/" data-cate="C#">
+          <code class="notebook">C#</code>
+        </a>
+        
+        下
+        
+
+        
+
+        ，最后修改于
+        <i>2019-02-11 17:32:46</i>
+      </p>
+    </div>
+  </article>
+  
+  <nav class="pagination">
+    
+    <a href="/post/21.html" class="prev">&laquo; javascript原生实现自定义滚动条，支持鼠标滚轮</a>
+    
+
+    
+    <a href="/post/19.html" class="next">JavaScript著名的变量命名规则 &raquo;</a>
+    
+  </nav>
+  
+</div>
+    <footer id="footer" class="inner">
+      &copy; 2019&nbsp;-&nbsp; Richard Chen
+    </footer>
+  </div>
+  <script src="/js/firekylin.js"></script>
+  
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?78b5e2f61bcb1be04b8e24101cc27f17";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+</body>
+</html>

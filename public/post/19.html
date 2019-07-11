@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+  
+  <title>JavaScript著名的变量命名规则 | Richard Chen</title>
+  
+  <meta name="keywords" content="web前端,SEO,搜索擎优化,网站开发">
+  
+  <meta name="description" content="关注web前端技术_搜索引擎优化_网站建设">
+  <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/rss.html">
+  <link rel="stylesheet" href="/css/all.css">
+
+  <script>
+    var prfm_config = { id: 1 };
+  </script>
+  <script src="//misc.chenliqiang.cn/prfm/1.0.0/perfm.min.js"></script>
+  
+</head>
+
+<body>
+  <nav id="sidebar" class="behavior_1">
+    <div class="wrap">
+      <div class="profile">
+        <a href="/">
+          <img src="https://misc.chenliqiang.cn/blog/logo.png" alt="关注WEB前端技术_搜索引擎优化_网站建设">
+        </a>
+        <span>Richard Chen</span>
+      </div>
+      <ul class="buttons">
+        
+        
+        <li>
+          <a class href="/" title="首页">
+            <i class="iconfont icon-home"></i>
+            <span>首页</span>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class href="/archives/" title="归档">
+            <i class="iconfont icon-archive"></i>
+            <span>归档</span>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class href="/page/about.html" title="关于">
+            <i class="iconfont icon-user"></i>
+            <span>关于</span>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class href="/links" title="友链">
+            <i class="iconfont icon-link"></i>
+            <span>友链</span>
+          </a>
+        </li>
+        
+      </ul>
+      <ul class="buttons">
+        <li>
+          
+          <a class="inline" rel="nofollow" target="_blank" href="https://github.com/richard-chen-1985">
+            <i class="iconfont icon-github-v" title="GitHub"></i>
+          </a>
+          
+          
+          <a class="inline" href="/">
+            <i class="iconfont icon-rss-v" title="RSS"></i>
+          </a>
+          <a class="inline" href="/search.html">
+            <i class="iconfont icon-search" title="Search"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div id="header">
+    <div class="btn-bar"><i></i></div>
+    <h1><a href="/">关注WEB前端技术_搜索引擎优化_网站建设</a></h1>
+    <a class="me" href="/page/about.html"><img src="https://misc.chenliqiang.cn/blog/logo.png" alt="Richard Chen"></a>
+  </div>
+  <div id="sidebar-mask"></div>
+  <div id="main">
+    <div id="page-post">
+  <article class="post detail">
+    <div class="meta">
+      <div class="date">03月07, 2018</div>
+    </div>
+    <h1 class="title">JavaScript著名的变量命名规则</h1>
+    <div class="entry-content">
+      <p>这些命名方法不仅限于JavaScript，在其它任何编程语言也比较适用。</p>
+<p>只是因为变量名的语法正确，并不意味着就该使用它们。变量还应遵守以下某条著名的命名规则：</p>
+<a id="more"></a>
+
+<h3 id="Camel标记法"><a href="#Camel标记法" class="headerlink" title="Camel标记法"></a>Camel标记法</h3><p>首字母是小写的，接下来的字母都以大写字符开头。例如：<br>var myTestValue = 0, mySecondeValue = “hi”;</p>
+<h3 id="Pascal标记法"><a href="#Pascal标记法" class="headerlink" title="Pascal标记法"></a>Pascal标记法</h3><p>首字母是大写的，接下来的字母都以大写字符开头。例如：<br>var MyTestValue = 0, MySecondeValue = “hi”;</p>
+<h3 id="匈牙利类型标记法"><a href="#匈牙利类型标记法" class="headerlink" title="匈牙利类型标记法"></a>匈牙利类型标记法</h3><p>在以Pascal标记法命名的变量前附加一个小写字母（或小写字母序列），说明该变量的类型。例如，i表示整数，s表示字符串，如下所示：<br>var iMyTestValue = 1, sMySecondeValue = “hi”;</p>
+<h4 id="参考w3school的前缀表"><a href="#参考w3school的前缀表" class="headerlink" title="参考w3school的前缀表"></a>参考w3school的前缀表</h4><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>前缀</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>数组</td>
+<td>a</td>
+<td>aValues</td>
+</tr>
+<tr>
+<td>布尔型</td>
+<td>b</td>
+<td>bFound</td>
+</tr>
+<tr>
+<td>浮点型（数字）</td>
+<td>f</td>
+<td>fValue</td>
+</tr>
+<tr>
+<td>函数</td>
+<td>fn</td>
+<td>fnMethod</td>
+</tr>
+<tr>
+<td>整型（数字）</td>
+<td>i</td>
+<td>iValue</td>
+</tr>
+<tr>
+<td>对象</td>
+<td>o</td>
+<td>oType</td>
+</tr>
+<tr>
+<td>正则表达式</td>
+<td>re</td>
+<td>rePattern</td>
+</tr>
+<tr>
+<td>字符串</td>
+<td>s</td>
+<td>sValue</td>
+</tr>
+<tr>
+<td>变型（可以是任何类型）</td>
+<td>v</td>
+<td>vValue</td>
+</tr>
+</tbody></table>
+
+    </div>
+    <p>本文链接：<a href="/post/19.html">https://www.chenliqiang.cn/post/19.html</a></p>
+    <p>-- <acronym title="End of File">EOF</acronym> --</p>
+
+    <div class="post-info">
+      <p>
+        作者
+        
+        发表于
+        <i>2018-03-07 23:47:21</i>
+
+        
+        ，添加在分类
+        
+        <a href="/cate/javascript/" data-cate="JavaScript">
+          <code class="notebook">JavaScript</code>
+        </a>
+        
+        下
+        
+
+        
+
+        ，最后修改于
+        <i>2019-02-11 17:31:52</i>
+      </p>
+    </div>
+  </article>
+  
+  <nav class="pagination">
+    
+    <a href="/post/20.html" class="prev">&laquo; C#.Net中使用WebBrowser请记得及时释放页面及缓存</a>
+    
+
+    
+    <a href="/post/18.html" class="next">给HTML元素分配与语义相关而不是表现相关的ID和类名 &raquo;</a>
+    
+  </nav>
+  
+</div>
+    <footer id="footer" class="inner">
+      &copy; 2019&nbsp;-&nbsp; Richard Chen
+    </footer>
+  </div>
+  <script src="/js/firekylin.js"></script>
+  
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?78b5e2f61bcb1be04b8e24101cc27f17";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+<article class="post archive">
+  <h1 class="title">归档</h1>
+  <% var last; %>
+  <% page.posts.each(function(post, i){ %>
+    <% var year = post.date.year(); %>
+    <% if (last != year){ %>
+      <% if (last != null){ %>
+        </ul></div>
+      <% } %>
+      <% last = year; %>
+      <div class="entry-content">
+        <h3><%= year %></h3>
+        <ul>
+    <% } %>
+    <li>
+      <a href="<%= url_for(post.path) %>" title="<%= post.title %>"><%= post.title %></a>&nbsp;
+      <span class="date"><%= date(post.date, 'YYYY-MM-DD') %></span>
+    </li>
+  <% }) %>
+  <% if (page.posts.length){ %>
+    </ul></div>
+  <% } %>
+</article>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+  
+  <title>给HTML元素分配与语义相关而不是表现相关的ID和类名 | Richard Chen</title>
+  
+  <meta name="keywords" content="web前端,SEO,搜索擎优化,网站开发">
+  
+  <meta name="description" content="关注web前端技术_搜索引擎优化_网站建设">
+  <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/rss.html">
+  <link rel="stylesheet" href="/css/all.css">
+
+  <script>
+    var prfm_config = { id: 1 };
+  </script>
+  <script src="//misc.chenliqiang.cn/prfm/1.0.0/perfm.min.js"></script>
+  
+</head>
+
+<body>
+  <nav id="sidebar" class="behavior_1">
+    <div class="wrap">
+      <div class="profile">
+        <a href="/">
+          <img src="https://misc.chenliqiang.cn/blog/logo.png" alt="关注WEB前端技术_搜索引擎优化_网站建设">
+        </a>
+        <span>Richard Chen</span>
+      </div>
+      <ul class="buttons">
+        
+        
+        <li>
+          <a class href="/" title="首页">
+            <i class="iconfont icon-home"></i>
+            <span>首页</span>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class href="/archives/" title="归档">
+            <i class="iconfont icon-archive"></i>
+            <span>归档</span>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class href="/page/about.html" title="关于">
+            <i class="iconfont icon-user"></i>
+            <span>关于</span>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class href="/links" title="友链">
+            <i class="iconfont icon-link"></i>
+            <span>友链</span>
+          </a>
+        </li>
+        
+      </ul>
+      <ul class="buttons">
+        <li>
+          
+          <a class="inline" rel="nofollow" target="_blank" href="https://github.com/richard-chen-1985">
+            <i class="iconfont icon-github-v" title="GitHub"></i>
+          </a>
+          
+          
+          <a class="inline" href="/">
+            <i class="iconfont icon-rss-v" title="RSS"></i>
+          </a>
+          <a class="inline" href="/search.html">
+            <i class="iconfont icon-search" title="Search"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div id="header">
+    <div class="btn-bar"><i></i></div>
+    <h1><a href="/">关注WEB前端技术_搜索引擎优化_网站建设</a></h1>
+    <a class="me" href="/page/about.html"><img src="https://misc.chenliqiang.cn/blog/logo.png" alt="Richard Chen"></a>
+  </div>
+  <div id="sidebar-mask"></div>
+  <div id="main">
+    <div id="page-post">
+  <article class="post detail">
+    <div class="meta">
+      <div class="date">03月07, 2018</div>
+    </div>
+    <h1 class="title">给HTML元素分配与语义相关而不是表现相关的ID和类名</h1>
+    <div class="entry-content">
+      <p>在给HTML元素分配ID和类名时，一定要尽可能保持名称与语义相关，例如，如果希望所有表单通知消息显示为红色，可以给他们分配类名为.warnning或.notification，而不是给.red。</p>
+<a id="more"></a>
+
+<p>当然，只要页面上没有其他红色的元素，这就没问题。但是，如果希望让4个必需的表单标签也显示为红色，就必须猜测这个类引用的是哪种元素，这时情况下就开始有些混乱了。想象一下，如果在整个网站上到处使用表现性元素，代码会多么混乱。如果决定把表单通知由红色改为黄色，就更复杂了。在这种情况下，必须修改所有类名，否则名为red的元素就会显示为黄色。</p>
+<p>因此，应该根据“它们是什么”来为元素命名，而不应该根据“它们的外观如何”来命名。这种方式会让代码更有意义，并且避免代码与设计不同步。有意义的类名的最大优点是可以在整个网站中重用它们。例如，还可以在其他类型的消息上使用.notification类，可以根据它们的在文档中的位置应用完全不同的样式。</p>
+
+    </div>
+    <p>本文链接：<a href="/post/18.html">https://www.chenliqiang.cn/post/18.html</a></p>
+    <p>-- <acronym title="End of File">EOF</acronym> --</p>
+
+    <div class="post-info">
+      <p>
+        作者
+        
+        发表于
+        <i>2018-03-07 23:42:54</i>
+
+        
+        ，添加在分类
+        
+        <a href="/cate/HTML/" data-cate="HTML">
+          <code class="notebook">HTML</code>
+        </a>
+        
+        下
+        
+
+        
+
+        ，最后修改于
+        <i>2019-02-11 17:31:40</i>
+      </p>
+    </div>
+  </article>
+  
+  <nav class="pagination">
+    
+    <a href="/post/19.html" class="prev">&laquo; JavaScript著名的变量命名规则</a>
+    
+
+    
+    <a href="/post/17.html" class="next">object和embed的wmode属性对布局的影响 &raquo;</a>
+    
+  </nav>
+  
+</div>
+    <footer id="footer" class="inner">
+      &copy; 2019&nbsp;-&nbsp; Richard Chen
+    </footer>
+  </div>
+  <script src="/js/firekylin.js"></script>
+  
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?78b5e2f61bcb1be04b8e24101cc27f17";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+</body>
+</html>

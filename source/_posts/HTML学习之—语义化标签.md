@@ -1,0 +1,95 @@
+---
+title: HTML学习之—语义化标签
+date: 2019-01-22 10:58:37
+updated: 2019-01-22 11:00:55
+comments: 1
+categories: HTML
+tags: []
+permalink: html-semantics-tags
+---
+
+在程序中, 语义 指的是一段代码的含义 — 例如 "运行这行代码会产生怎样的影响?", 或者 "这个HTML的元素有什么作用，扮演了什么样的角色" (不只是 "它看上去像是什么?"。)
+
+<!--more-->
+
+## 适用场景
+
+* 自然语言表达能力的补充
+* 文章标题摘要
+* 适合机器阅读的整体结构
+
+## 文本格式化标签
+
+| 标签 | 描述 |
+|------|-----|
+| &lt;b&gt; | 定义粗体文本。 |
+| &lt;big&gt; | 定义大号字。 |
+| &lt;em&gt; | 定义着重文字。 |
+| &lt;i&gt; | 定义斜体字。 |
+| &lt;small&gt; | 定义小号字。 |
+| &lt;strong&gt; | 定义加重语气。 |
+| &lt;sub&gt; | 定义下标字。 |
+| &lt;sup&gt; | 定义上标字。 |
+| &lt;ins&gt; | 定义插入字。 |
+| &lt;del&gt; | 定义删除字。 |
+| &lt;s&gt; | 不赞成使用。使用 &lt;del&gt; 代替。 |
+| &lt;strike&gt; | 不赞成使用。使用 &lt;del&gt; 代替。 |
+| &lt;u&gt; | 不赞成使用。使用样式（style）代替。 |
+
+## “计算机输出”标签
+
+| 标签 | 描述 |
+|------|-----|
+| &lt;code&gt; | 定义计算机代码。 |
+| &lt;kbd&gt; | 定义键盘码。 |
+| &lt;samp&gt; | 定义计算机代码样本。 |
+| &lt;tt&gt; | 定义打字机代码。 |
+| &lt;var&gt; | 定义变量。 |
+| &lt;pre&gt; | 定义预格式文本。 |
+| &lt;listing&gt; | 不赞成使用。使用 &lt;pre&gt; 代替。 |
+| &lt;plaintext&gt; | 不赞成使用。使用 &lt;pre&gt; 代替。 |
+| &lt;xmp&gt; | 不赞成使用。使用 &lt;pre&gt; 代替。 |
+
+## 引用、引用和术语定义
+
+| 标签 | 描述 |
+|------|-----|
+| &lt;abbr&gt; | 定义缩写。 |
+| &lt;acronym&gt; | 定义首字母缩写。 |
+| &lt;address&gt; | 定义地址。 |
+| &lt;bdo&gt; | 定义文字方向。 |
+| &lt;blockquote&gt; | 定义长的引用。 |
+| &lt;q&gt; | 定义短的引用语。 |
+| &lt;cite&gt; | 定义引用、引证。 |
+| &lt;dfn&gt; | 定义一个定义项目。 |
+
+## 列表标签
+
+| 标签 | 描述 |
+|------|-----|
+| &lt;ol&gt; | 定义有序列表。 |
+| &lt;ul&gt; | 定义无序列表。 |
+| &lt;li&gt; | 定义列表项。 |
+| &lt;dl&gt; | 定义定义列表。 |
+| &lt;dt&gt; | 定义定义项目。 |
+| &lt;dd&gt; | 定义定义的描述。 |
+| &lt;dir&gt; | 已废弃。使用 &lt;ul&gt; 代替它。 |
+| &lt;menu&gt; | 已废弃。使用 &lt;ul&gt; 代替它。 |
+
+## HTML5 标签语义
+
+| 标签 | 描述 |
+|-----|------|
+| &lt;article&gt; | 定义文章。 |
+| &lt;aside&gt; | 定义页面内容以外的内容。 |
+| &lt;details&gt; | 定义用户能够查看或隐藏的额外细节。 |
+| &lt;figcaption&gt; | 定义 &lt;figure&gt; 元素的标题。 |
+| &lt;figure&gt; | 规定自包含内容，比如图示、图表、照片、代码清单等。 |
+| &lt;footer&gt; | 定义文档或节的页脚。 |
+| &lt;header&gt; | 规定文档或节的页眉。 |
+| &lt;main&gt; | 规定文档的主内容。 |
+| &lt;mark&gt; | 定义重要的或强调的文本。 |
+| &lt;nav&gt; | 定义导航链接。 |
+| &lt;section&gt; | 定义文档中的节。 |
+| &lt;summary&gt; | 定义 &lt;details&gt; 元素的可见标题。 |
+| &lt;time&gt; | 定义日期/时间。 |

@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+  
+  <title>HTML学习之—语义化标签 | Richard Chen</title>
+  
+  <meta name="keywords" content="web前端,SEO,搜索擎优化,网站开发">
+  
+  <meta name="description" content="关注web前端技术_搜索引擎优化_网站建设">
+  <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/rss.html">
+  <link rel="stylesheet" href="/css/all.css">
+
+  <script>
+    var prfm_config = { id: 1 };
+  </script>
+  <script src="//misc.chenliqiang.cn/prfm/1.0.0/perfm.min.js"></script>
+  
+</head>
+
+<body>
+  <nav id="sidebar" class="behavior_1">
+    <div class="wrap">
+      <div class="profile">
+        <a href="/">
+          <img src="https://misc.chenliqiang.cn/blog/logo.png" alt="关注WEB前端技术_搜索引擎优化_网站建设">
+        </a>
+        <span>Richard Chen</span>
+      </div>
+      <ul class="buttons">
+        
+        
+        <li>
+          <a class href="/" title="首页">
+            <i class="iconfont icon-home"></i>
+            <span>首页</span>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class href="/archives/" title="归档">
+            <i class="iconfont icon-archive"></i>
+            <span>归档</span>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class href="/page/about.html" title="关于">
+            <i class="iconfont icon-user"></i>
+            <span>关于</span>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class href="/links" title="友链">
+            <i class="iconfont icon-link"></i>
+            <span>友链</span>
+          </a>
+        </li>
+        
+      </ul>
+      <ul class="buttons">
+        <li>
+          
+          <a class="inline" rel="nofollow" target="_blank" href="https://github.com/richard-chen-1985">
+            <i class="iconfont icon-github-v" title="GitHub"></i>
+          </a>
+          
+          
+          <a class="inline" href="/">
+            <i class="iconfont icon-rss-v" title="RSS"></i>
+          </a>
+          <a class="inline" href="/search.html">
+            <i class="iconfont icon-search" title="Search"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div id="header">
+    <div class="btn-bar"><i></i></div>
+    <h1><a href="/">关注WEB前端技术_搜索引擎优化_网站建设</a></h1>
+    <a class="me" href="/page/about.html"><img src="https://misc.chenliqiang.cn/blog/logo.png" alt="Richard Chen"></a>
+  </div>
+  <div id="sidebar-mask"></div>
+  <div id="main">
+    <div id="page-post">
+  <article class="post detail">
+    <div class="meta">
+      <div class="date">01月22, 2019</div>
+    </div>
+    <h1 class="title">HTML学习之—语义化标签</h1>
+    <div class="entry-content">
+      <p>在程序中, 语义 指的是一段代码的含义 — 例如 “运行这行代码会产生怎样的影响?”, 或者 “这个HTML的元素有什么作用，扮演了什么样的角色” (不只是 “它看上去像是什么?”。)</p>
+<a id="more"></a>
+
+<h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><ul>
+<li>自然语言表达能力的补充</li>
+<li>文章标题摘要</li>
+<li>适合机器阅读的整体结构</li>
+</ul>
+<h2 id="文本格式化标签"><a href="#文本格式化标签" class="headerlink" title="文本格式化标签"></a>文本格式化标签</h2><table>
+<thead>
+<tr>
+<th>标签</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&lt;b&gt;</td>
+<td>定义粗体文本。</td>
+</tr>
+<tr>
+<td>&lt;big&gt;</td>
+<td>定义大号字。</td>
+</tr>
+<tr>
+<td>&lt;em&gt;</td>
+<td>定义着重文字。</td>
+</tr>
+<tr>
+<td>&lt;i&gt;</td>
+<td>定义斜体字。</td>
+</tr>
+<tr>
+<td>&lt;small&gt;</td>
+<td>定义小号字。</td>
+</tr>
+<tr>
+<td>&lt;strong&gt;</td>
+<td>定义加重语气。</td>
+</tr>
+<tr>
+<td>&lt;sub&gt;</td>
+<td>定义下标字。</td>
+</tr>
+<tr>
+<td>&lt;sup&gt;</td>
+<td>定义上标字。</td>
+</tr>
+<tr>
+<td>&lt;ins&gt;</td>
+<td>定义插入字。</td>
+</tr>
+<tr>
+<td>&lt;del&gt;</td>
+<td>定义删除字。</td>
+</tr>
+<tr>
+<td>&lt;s&gt;</td>
+<td>不赞成使用。使用 &lt;del&gt; 代替。</td>
+</tr>
+<tr>
+<td>&lt;strike&gt;</td>
+<td>不赞成使用。使用 &lt;del&gt; 代替。</td>
+</tr>
+<tr>
+<td>&lt;u&gt;</td>
+<td>不赞成使用。使用样式（style）代替。</td>
+</tr>
+</tbody></table>
+<h2 id="“计算机输出”标签"><a href="#“计算机输出”标签" class="headerlink" title="“计算机输出”标签"></a>“计算机输出”标签</h2><table>
+<thead>
+<tr>
+<th>标签</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&lt;code&gt;</td>
+<td>定义计算机代码。</td>
+</tr>
+<tr>
+<td>&lt;kbd&gt;</td>
+<td>定义键盘码。</td>
+</tr>
+<tr>
+<td>&lt;samp&gt;</td>
+<td>定义计算机代码样本。</td>
+</tr>
+<tr>
+<td>&lt;tt&gt;</td>
+<td>定义打字机代码。</td>
+</tr>
+<tr>
+<td>&lt;var&gt;</td>
+<td>定义变量。</td>
+</tr>
+<tr>
+<td>&lt;pre&gt;</td>
+<td>定义预格式文本。</td>
+</tr>
+<tr>
+<td>&lt;listing&gt;</td>
+<td>不赞成使用。使用 &lt;pre&gt; 代替。</td>
+</tr>
+<tr>
+<td>&lt;plaintext&gt;</td>
+<td>不赞成使用。使用 &lt;pre&gt; 代替。</td>
+</tr>
+<tr>
+<td>&lt;xmp&gt;</td>
+<td>不赞成使用。使用 &lt;pre&gt; 代替。</td>
+</tr>
+</tbody></table>
+<h2 id="引用、引用和术语定义"><a href="#引用、引用和术语定义" class="headerlink" title="引用、引用和术语定义"></a>引用、引用和术语定义</h2><table>
+<thead>
+<tr>
+<th>标签</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&lt;abbr&gt;</td>
+<td>定义缩写。</td>
+</tr>
+<tr>
+<td>&lt;acronym&gt;</td>
+<td>定义首字母缩写。</td>
+</tr>
+<tr>
+<td>&lt;address&gt;</td>
+<td>定义地址。</td>
+</tr>
+<tr>
+<td>&lt;bdo&gt;</td>
+<td>定义文字方向。</td>
+</tr>
+<tr>
+<td>&lt;blockquote&gt;</td>
+<td>定义长的引用。</td>
+</tr>
+<tr>
+<td>&lt;q&gt;</td>
+<td>定义短的引用语。</td>
+</tr>
+<tr>
+<td>&lt;cite&gt;</td>
+<td>定义引用、引证。</td>
+</tr>
+<tr>
+<td>&lt;dfn&gt;</td>
+<td>定义一个定义项目。</td>
+</tr>
+</tbody></table>
+<h2 id="列表标签"><a href="#列表标签" class="headerlink" title="列表标签"></a>列表标签</h2><table>
+<thead>
+<tr>
+<th>标签</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&lt;ol&gt;</td>
+<td>定义有序列表。</td>
+</tr>
+<tr>
+<td>&lt;ul&gt;</td>
+<td>定义无序列表。</td>
+</tr>
+<tr>
+<td>&lt;li&gt;</td>
+<td>定义列表项。</td>
+</tr>
+<tr>
+<td>&lt;dl&gt;</td>
+<td>定义定义列表。</td>
+</tr>
+<tr>
+<td>&lt;dt&gt;</td>
+<td>定义定义项目。</td>
+</tr>
+<tr>
+<td>&lt;dd&gt;</td>
+<td>定义定义的描述。</td>
+</tr>
+<tr>
+<td>&lt;dir&gt;</td>
+<td>已废弃。使用 &lt;ul&gt; 代替它。</td>
+</tr>
+<tr>
+<td>&lt;menu&gt;</td>
+<td>已废弃。使用 &lt;ul&gt; 代替它。</td>
+</tr>
+</tbody></table>
+<h2 id="HTML5-标签语义"><a href="#HTML5-标签语义" class="headerlink" title="HTML5 标签语义"></a>HTML5 标签语义</h2><table>
+<thead>
+<tr>
+<th>标签</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&lt;article&gt;</td>
+<td>定义文章。</td>
+</tr>
+<tr>
+<td>&lt;aside&gt;</td>
+<td>定义页面内容以外的内容。</td>
+</tr>
+<tr>
+<td>&lt;details&gt;</td>
+<td>定义用户能够查看或隐藏的额外细节。</td>
+</tr>
+<tr>
+<td>&lt;figcaption&gt;</td>
+<td>定义 &lt;figure&gt; 元素的标题。</td>
+</tr>
+<tr>
+<td>&lt;figure&gt;</td>
+<td>规定自包含内容，比如图示、图表、照片、代码清单等。</td>
+</tr>
+<tr>
+<td>&lt;footer&gt;</td>
+<td>定义文档或节的页脚。</td>
+</tr>
+<tr>
+<td>&lt;header&gt;</td>
+<td>规定文档或节的页眉。</td>
+</tr>
+<tr>
+<td>&lt;main&gt;</td>
+<td>规定文档的主内容。</td>
+</tr>
+<tr>
+<td>&lt;mark&gt;</td>
+<td>定义重要的或强调的文本。</td>
+</tr>
+<tr>
+<td>&lt;nav&gt;</td>
+<td>定义导航链接。</td>
+</tr>
+<tr>
+<td>&lt;section&gt;</td>
+<td>定义文档中的节。</td>
+</tr>
+<tr>
+<td>&lt;summary&gt;</td>
+<td>定义 &lt;details&gt; 元素的可见标题。</td>
+</tr>
+<tr>
+<td>&lt;time&gt;</td>
+<td>定义日期/时间。</td>
+</tr>
+</tbody></table>
+
+    </div>
+    <p>本文链接：<a href="/post/html-semantics-tags.html">https://www.chenliqiang.cn/post/html-semantics-tags.html</a></p>
+    <p>-- <acronym title="End of File">EOF</acronym> --</p>
+
+    <div class="post-info">
+      <p>
+        作者
+        
+        发表于
+        <i>2019-01-22 10:58:37</i>
+
+        
+        ，添加在分类
+        
+        <a href="/cate/HTML/" data-cate="HTML">
+          <code class="notebook">HTML</code>
+        </a>
+        
+        下
+        
+
+        
+
+        ，最后修改于
+        <i>2019-01-22 11:00:55</i>
+      </p>
+    </div>
+  </article>
+  
+  <nav class="pagination">
+    
+    <a href="/post/browser-api-bom.html" class="prev">&laquo; 浏览器API学习——BOM浏览器对象模型</a>
+    
+
+    
+    <a href="/post/nginx-install-config-supoort-https.html" class="next">nginx安装、配置及支持https不完全手册 &raquo;</a>
+    
+  </nav>
+  
+</div>
+    <footer id="footer" class="inner">
+      &copy; 2019&nbsp;-&nbsp; Richard Chen
+    </footer>
+  </div>
+  <script src="/js/firekylin.js"></script>
+  
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?78b5e2f61bcb1be04b8e24101cc27f17";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+</body>
+</html>

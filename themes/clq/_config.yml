@@ -1,0 +1,13 @@
+menu:
+  - page: 首页
+    path: /
+    icon: home
+  - page: 归档
+    path: /archives/
+    icon: archive
+  - page: 关于
+    path: /page/about.html
+    icon: user
+  - page: 友链
+    path: /links
+    icon: link

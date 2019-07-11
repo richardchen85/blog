@@ -1,0 +1,219 @@
+
+
+/**
+ * GitHub Gist Theme
+ * Author : Louis Barranqueiro - https://github.com/LouisBarranqueiro
+ */
+ .hljs {
+  display: block;
+  background: white;
+  padding: 0.5em;
+  color: #333333;
+  overflow-x: auto;
+  -webkit-text-size-adjust: none;
+}
+
+.hljs .comment,
+.lang-bash .shebang,
+.lang-java .javadoc,
+.lang-javascript .javadoc,
+.lang-rust .preprocessor {
+  color: #969896;
+}
+
+.hljs .string,
+.lang-apache .sqbracket,
+.lang-coffeescript .subst,
+.lang-coffeescript .regexp,
+.lang-cpp .preprocessor,
+.lang-c .preprocessor,
+.lang-javascript .regexp,
+.lang-json .attribute,
+.lang-makefile .variable,
+.lang-markdown .value,
+.lang-markdown .link_label,
+.lang-markdown .strong,
+.lang-markdown .emphasis,
+.lang-markdown .blockquote,
+.lang-nginx .regexp,
+.lang-nginx .number,
+.lang-objectivec .preprocessor .title,
+.lang-perl .regexp,
+.lang-php .regexp,
+.lang-xml .value,
+.lang-less .built_in,
+.lang-scss .built_in {
+  color: #df5000;
+}
+
+.hljs .keyword,
+.lang-css .at_rule,
+.lang-css .important,
+.lang-http .request,
+.lang-ini .setting,
+.lang-haskell .type,
+.lang-java .javadoctag,
+.lang-javascript .tag,
+.lang-javascript .javadoctag,
+.lang-nginx .title,
+.lang-objectivec .preprocessor,
+.lang-php .phpdoc,
+.lang-sql .built_in,
+.lang-less .tag,
+.lang-less .at_rule,
+.lang-scss .tag,
+.lang-scss .at_rule,
+.lang-scss .important,
+.lang-stylus .at_rule,
+.lang-go .typename,
+.lang-swift .preprocessor {
+  color: #a71d5d;
+}
+
+.lang-apache .common,
+.lang-apache .cbracket,
+.lang-apache .keyword,
+.lang-bash .literal,
+.lang-bash .built_in,
+.lang-coffeescript .literal,
+.lang-coffeescript .built_in,
+.lang-coffeescript .number,
+.lang-cpp .number,
+.lang-cpp .built_in,
+.lang-c .number,
+.lang-c .built_in,
+.lang-cs .number,
+.lang-cs .built_in,
+.lang-css .attribute,
+.lang-css .hexcolor,
+.lang-css .number,
+.lang-css .function,
+.lang-haskell .number,
+.lang-http .literal,
+.lang-http .attribute,
+.lang-java .number,
+.lang-javascript .built_in,
+.lang-javascript .literal,
+.lang-javascript .number,
+.lang-json .number,
+.lang-makefile .keyword,
+.lang-markdown .link_reference,
+.lang-nginx .built_in,
+.lang-objectivec .literal,
+.lang-objectivec .number,
+.lang-objectivec .built_in,
+.lang-php .literal,
+.lang-php .number,
+.lang-python .number,
+.lang-ruby .prompt,
+.lang-ruby .constant,
+.lang-ruby .number,
+.lang-ruby .subst .keyword,
+.lang-ruby .symbol,
+.lang-rust .number,
+.lang-sql .number,
+.lang-puppet .function,
+.lang-less .number,
+.lang-less .hexcolor,
+.lang-less .function,
+.lang-less .attribute,
+.lang-scss .preprocessor,
+.lang-scss .number,
+.lang-scss .hexcolor,
+.lang-scss .function,
+.lang-scss .attribute,
+.lang-stylus .number,
+.lang-stylus .hexcolor,
+.lang-stylus .attribute,
+.lang-stylus .params,
+.lang-go .built_in,
+.lang-go .constant,
+.lang-swift .built_in,
+.lang-swift .number {
+  color: #0086b3;
+}
+
+.lang-apache .tag,
+.lang-cs .xmlDocTag,
+.lang-css .tag,
+.lang-xml .title,
+.lang-stylus .tag {
+  color: #63a35c;
+}
+
+.lang-bash .variable,
+.lang-cs .preprocessor,
+.lang-cs .preprocessor .keyword,
+.lang-css .attr_selector,
+.lang-css .value,
+.lang-ini .value,
+.lang-ini .keyword,
+.lang-javascript .tag .title,
+.lang-makefile .constant,
+.lang-nginx .variable,
+.lang-xml .tag,
+.lang-scss .variable {
+  color: #333333;
+}
+
+.lang-bash .title,
+.lang-coffeescript .title,
+.lang-cpp .title,
+.lang-c .title,
+.lang-cs .title,
+.lang-css .id,
+.lang-css .class,
+.lang-css .pseudo,
+.lang-ini .title,
+.lang-haskell .title,
+.lang-haskell .pragma,
+.lang-java .title,
+.lang-javascript .title,
+.lang-makefile .title,
+.lang-objectivec .title,
+.lang-perl .sub,
+.lang-php .title,
+.lang-python .decorator,
+.lang-python .title,
+.lang-ruby .parent,
+.lang-ruby .title,
+.lang-rust .title,
+.lang-xml .attribute,
+.lang-puppet .title,
+.lang-less .id,
+.lang-less .pseudo,
+.lang-less .class,
+.lang-scss .id,
+.lang-scss .pseudo,
+.lang-scss .class,
+.lang-stylus .class,
+.lang-stylus .id,
+.lang-stylus .pseudo,
+.lang-stylus .title,
+.lang-swift .title,
+.lang-diff .chunk {
+  color: #795da3;
+}
+
+.lang-coffeescript .reserved,
+.lang-coffeescript .attribute {
+  color: #1d3e81;
+}
+
+.lang-diff .chunk {
+  font-weight: bold;
+}
+
+.lang-diff .addition {
+  color: #55a532;
+  background-color: #eaffea;
+}
+
+.lang-diff .deletion {
+  color: #bd2c00;
+  background-color: #ffecec;
+}
+
+.lang-markdown .link_url {
+  text-decoration: underline;
+}
