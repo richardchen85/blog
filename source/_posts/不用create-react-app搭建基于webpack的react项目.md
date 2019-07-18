@@ -127,7 +127,7 @@ module.exports = {
 
 在项目根目录新建一个 `babel` 配置文件 `babal.config.js`，内容如下：
 
-```js
+```javascript
 module.exports = function () {
   const presets = ["@babel/preset-env", "@babel/preset-react"];
   const plugins = [];
@@ -183,7 +183,7 @@ webpack-react-startup
 
 在 `webpack.config.js` 中配置 `devServer` 选项
 
-```js
+```javascript
 const mockServer = require('./mock/server')
 module.exports = {
   devServer: {
@@ -196,7 +196,7 @@ module.exports = {
 
 模拟数据相关的代码：
 
-```js
+```javascript
 // mock/config.js
 module.exports = {
   '/api/index': {
@@ -263,7 +263,7 @@ webpack-react-startup
 
 ### 修改webpack.config.js
 
-```js
+```javascript
 // webpack.config.js
 
 module.exports = {
@@ -303,7 +303,7 @@ module.exports = {
 
 这是一个内置插件，只需要在 `webpack.config.js` 文件中写相应的配置就可以了：
 
-```js
+```javascript
 module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
@@ -337,7 +337,7 @@ module.exports = {
 
 `css` 样式默认是以创建 `style` 标签的方式，将样式直接写入文档的，但在生产环境希望将 `css` 导出到文件，可以安装 `npm install --save mini-css-extract-plugin`，然后在 `webpack.config.js` 中的 `plugins` 下增加以下配置：
 
-```js
+```javascript
   new MiniCssExtractPlugin({
     // Options similar to the same options in webpackOptions.output
     // both options are optional
@@ -354,7 +354,7 @@ module.exports = {
 
 代码风格检查也是非常必要的，还可以预先发现一些 bug，首先安装依赖 `npm install --save-dev eslint-loader eslint eslint-config-react-app`，然后增加 `rules` 配置：
 
-```js
+```javascript
 rules: [
   {
     enforce: "pre", // 强制在 babel 之前执行
@@ -382,7 +382,7 @@ rules: [
 
 首先是环境的区分，方法有很多，本文是通过命令 `webpack --mode production|development`  来区分。
 
-```js
+```javascript
 const argv = require('minimist')(process.argv.slice(0))
 const production = argv.mode === 'production'
 

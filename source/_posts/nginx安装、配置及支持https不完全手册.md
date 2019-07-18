@@ -21,7 +21,7 @@ permalink: nginx-install-config-supoort-https
 
 这里我们下载 `nginx-1.12.2` 最新的稳定版本。
 
-```shell
+```bash
 # 下载
 curl -O http://nginx.org/download/nginx-1.12.2.tar.gz
 
@@ -53,7 +53,7 @@ make && make install
 
 安装完成过后，首先我们要配置的就是让 `nginx` 随系统自动启动：
 
-```shell
+```bash
 # 编辑 /etc/rc.local 文件（这里需要 root 权限）
 sudo vi /etc/rc.local
 # 在文件中添加如下内容
@@ -65,7 +65,7 @@ sudo vi /etc/rc.local
 
 因为我们将 `nginx` 安装到了 `/export/servers/nginx/` 目录，所以每次要执行 `nginx` 命令都要写全路径。所以最好是建立一个 `nginx` 软链接到 `/usr/local/bin/` 目录：
 
-```shell
+```bash
 ln -s /export/servers/nginx/sbin/nginx /usr/local/bin/nginx
 ```
 
@@ -75,7 +75,7 @@ ln -s /export/servers/nginx/sbin/nginx /usr/local/bin/nginx
 
 支持多个网站，我们只需要在 `nginx` 配置文件增加 `server` 节点就可以实现。配置文件在安装目录中 `/export/servers/nginx/conf/nginx.conf`（这就是为什么我喜欢指定`nginx` 的安装目录了，因为默认安装时各种文件会放在不同的目录中）。
 
-```shell
+```bash
 cd /export/servers/nginx/conf/
 
 # 修改 nginx.conf
@@ -142,7 +142,7 @@ server {
 
 创建一个 `sh` 文件：`touch nginxLogRotate.sh`。文件内容如下：
 
-```shell
+```bash
 #!/bin/bash
 
 # 到 nginx 日志目录
@@ -184,7 +184,7 @@ kill -USR1 $(cat nginx.pid)
 
 `cron` 有个配置文件： `/etc/crontab`，我们可以在这个配置文件里配置我们的任务：
 
-```shell
+```bash
 vi /etc/crontab
 
 # 内容如下：
@@ -209,7 +209,7 @@ crond restart
 
 `certbot` 官方首页（ [https://certbot.eff.org/](https://certbot.eff.org/) ）提供了如何在不同系统下安装 `certbot` 的教程，这里不做详细介绍。需要注意一点是，因为我们的 `nginx` 是自己编译安装的，所以我们在第一个下拉选项框里应该选择 `None of the above` 而不是 `nginx`。
 
-```shell
+```bash
 # 先停掉 nginx
 nginx -s stop
 
@@ -238,7 +238,7 @@ server {
 
 因为 `Let's Encrypt` 的证书只能免费使用 90 天，过期后必须运行命令 `certbot renew` 重新续签。为了省心，我们再次使用 `linux` 的计划任务配置 `cron`。
 
-```shell
+```bash
 vi /etc/crontab
 
 # 表示每天 0 点和 12 都执行一次命令
