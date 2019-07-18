@@ -14,7 +14,7 @@ permalink: webpack-react-without-create-react-app
 
 本人正好看了一些相关资料，这里做为笔记记录一下如何从零开始用 `webpack` 搭建一个 `react` 的项目。我默认你已经在电脑上装好了 `nodejs`，并且有基本的命令行相关知识。
 
-> 本文的示例代码可以在 [webpack-react-startup](https://github.com/richard-chen-1985/webpack-react-startup) 中找到
+> 本文的完整示例代码可以在 [webpack-react-startup](https://github.com/richard-chen-1985/webpack-react-startup) 中找到，喜欢的话请给个 Star
 
 ## 创建项目目录
 
@@ -352,7 +352,7 @@ module.exports = {
 
 ## 内置 `eslint`
 
-代码风格检查也是非常必要的，还可以预先发现一些 bug，首先安装依赖 `npm install --save-dev eslint-loader eslint eslint-config-react-app`，然后增加 `rule` 配置：
+代码风格检查也是非常必要的，还可以预先发现一些 bug，首先安装依赖 `npm install --save-dev eslint-loader eslint eslint-config-react-app`，然后增加 `rules` 配置：
 
 ```js
 rules: [
@@ -407,7 +407,7 @@ const production = argv.mode === 'production'
 }
 ```
 
-好了，整个配置到这里就结束了，完整的示例放在了 [webpack-react-startup](https://github.com/richard-chen-1985/webpack-react-startup)，欢迎查看及指正。
+好了，整个配置到这里就结束了，完整的示例放在了 [webpack-react-startup](https://github.com/richard-chen-1985/webpack-react-startup)，欢迎查看及指正，既然已经看完了，说明你对本文很感兴趣，顺便给个 Star 吧。
 
 ## 参考资料
 

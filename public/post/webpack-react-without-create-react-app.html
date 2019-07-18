@@ -100,7 +100,7 @@
 
 <p>本人正好看了一些相关资料，这里做为笔记记录一下如何从零开始用 <code>webpack</code> 搭建一个 <code>react</code> 的项目。我默认你已经在电脑上装好了 <code>nodejs</code>，并且有基本的命令行相关知识。</p>
 <blockquote>
-<p>本文的示例代码可以在 <a href="https://github.com/richard-chen-1985/webpack-react-startup" target="_blank" rel="noopener">webpack-react-startup</a> 中找到</p>
+<p>本文的完整示例代码可以在 <a href="https://github.com/richard-chen-1985/webpack-react-startup" target="_blank" rel="noopener">webpack-react-startup</a> 中找到，喜欢的话请给个 Star</p>
 </blockquote>
 <h2 id="创建项目目录"><a href="#创建项目目录" class="headerlink" title="创建项目目录"></a>创建项目目录</h2><p>比如我要搭建一个项目，名字叫 <code>webpack-react-startup</code></p>
 <pre><code class="hljs bash">// 创建项目目录
@@ -351,7 +351,7 @@ npm init -y</code></pre>
 
 <p>当然你还可以安装 <code>sass-loader</code> 和 <code>postcss-loader</code> 以支持样式相关的更多功能。</p>
 <p>以上就是关于如何用 <code>webpack</code> 搭建一个 <code>react</code> 应用的方法，现在就可以开心地写 <code>react</code> 代码了。接下来，谈谈部署相关的事情。</p>
-<h2 id="内置-eslint"><a href="#内置-eslint" class="headerlink" title="内置 eslint"></a>内置 <code>eslint</code></h2><p>代码风格检查也是非常必要的，还可以预先发现一些 bug，首先安装依赖 <code>npm install --save-dev eslint-loader eslint eslint-config-react-app</code>，然后增加 <code>rule</code> 配置：</p>
+<h2 id="内置-eslint"><a href="#内置-eslint" class="headerlink" title="内置 eslint"></a>内置 <code>eslint</code></h2><p>代码风格检查也是非常必要的，还可以预先发现一些 bug，首先安装依赖 <code>npm install --save-dev eslint-loader eslint eslint-config-react-app</code>，然后增加 <code>rules</code> 配置：</p>
 <pre><code class="hljs js">rules: [
   &#123;
     <span class="hljs-attr">enforce</span>: <span class="hljs-string">"pre"</span>, <span class="hljs-comment">// 强制在 babel 之前执行</span>
@@ -397,7 +397,7 @@ npm init -y</code></pre>
   &#125;
 &#125;</code></pre>
 
-<p>好了，整个配置到这里就结束了，完整的示例放在了 <a href="https://github.com/richard-chen-1985/webpack-react-startup" target="_blank" rel="noopener">webpack-react-startup</a>，欢迎查看及指正。</p>
+<p>好了，整个配置到这里就结束了，完整的示例放在了 <a href="https://github.com/richard-chen-1985/webpack-react-startup" target="_blank" rel="noopener">webpack-react-startup</a>，欢迎查看及指正，既然已经看完了，说明你对本文很感兴趣，顺便给个 Star 吧。</p>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
 <li><a href="https://www.youtube.com/watch?v=deyxI-6C2u4" target="_blank" rel="noopener">https://www.youtube.com/watch?v=deyxI-6C2u4</a></li>
 <li><a href="https://webpack.js.org/concepts/" target="_blank" rel="noopener">https://webpack.js.org/concepts/</a></li>
