@@ -58,10 +58,10 @@ npm i --save-dev webpack webpack-cli webpack-dev-server
 通常在写 `react` 应用的时候，都会用到 `es6/7/8` 和 `jsx` 的一些语法，所以需要安装能够编译这些语法的插件
 
 ```bash
-npm i --save-dev @babel/cli @babel/core @babel/preset-env @babel/preset-react babel-loader html-webpack-plugin style-loader css-loader file-loader
+npm i --save-dev @babel/cli @babel/core @babel/preset-env @babel/preset-react @babel/preset-typescript babel-loader html-webpack-plugin style-loader css-loader file-loader
 ```
 
-`@babel/x` 插件是为了让 `webpack` 能够使用 `babel` 编译 `es6/7/8` 和 `jsx` 的语法，而 `html-webpack-plugin` 会生成一个 `html` 文件，它的内容自动引入了 `webpack` 产出的 `bundle` 文件，`style-loader` 和 `css-loader` 支持引入 `css` 文件，`file-loader` 用于支持引入图片及字体等文件。
+`@babel/x` 插件是为了让 `webpack` 能够使用 `babel` 编译 `es6/7/8`、`TypeScript` 和 `jsx` 的语法，而 `html-webpack-plugin` 会生成一个 `html` 文件，它的内容自动引入了 `webpack` 产出的 `bundle` 文件，`style-loader` 和 `css-loader` 支持引入 `css` 文件，`file-loader` 用于支持引入图片及字体等文件。
 
 依赖安装完过后，项目目录下会多一个 `node_modules` 的文件夹，用于存放安装好的依赖包文件。
 
@@ -87,11 +87,11 @@ module.exports = {
     filename: 'bundle.js'
   },
   module: {
-    // 使用 babel-loader 编译 es6/7/8 和 jsx 语法
+    // 使用 babel-loader 编译 es6/7/8、ts 和 jsx 语法
     // 注意：这里没有配置 preset，而是在 babel.config.js 文件里面配置
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.(js|mjs|jsx|ts|tsx)$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader'
@@ -127,10 +127,27 @@ module.exports = {
 
 在项目根目录新建一个 `babel` 配置文件 `babal.config.js`，内容如下：
 
+如果想要使用一些新的语言特性，需要安装以下插件：
+
+* @babel/plugin-proposal-decorators   支持 decorators
+* @babel/plugin-proposal-class-properties  支持类属性
+* @babel/plugin-proposal-object-rest-spread  支持对象解构
+* @babel/plugin-syntax-dynamic-import 支持 import()
+
 ```javascript
 module.exports = function () {
-  const presets = ["@babel/preset-env", "@babel/preset-react"];
-  const plugins = [];
+  // 具体参考：https://babeljs.io/docs/en/presets
+  const presets = [
+    "@babel/preset-env",
+    "@babel/preset-react",
+    "@babel/preset-typescript"
+  ];
+  // 具体参考：https://babeljs.io/docs/en/plugins
+  const plugins = [
+    ["@babel/plugin-proposal-decorators", { legacy: true }],
+    ["@babel/plugin-proposal-class-properties", { loose: true }],
+    ["@babel/plugin-proposal-object-rest-spread", { useBuiltIns: true }]
+  ];
   return { presets, plugins };
 }
 ```
@@ -352,13 +369,13 @@ module.exports = {
 
 ## 内置 `eslint`
 
-代码风格检查也是非常必要的，还可以预先发现一些 bug，首先安装依赖 `npm install --save-dev eslint-loader eslint eslint-config-react-app`，然后增加 `rules` 配置：
+代码风格检查也是非常必要的，还可以预先发现一些 bug，首先安装依赖 `npm install --save-dev eslint-loader eslint eslint-config-react-app @typescript-eslint/eslint-plugin @typescript-eslint/parser`，然后增加 `rule` 配置：
 
 ```javascript
 rules: [
   {
     enforce: "pre", // 强制在 babel 之前执行
-    test: /\.jsx?$/,
+    test: /\.(js|mjs|jsx|ts|tsx)$/,
     exclude: /node_modules/,
     use: {
       loader: 'eslint-loader',
@@ -375,6 +392,14 @@ rules: [
   }
 ]
 ```
+
+## 支持 TypeScript
+
+虽然前面 `babel-loader` 和 `eslint` 的配置都有 `.ts/tsx` 的扩展名，但要想编译 `TypeScript` 文件还需要安装 `npm install --save-dev typescript` 模块。
+
+安装 `react` 声明文件： `npm install --save-dev @types/react @types/react-dom`。
+
+如果要自定义 `TypeScript` 配置，可以在项目根目录新建文件 `tsconfig.json`。
 
 ## 部署配置
 

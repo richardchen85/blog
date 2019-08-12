@@ -120,9 +120,9 @@ npm init -y</code></pre>
 
 <p>这里 <code>webpack-cli</code> 作为一个命令行工具，接收一些参数并用于 <code>webpack</code> 的编译器，<code>webpack-dev-server</code> 是一个基于 <code>express</code> 的开发服务器，还提供了 <code>live reloading</code> 的功能，在开发的时候使用它还是很方便的，它还有两个 <code>hook api</code> 以方便扩展自己想要的功能，这个后面会讲到。</p>
 <h3 id="安装编译插件"><a href="#安装编译插件" class="headerlink" title="安装编译插件"></a>安装编译插件</h3><p>通常在写 <code>react</code> 应用的时候，都会用到 <code>es6/7/8</code> 和 <code>jsx</code> 的一些语法，所以需要安装能够编译这些语法的插件</p>
-<pre><code class="hljs bash">npm i --save-dev @babel/cli @babel/core @babel/preset-env @babel/preset-react babel-loader html-webpack-plugin style-loader css-loader file-loader</code></pre>
+<pre><code class="hljs bash">npm i --save-dev @babel/cli @babel/core @babel/preset-env @babel/preset-react @babel/preset-typescript babel-loader html-webpack-plugin style-loader css-loader file-loader</code></pre>
 
-<p><code>@babel/x</code> 插件是为了让 <code>webpack</code> 能够使用 <code>babel</code> 编译 <code>es6/7/8</code> 和 <code>jsx</code> 的语法，而 <code>html-webpack-plugin</code> 会生成一个 <code>html</code> 文件，它的内容自动引入了 <code>webpack</code> 产出的 <code>bundle</code> 文件，<code>style-loader</code> 和 <code>css-loader</code> 支持引入 <code>css</code> 文件，<code>file-loader</code> 用于支持引入图片及字体等文件。</p>
+<p><code>@babel/x</code> 插件是为了让 <code>webpack</code> 能够使用 <code>babel</code> 编译 <code>es6/7/8</code>、<code>TypeScript</code> 和 <code>jsx</code> 的语法，而 <code>html-webpack-plugin</code> 会生成一个 <code>html</code> 文件，它的内容自动引入了 <code>webpack</code> 产出的 <code>bundle</code> 文件，<code>style-loader</code> 和 <code>css-loader</code> 支持引入 <code>css</code> 文件，<code>file-loader</code> 用于支持引入图片及字体等文件。</p>
 <p>依赖安装完过后，项目目录下会多一个 <code>node_modules</code> 的文件夹，用于存放安装好的依赖包文件。</p>
 <h2 id="配置-webpack"><a href="#配置-webpack" class="headerlink" title="配置 webpack"></a>配置 webpack</h2><h3 id="webpack-config-js"><a href="#webpack-config-js" class="headerlink" title="webpack.config.js"></a>webpack.config.js</h3><p><code>webpack</code> 的配置文件名叫 <code>webpack.config.js</code>，这个文件需要返回包含 <code>webpack</code> 配置项的对象。<code>webpack</code> 配置项中最常用到的是 <code>entry</code>、<code>output</code> 和 <code>rules</code>。</p>
 <pre><code class="hljs javascript"><span class="hljs-comment">// webpack.config.js</span>
@@ -140,11 +140,11 @@ npm init -y</code></pre>
     <span class="hljs-attr">filename</span>: <span class="hljs-string">'bundle.js'</span>
   &#125;,
   <span class="hljs-attr">module</span>: &#123;
-    <span class="hljs-comment">// 使用 babel-loader 编译 es6/7/8 和 jsx 语法</span>
+    <span class="hljs-comment">// 使用 babel-loader 编译 es6/7/8、ts 和 jsx 语法</span>
     <span class="hljs-comment">// 注意：这里没有配置 preset，而是在 babel.config.js 文件里面配置</span>
     rules: [
       &#123;
-        <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.jsx?$/</span>,
+        <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.(js|mjs|jsx|ts|tsx)$/</span>,
         <span class="hljs-attr">exclude</span>: <span class="hljs-regexp">/node_modules/</span>,
         <span class="hljs-attr">use</span>: &#123;
           <span class="hljs-attr">loader</span>: <span class="hljs-string">'babel-loader'</span>
@@ -176,9 +176,26 @@ npm init -y</code></pre>
 &#125;</code></pre>
 
 <h3 id="配置-babel"><a href="#配置-babel" class="headerlink" title="配置 babel"></a>配置 babel</h3><p>在项目根目录新建一个 <code>babel</code> 配置文件 <code>babal.config.js</code>，内容如下：</p>
+<p>如果想要使用一些新的语言特性，需要安装以下插件：</p>
+<ul>
+<li>@babel/plugin-proposal-decorators   支持 decorators</li>
+<li>@babel/plugin-proposal-class-properties  支持类属性</li>
+<li>@babel/plugin-proposal-object-rest-spread  支持对象解构</li>
+<li>@babel/plugin-syntax-dynamic-import 支持 import()</li>
+</ul>
 <pre><code class="hljs javascript"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-keyword">const</span> presets = [<span class="hljs-string">"@babel/preset-env"</span>, <span class="hljs-string">"@babel/preset-react"</span>];
-  <span class="hljs-keyword">const</span> plugins = [];
+  <span class="hljs-comment">// 具体参考：https://babeljs.io/docs/en/presets</span>
+  <span class="hljs-keyword">const</span> presets = [
+    <span class="hljs-string">"@babel/preset-env"</span>,
+    <span class="hljs-string">"@babel/preset-react"</span>,
+    <span class="hljs-string">"@babel/preset-typescript"</span>
+  ];
+  <span class="hljs-comment">// 具体参考：https://babeljs.io/docs/en/plugins</span>
+  <span class="hljs-keyword">const</span> plugins = [
+    [<span class="hljs-string">"@babel/plugin-proposal-decorators"</span>, &#123; <span class="hljs-attr">legacy</span>: <span class="hljs-literal">true</span> &#125;],
+    [<span class="hljs-string">"@babel/plugin-proposal-class-properties"</span>, &#123; <span class="hljs-attr">loose</span>: <span class="hljs-literal">true</span> &#125;],
+    [<span class="hljs-string">"@babel/plugin-proposal-object-rest-spread"</span>, &#123; <span class="hljs-attr">useBuiltIns</span>: <span class="hljs-literal">true</span> &#125;]
+  ];
   <span class="hljs-keyword">return</span> &#123; presets, plugins &#125;;
 &#125;</code></pre>
 
@@ -351,11 +368,11 @@ npm init -y</code></pre>
 
 <p>当然你还可以安装 <code>sass-loader</code> 和 <code>postcss-loader</code> 以支持样式相关的更多功能。</p>
 <p>以上就是关于如何用 <code>webpack</code> 搭建一个 <code>react</code> 应用的方法，现在就可以开心地写 <code>react</code> 代码了。接下来，谈谈部署相关的事情。</p>
-<h2 id="内置-eslint"><a href="#内置-eslint" class="headerlink" title="内置 eslint"></a>内置 <code>eslint</code></h2><p>代码风格检查也是非常必要的，还可以预先发现一些 bug，首先安装依赖 <code>npm install --save-dev eslint-loader eslint eslint-config-react-app</code>，然后增加 <code>rules</code> 配置：</p>
+<h2 id="内置-eslint"><a href="#内置-eslint" class="headerlink" title="内置 eslint"></a>内置 <code>eslint</code></h2><p>代码风格检查也是非常必要的，还可以预先发现一些 bug，首先安装依赖 <code>npm install --save-dev eslint-loader eslint eslint-config-react-app @typescript-eslint/eslint-plugin @typescript-eslint/parser</code>，然后增加 <code>rule</code> 配置：</p>
 <pre><code class="hljs javascript">rules: [
   &#123;
     <span class="hljs-attr">enforce</span>: <span class="hljs-string">"pre"</span>, <span class="hljs-comment">// 强制在 babel 之前执行</span>
-    test: <span class="hljs-regexp">/\.jsx?$/</span>,
+    test: <span class="hljs-regexp">/\.(js|mjs|jsx|ts|tsx)$/</span>,
     <span class="hljs-attr">exclude</span>: <span class="hljs-regexp">/node_modules/</span>,
     <span class="hljs-attr">use</span>: &#123;
       <span class="hljs-attr">loader</span>: <span class="hljs-string">'eslint-loader'</span>,
@@ -372,6 +389,9 @@ npm init -y</code></pre>
   &#125;
 ]</code></pre>
 
+<h2 id="支持-TypeScript"><a href="#支持-TypeScript" class="headerlink" title="支持 TypeScript"></a>支持 TypeScript</h2><p>虽然前面 <code>babel-loader</code> 和 <code>eslint</code> 的配置都有 <code>.ts/tsx</code> 的扩展名，但要想编译 <code>TypeScript</code> 文件还需要安装 <code>npm install --save-dev typescript</code> 模块。</p>
+<p>安装 <code>react</code> 声明文件： <code>npm install --save-dev @types/react @types/react-dom</code>。</p>
+<p>如果要自定义 <code>TypeScript</code> 配置，可以在项目根目录新建文件 <code>tsconfig.json</code>。</p>
 <h2 id="部署配置"><a href="#部署配置" class="headerlink" title="部署配置"></a>部署配置</h2><p>部署到生产环境的代码都是要经过压缩优化的，但是在开发的时候，为了方便在浏览器 <code>devtool</code> 中定位问题，一般是不需要压缩的，所以需要将 <code>webpack.config.js</code> 中的配置分别对应开发环境和生产环境部署。</p>
 <p>首先是环境的区分，方法有很多，本文是通过命令 <code>webpack --mode production|development</code>  来区分。</p>
 <pre><code class="hljs javascript"><span class="hljs-keyword">const</span> argv = <span class="hljs-built_in">require</span>(<span class="hljs-string">'minimist'</span>)(process.argv.slice(<span class="hljs-number">0</span>))
