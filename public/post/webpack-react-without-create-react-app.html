@@ -366,7 +366,7 @@ npm init -y</code></pre>
   <span class="hljs-attr">chunkFilename</span>: <span class="hljs-string">'[id].css'</span>,
 &#125;)</code></pre>
 
-<p>当然你还可以安装 <code>sass-loader</code> 和 <code>postcss-loader</code> 以支持样式相关的更多功能。</p>
+<p>当然你还可以配置 <code>css-loader</code> 的 <code>options</code> 来开启 <code>css modules</code>，也可以安装 <code>sass-loader</code> 和 <code>postcss-loader</code> 以支持样式相关的更多功能。</p>
 <p>以上就是关于如何用 <code>webpack</code> 搭建一个 <code>react</code> 应用的方法，现在就可以开心地写 <code>react</code> 代码了。接下来，谈谈部署相关的事情。</p>
 <h2 id="内置-eslint"><a href="#内置-eslint" class="headerlink" title="内置 eslint"></a>内置 <code>eslint</code></h2><p>代码风格检查也是非常必要的，还可以预先发现一些 bug，首先安装依赖 <code>npm install --save-dev eslint-loader eslint eslint-config-react-app @typescript-eslint/eslint-plugin @typescript-eslint/parser</code>，然后增加 <code>rule</code> 配置：</p>
 <pre><code class="hljs javascript">rules: [
@@ -447,7 +447,7 @@ npm init -y</code></pre>
         
 
         ，最后修改于
-        <i>2019-08-12 16:57:54</i>
+        <i>2019-08-21 17:14:54</i>
       </p>
     </div>
   </article>

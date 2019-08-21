@@ -1,7 +1,7 @@
 ---
 title: 不用create-react-app搭建基于webpack的react项目
 date: 2018-04-06 15:59:49
-updated: 2019-08-12 16:57:54
+updated: 2019-08-21 17:14:54
 comments: 1
 categories: 前端工程化
 tags: []
@@ -363,7 +363,7 @@ module.exports = {
   })
 ```
 
-当然你还可以安装 `sass-loader` 和 `postcss-loader` 以支持样式相关的更多功能。
+当然你还可以配置 `css-loader` 的 `options` 来开启 `css modules`，也可以安装 `sass-loader` 和 `postcss-loader` 以支持样式相关的更多功能。
 
 以上就是关于如何用 `webpack` 搭建一个 `react` 应用的方法，现在就可以开心地写 `react` 代码了。接下来，谈谈部署相关的事情。
 
