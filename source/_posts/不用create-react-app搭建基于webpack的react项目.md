@@ -415,6 +415,47 @@ rules: [
 yarn add prettier pretty-quick husky --dev
 ```
 
+在项目根目录创建 `.prettierignore` 文件：
+
+```nohighlight
+**/*.md
+**/*.svg
+**/*.ejs
+**/*.html
+.editorconfig
+.gitignore
+.prettierignore
+
+# ide
+.idea
+.vscode
+
+# npm
+npm-error.log
+package.json
+package-lock.json
+yarn.lock
+yarn-error.log
+
+# folder
+dist
+```
+
+在项目根目录创建 `.prettierrc` 文件：
+
+```json
+{
+  "singleQuote": true,
+  "trailingComma": "all",
+  "overrides": [
+    {
+      "files": ".prettierrc",
+      "options": { "parser": "json" }
+    }
+  ]
+}
+```
+
 配置 `package.json`：
 
 ```json

@@ -405,6 +405,41 @@ npm init -y</code></pre>
 <p>使用 <code>prettier</code> 的方案有很多种，具体可以参考官方文档：<a href="https://prettier.io/docs/en/precommit.html" target="_blank" rel="noopener">https://prettier.io/docs/en/precommit.html</a>，这里我推荐使用 <code>pretty-quick</code> 的方案：</p>
 <pre><code class="hljs bash">yarn add prettier pretty-quick husky --dev</code></pre>
 
+<p>在项目根目录创建 <code>.prettierignore</code> 文件：</p>
+<pre><code class="hljs nohighlight">**/*.md
+**/*.svg
+**/*.ejs
+**/*.html
+.editorconfig
+.gitignore
+.prettierignore
+
+# ide
+.idea
+.vscode
+
+# npm
+npm-error.log
+package.json
+package-lock.json
+yarn.lock
+yarn-error.log
+
+# folder
+dist</code></pre>
+
+<p>在项目根目录创建 <code>.prettierrc</code> 文件：</p>
+<pre><code class="hljs json">&#123;
+  <span class="hljs-attr">"singleQuote"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"trailingComma"</span>: <span class="hljs-string">"all"</span>,
+  <span class="hljs-attr">"overrides"</span>: [
+    &#123;
+      <span class="hljs-attr">"files"</span>: <span class="hljs-string">".prettierrc"</span>,
+      <span class="hljs-attr">"options"</span>: &#123; <span class="hljs-attr">"parser"</span>: <span class="hljs-string">"json"</span> &#125;
+    &#125;
+  ]
+&#125;</code></pre>
+
 <p>配置 <code>package.json</code>：</p>
 <pre><code class="hljs json">&#123;
   <span class="hljs-attr">"husky"</span>: &#123;
