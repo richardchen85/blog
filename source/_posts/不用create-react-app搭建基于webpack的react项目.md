@@ -1,7 +1,7 @@
 ---
 title: 不用create-react-app搭建基于webpack的react项目
 date: 2018-04-06 15:59:49
-updated: 2019-08-21 17:14:54
+updated: 2019-11-25 14:26:54
 comments: 1
 categories: 前端工程化
 tags: []
@@ -392,6 +392,42 @@ rules: [
   }
 ]
 ```
+
+## 内置 `prettier` 自动格式化代码
+
+虽然已经有了 `eslint`，但每个人编码习惯不一样，代码格式也不一样，即使使用 `eslint --fix` 也只能格式化 `javascript` 的代码，为了使每个开发人员提交的代码都有统一的格式，就需要引入另一个工具：`prettier`。
+
+为什么要自动格式化代码呢？
+
+* 统一使用一种编程风格，不必要在 code review 时讨论代码风格的问题
+* 自动格式化，省时省力
+
+使用 `prettier` 主要有以下几个原因：
+
+* 可配置化的代码格式化工具：内置了业界主流的代码格式并支持通过配置修改默认格式
+* 支持多种语言：解决了 `eslint` 只支持 `javascript` 的困扰
+* 可集成到大多数的编辑器：不必担心某个成员使用的编辑器不支持
+* 配置少：不必为了记住很多配置项页烦恼
+
+使用 `prettier` 的方案有很多种，具体可以参考官方文档：[https://prettier.io/docs/en/precommit.html](https://prettier.io/docs/en/precommit.html)，这里我推荐使用 `pretty-quick` 的方案：
+
+```bash
+yarn add prettier pretty-quick husky --dev
+```
+
+配置 `package.json`：
+
+```json
+{
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  }
+}
+```
+
+配置好过后，`prettier` 会在每次成员执行 `git commit` 时将代码格式化，这样就保证了提交到代码库里的代码都是经过格式化过后的代码了。
 
 ## 支持 TypeScript
 
