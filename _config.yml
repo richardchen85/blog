@@ -85,7 +85,7 @@ theme: clq
 
 # user links
 logo_url: https://misc.chenliqiang.cn/blog/logo.png
-github_url: https://github.com/richard-chen-1985
+github_url: https://github.com/richardchen85
 
 # rss
 feed:
@@ -102,5 +102,5 @@ feed:
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: https://github.com/richard-chen-1985/richard-chen-1985.github.io.git
+  repository: https://github.com/richardchen85/richardchen85.github.io.git
   branch: master
