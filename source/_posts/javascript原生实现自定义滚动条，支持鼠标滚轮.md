@@ -8,7 +8,7 @@ tags: []
 permalink: 21
 ---
 
-javascript原生实现自定义滚动条，支持鼠标滚轮，自定义滚动条的样式，这是本人写的小封装之一，github：[https://github.com/richard-chen-1985/jScrollBar](https://github.com/richard-chen-1985/jScrollBar)
+javascript原生实现自定义滚动条，支持鼠标滚轮，自定义滚动条的样式，这是本人写的小封装之一，github：[https://github.com/richardchen85/jScrollBar](https://github.com/richardchen85/jScrollBar)
 
 <!--more-->
 

@@ -17,7 +17,7 @@ permalink: fis3-share-template-try
 
 > 模板共用最理想的状态，我想应该是前端产出模板后，后端不需要修改，可以直接copy进项目里，这样可以减少重复劳动力，我来试试看能不能做到。
 
-因为后端是velocity模板引擎，幸好以前用gulp时发现了[fool2fish的velocity模块](https://github.com/fool2fish/velocity)，可以满足velocity语法解析，还支持类似于velocity tools的用法。于是想到写一个[fis-parser-velocity](https://github.com/richard-chen-1985/fis-parser-velocity)插件，将velocity模板文件直接生成html。
+因为后端是velocity模板引擎，幸好以前用gulp时发现了[fool2fish的velocity模块](https://github.com/fool2fish/velocity)，可以满足velocity语法解析，还支持类似于velocity tools的用法。于是想到写一个[fis-parser-velocity](https://github.com/richardchen85/fis-parser-velocity)插件，将velocity模板文件直接生成html。
 
 我喜欢FIS的原因之一就是，像我这样的小白可以很容易写一个parser插件，FIS的插件开发方法请参考[FIS3插件开发](http://fis.baidu.com/fis3/docs/api/dev-plugin.html)。
 
@@ -164,4 +164,4 @@ seajs.use(["/widget/a/a.js", "/widget/b/b.js"]);
 
 ## 来个总结
 
-其实也没什么好总结的，本来是个内向的人，也很少写文字，所有内容都在fis-parser-velocity插件里面，另外还有个完整的案例在[fiskit](https://github.com/richard-chen-1985/fiskit)封装和[fiskit-demo](https://github.com/richard-chen-1985/fiskit-demo)中可以参考。FIS是个很强大的东西，我也只是用到了其中很小的一点来解决我现有业务上的一些问题，经验尚浅，还有很多东西需要学习。
+其实也没什么好总结的，本来是个内向的人，也很少写文字，所有内容都在fis-parser-velocity插件里面，另外还有个完整的案例在[fiskit](https://github.com/richardchen85/fiskit)封装和[fiskit-demo](https://github.com/richardchen85/fiskit-demo)中可以参考。FIS是个很强大的东西，我也只是用到了其中很小的一点来解决我现有业务上的一些问题，经验尚浅，还有很多东西需要学习。

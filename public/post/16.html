@@ -116,7 +116,7 @@
 <p>我们先使用绝对定位的方式来满足IE7以下的浏览器实现垂直居中，为什么使用绝对定位然后top:50%和top:-50%能居中，而且只能在IE7以下版本浏览器中才有效，据说是IE的layout的bug，具体原因我也不太清楚，反正是能用就好了，以后再深入去研究。</p>
 <p>第二步，也是最关键的，使用:lang选择器，这个选择器只有IE8以上版本和高级浏览器才支持，于是正好，我们可以用这个选择器来实现高级浏览器的垂直居中的CSS，即display:table的方式。</p>
 <p>好了，就是这样，附上效果图，效果自己去测试吧。</p>
-<p><img src="https://github.com/richard-chen-1985/blog/raw/master/static/css_vertical_align_middle_03.png" alt="css_vertical_align_middle_03"></p>
+<p><img src="https://github.com/richardchen85/blog/raw/master/static/css_vertical_align_middle_03.png" alt="css_vertical_align_middle_03"></p>
 <p>本人也是菜鸟，文字表达不太清楚请多包涵，这个方法其实也是借鉴了一些别人的思路。以前总在迫不得已的情况下会使用hack，现在其实也可以通过选择器来达到同样的效果，虽然也算是hack，但是总比什么“*”、“_”之类的看着好看些，纯属个人偏好了。</p>
 
     </div>

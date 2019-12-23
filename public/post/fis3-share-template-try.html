@@ -102,7 +102,7 @@
 <h2 id="先说说模板共用的事儿"><a href="#先说说模板共用的事儿" class="headerlink" title="先说说模板共用的事儿"></a>先说说模板共用的事儿</h2><blockquote>
 <p>模板共用最理想的状态，我想应该是前端产出模板后，后端不需要修改，可以直接copy进项目里，这样可以减少重复劳动力，我来试试看能不能做到。</p>
 </blockquote>
-<p>因为后端是velocity模板引擎，幸好以前用gulp时发现了<a href="https://github.com/fool2fish/velocity" target="_blank" rel="noopener">fool2fish的velocity模块</a>，可以满足velocity语法解析，还支持类似于velocity tools的用法。于是想到写一个<a href="https://github.com/richard-chen-1985/fis-parser-velocity" target="_blank" rel="noopener">fis-parser-velocity</a>插件，将velocity模板文件直接生成html。</p>
+<p>因为后端是velocity模板引擎，幸好以前用gulp时发现了<a href="https://github.com/fool2fish/velocity" target="_blank" rel="noopener">fool2fish的velocity模块</a>，可以满足velocity语法解析，还支持类似于velocity tools的用法。于是想到写一个<a href="https://github.com/richardchen85/fis-parser-velocity" target="_blank" rel="noopener">fis-parser-velocity</a>插件，将velocity模板文件直接生成html。</p>
 <p>我喜欢FIS的原因之一就是，像我这样的小白可以很容易写一个parser插件，FIS的插件开发方法请参考<a href="http://fis.baidu.com/fis3/docs/api/dev-plugin.html" target="_blank" rel="noopener">FIS3插件开发</a>。</p>
 <p>说回正题，能够解析velocity语法只能满足在开发的时候预览前端效果，要直接把模板拿到后端用还是不行的，请看下面这段前端代码：</p>
 <pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"floor"</span>&gt;</span>
@@ -201,7 +201,7 @@
 <pre><code class="hljs js">seajs.use([<span class="hljs-string">"/widget/a/a.js"</span>, <span class="hljs-string">"/widget/b/b.js"</span>]);</code></pre>
 
 <p>剩下的交由<code>fis3-postpackager-loader</code>去处理。</p>
-<h2 id="来个总结"><a href="#来个总结" class="headerlink" title="来个总结"></a>来个总结</h2><p>其实也没什么好总结的，本来是个内向的人，也很少写文字，所有内容都在fis-parser-velocity插件里面，另外还有个完整的案例在<a href="https://github.com/richard-chen-1985/fiskit" target="_blank" rel="noopener">fiskit</a>封装和<a href="https://github.com/richard-chen-1985/fiskit-demo" target="_blank" rel="noopener">fiskit-demo</a>中可以参考。FIS是个很强大的东西，我也只是用到了其中很小的一点来解决我现有业务上的一些问题，经验尚浅，还有很多东西需要学习。</p>
+<h2 id="来个总结"><a href="#来个总结" class="headerlink" title="来个总结"></a>来个总结</h2><p>其实也没什么好总结的，本来是个内向的人，也很少写文字，所有内容都在fis-parser-velocity插件里面，另外还有个完整的案例在<a href="https://github.com/richardchen85/fiskit" target="_blank" rel="noopener">fiskit</a>封装和<a href="https://github.com/richardchen85/fiskit-demo" target="_blank" rel="noopener">fiskit-demo</a>中可以参考。FIS是个很强大的东西，我也只是用到了其中很小的一点来解决我现有业务上的一些问题，经验尚浅，还有很多东西需要学习。</p>
 
     </div>
     <p>本文链接：<a href="/post/fis3-share-template-try.html">https://www.chenliqiang.cn/post/fis3-share-template-try.html</a></p>
