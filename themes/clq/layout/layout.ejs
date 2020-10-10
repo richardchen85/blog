@@ -23,9 +23,9 @@
   %>
   <title><% if (title) { %><%= title %> | <% } %><%= config.author %></title>
   <% if (config.keywords) { %>
-  <meta name="keywords" content="<%= config.keywords %>"><% } %>
+  <meta name="keywords" content="<%= page.keywords || config.keywords %>"><% } %>
   <% if (config.description) { %>
-  <meta name="description" content="<%= config.description %>"><% } %>
+  <meta name="description" content="<%= page.description || config.description %>"><% } %>
   <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/rss.html">
   <%- css('css/all') %>
 
