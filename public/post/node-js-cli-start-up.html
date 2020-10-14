@@ -209,7 +209,7 @@ Commands:
 [<span class="hljs-string">'/usr/local/bin/node'</span>, <span class="hljs-string">'/path/to/cli-test'</span>, <span class="hljs-string">'one'</span>, <span class="hljs-string">'two=three'</span>, <span class="hljs-string">'four'</span>]</code></pre>
 
 <p>但是 <code>process.argv</code> 得到的内容不好区分<code>命令</code>、<code>参数</code>以及<code>参数的值</code>，所以这里需要引入一个第三方模块 <a href="https://github.com/yargs/yargs-parser" target="_blank" rel="noopener">yargs-parser</a>。</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">const</span> yArgsParser = <span class="hljs-built_in">require</span>(<span class="hljs-string">'yargs-parser'</span>);
+<pre><code class="hljs javascript"><span class="hljs-keyword">const</span> yArgsParser = <span class="hljs-built_in">require</span>(<span class="hljs-string">"yargs-parser"</span>);
 
 <span class="hljs-comment">// 这是命令</span>
 <span class="hljs-keyword">const</span> command = process.argv[<span class="hljs-number">2</span>];
@@ -252,24 +252,87 @@ $ cli-test
 <p>通过这个路径可以知道用户想要在什么位置使用该命令行工具，并且可以读取用户自定义的配置文件，比如 <code>vue</code> 的配置文件 <code>vue.config.js</code>。</p>
 <h3 id="commander-js"><a href="#commander-js" class="headerlink" title="commander.js"></a>commander.js</h3><p>如果觉得以上处理 <code>命令</code> 和 <code>参数</code> 的方式很繁琐，又想快速上手制作出一个命令行工具，可以使用第三方模块 <a href="https://github.com/tj/commander.js" target="_blank" rel="noopener">commander.js</a>。</p>
 <p><code>commander.js</code> 是一个完整的 <code>node.js</code> 命令行解决方案，灵感来自 <code>Ruby</code> 的 <a href="https://github.com/commander-rb/commander" target="_blank" rel="noopener">commander</a>。它有很详细的说明文档，并且有官方中文版，这里就不做过多介绍了。</p>
+<h2 id="用户行为交互"><a href="#用户行为交互" class="headerlink" title="用户行为交互"></a>用户行为交互</h2><p>为了给用户提供更加友好的使用体验，通常会增加一些交互行为反馈功能，比如任务执行等待提示、输出结果高亮提示和用户输入提示等。</p>
+<h3 id="任务执行等待提示"><a href="#任务执行等待提示" class="headerlink" title="任务执行等待提示"></a>任务执行等待提示</h3><p><a href="https://github.com/sindresorhus/ora" target="_blank" rel="noopener">ora</a> 是一个不错的等待提示工具，也很容易上手：</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">const</span> Ora = <span class="hljs-built_in">require</span>(<span class="hljs-string">"ora"</span>);
+<span class="hljs-comment">// 实例化一个 spinner</span>
+<span class="hljs-keyword">const</span> spinner = <span class="hljs-keyword">new</span> Ora();
+<span class="hljs-comment">// 设置文案</span>
+spinner.text = <span class="hljs-string">"Loading"</span>;
+<span class="hljs-comment">// 开始显示等待提示</span>
+spinner.start();
+setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &#123;
+  <span class="hljs-comment">// 显示成功信息并退出 spinner</span>
+  spinner.succeed();
+&#125;, <span class="hljs-number">3000</span>);</code></pre>
+
+<h3 id="输出结果高亮"><a href="#输出结果高亮" class="headerlink" title="输出结果高亮"></a>输出结果高亮</h3><p><a href="https://github.com/chalk/chalk" target="_blank" rel="noopener">chalk</a> 可以在命令行终端里定义字符串样式的模块，通过这个模块可以在终端输出各种样式的文本信息：</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">const</span> chalk = <span class="hljs-built_in">require</span>(<span class="hljs-string">"chalk"</span>);
+<span class="hljs-keyword">const</span> log = <span class="hljs-built_in">console</span>.log;
+
+<span class="hljs-comment">// 输出有带颜色的文本</span>
+log(chalk.blue(<span class="hljs-string">"Hello"</span>) + <span class="hljs-string">" World"</span> + chalk.red(<span class="hljs-string">"!"</span>));
+
+<span class="hljs-comment">// 输出带颜色和背景色的文本</span>
+log(chalk.blue.bgRed.bold(<span class="hljs-string">"Hello world!"</span>));
+
+<span class="hljs-comment">// 多段文本输出</span>
+log(chalk.blue(<span class="hljs-string">"Hello"</span>, <span class="hljs-string">"World!"</span>, <span class="hljs-string">"Foo"</span>, <span class="hljs-string">"bar"</span>, <span class="hljs-string">"biz"</span>, <span class="hljs-string">"baz"</span>));
+
+<span class="hljs-comment">// 嵌套样式</span>
+log(chalk.red(<span class="hljs-string">"Hello"</span>, chalk.underline.bgBlue(<span class="hljs-string">"world"</span>) + <span class="hljs-string">"!"</span>));
+
+<span class="hljs-comment">// 还有更多样式比如：加粗、中划线、斜体等请参考官方文档</span></code></pre>
+
+<h3 id="用户输入交互"><a href="#用户输入交互" class="headerlink" title="用户输入交互"></a>用户输入交互</h3><p><a href="https://github.com/SBoudrias/Inquirer.js" target="_blank" rel="noopener">inquirer</a> 模块集成了常用的命令行工具的用户交互功能，比如：input, number, confirm, list, rawlist, expand, checkbox, password, editor 等。</p>
+<ul>
+<li>文本输入</li>
+</ul>
+<pre><code class="hljs javascript"><span class="hljs-keyword">const</span> inquirer = <span class="hljs-built_in">require</span>(<span class="hljs-string">"inquirer"</span>);
+
+(<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-keyword">const</span> answers = <span class="hljs-keyword">await</span> inquirer.prompt([
+    &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">"username"</span>, <span class="hljs-attr">message</span>: <span class="hljs-string">`Please enter your username`</span> &#125;,
+  ]);
+  <span class="hljs-built_in">console</span>.log(answers.username);
+&#125;)();</code></pre>
+
+<ul>
+<li>单项选择</li>
+</ul>
+<pre><code class="hljs javascript"><span class="hljs-keyword">const</span> inquirer = <span class="hljs-built_in">require</span>(<span class="hljs-string">"inquirer"</span>);
+
+(<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-keyword">const</span> answers = <span class="hljs-keyword">await</span> inquirer.prompt([
+    &#123;
+      <span class="hljs-attr">name</span>: <span class="hljs-string">"gender"</span>,
+      <span class="hljs-attr">message</span>: <span class="hljs-string">`Please enter your gender`</span>,
+      <span class="hljs-attr">type</span>: <span class="hljs-string">"list"</span>,
+      <span class="hljs-attr">choices</span>: [<span class="hljs-string">"male"</span>, <span class="hljs-string">"female"</span>],
+    &#125;,
+  ]);
+  <span class="hljs-built_in">console</span>.log(answers.gender);
+&#125;)();</code></pre>
+
+<p>更多功能请参考官方文档: <a href="https://github.com/SBoudrias/Inquirer.js#documentation" target="_blank" rel="noopener">https://github.com/SBoudrias/Inquirer.js#documentation</a></p>
 <h2 id="运行环境检查"><a href="#运行环境检查" class="headerlink" title="运行环境检查"></a>运行环境检查</h2><p>有些命令行工具需要安装第三方工具或者在特殊的环境（比如：node.js 的版本在 v10 及以上）才能运行，所以在运行任何程序之前，需要检查用户当前的运行环境是否能够正常使用本工具。</p>
 <h3 id="node-js-版本检查"><a href="#node-js-版本检查" class="headerlink" title="node.js 版本检查"></a>node.js 版本检查</h3><p><code>npm</code> 提供了在 <code>package.json</code> 文件中配置 <code>engines</code> 来声明 <code>node.js</code> 的版本，也可以声明 <code>npm</code> 的版本：</p>
 <pre><code class="hljs json">&#123;
   <span class="hljs-attr">"engines"</span>: &#123;
     <span class="hljs-attr">"node"</span>: <span class="hljs-string">"&gt;= 10.13.0"</span>,
-    <span class="hljs-attr">"npm"</span> : <span class="hljs-string">"~6.9.0"</span>
+    <span class="hljs-attr">"npm"</span>: <span class="hljs-string">"~6.9.0"</span>
   &#125;
 &#125;</code></pre>
 
 <p>当用户在安装本命令行工具时，<code>npm</code> 检查当前的 <code>node.js</code> 版本，如果不满足要求则会警告提示，如果带上 <code>engine-strict</code> 参数则会直接报错。</p>
 <p>当然，开发者也可以在运行命令行工具时用程序去检查，这里借助第三方模块 <a href="https://github.com/npm/node-semver" target="_blank" rel="noopener">node-semver</a>：</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">const</span> semver = <span class="hljs-built_in">require</span>(<span class="hljs-string">'semver'</span>);
+<pre><code class="hljs javascript"><span class="hljs-keyword">const</span> semver = <span class="hljs-built_in">require</span>(<span class="hljs-string">"semver"</span>);
 
-<span class="hljs-keyword">const</span> requiredVersion = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../package.json'</span>).engines.node;
+<span class="hljs-keyword">const</span> requiredVersion = <span class="hljs-built_in">require</span>(<span class="hljs-string">"../package.json"</span>).engines.node;
 <span class="hljs-keyword">const</span> nodeVersion = process.version;
 
 <span class="hljs-keyword">if</span> (!semver.satisfies(nodeVersion, requiredVersion)) &#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'node.js 版本必须满足 '</span> + requiredVersion + <span class="hljs-string">' 才能运行本工具'</span>);
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"node.js 版本必须满足 "</span> + requiredVersion + <span class="hljs-string">" 才能运行本工具"</span>);
   <span class="hljs-keyword">return</span>;
 &#125;</code></pre>
 
@@ -277,24 +340,24 @@ $ cli-test
 <h2 id="更新检查"><a href="#更新检查" class="headerlink" title="更新检查"></a>更新检查</h2><p>通常一个应用程序都不会只发布一个版本，而是会不断的迭代新的版本，当 <code>npm</code> 包发布新版本时用户是无法感知到的，所以需要在用户每次使用这个工具的时候，主动去检查线上最新的版本，如果用户使用的版本太旧就主动提示用户升级。</p>
 <p>获取当前 <code>npm</code> 包的版本很容易，可以读取 <code>package.json</code> 文件中的 <code>version</code> 拿到。获取线上的最新版本号稍麻烦些，需要用到 <code>node.js</code> 的 <code>http</code> 模块发起一个 <code>http</code> 请求到<code>http://registry.npmjs.org/[模块名]</code>，返回结果是一个 <code>json</code> 字符串，里面包含了 <code>dist-tags.latest</code> 字段可以获取当前最新版本。</p>
 <p>为了方便举例，这里使用到一个第三方 <code>http</code> 请求库 <a href="https://github.com/axios/axios" target="_blank" rel="noopener">axios</a></p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">const</span> axios = <span class="hljs-built_in">require</span>(<span class="hljs-string">'axios'</span>);
+<pre><code class="hljs javascript"><span class="hljs-keyword">const</span> axios = <span class="hljs-built_in">require</span>(<span class="hljs-string">"axios"</span>);
 
 <span class="hljs-built_in">module</span>.exports = <span class="hljs-keyword">async</span> (pkgName, currentVersion) =&gt; &#123;
-  <span class="hljs-keyword">const</span> &#123;
-    data,
-    status,
-  &#125; = <span class="hljs-keyword">await</span> axios.get(<span class="hljs-string">`http://registry.m.jd.com/<span class="hljs-subst">$&#123;pkgName&#125;</span>`</span>, &#123;
-    <span class="hljs-attr">timeout</span>: <span class="hljs-number">1000</span>,
-  &#125;);
+  <span class="hljs-keyword">const</span> &#123; data, status &#125; = <span class="hljs-keyword">await</span> axios.get(
+    <span class="hljs-string">`http://registry.m.jd.com/<span class="hljs-subst">$&#123;pkgName&#125;</span>`</span>,
+    &#123;
+      <span class="hljs-attr">timeout</span>: <span class="hljs-number">1000</span>,
+    &#125;
+  );
 
   <span class="hljs-keyword">if</span> (status === <span class="hljs-number">200</span>) &#123;
-    <span class="hljs-keyword">const</span> latest = data[<span class="hljs-string">'dist-tags'</span>][<span class="hljs-string">'latest'</span>].split(<span class="hljs-string">'.'</span>);
-    <span class="hljs-keyword">const</span> current = currentVersion.split(<span class="hljs-string">'.'</span>);
+    <span class="hljs-keyword">const</span> latest = data[<span class="hljs-string">"dist-tags"</span>][<span class="hljs-string">"latest"</span>].split(<span class="hljs-string">"."</span>);
+    <span class="hljs-keyword">const</span> current = currentVersion.split(<span class="hljs-string">"."</span>);
 
     <span class="hljs-keyword">if</span> (latest[<span class="hljs-number">0</span>] !== current[<span class="hljs-number">0</span>]) &#123;
-      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'该模块进行了 Mayor 升级'</span>);
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"该模块进行了 Mayor 升级"</span>);
     &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (latest[<span class="hljs-number">1</span>] !== current[<span class="hljs-number">1</span>] || latest[<span class="hljs-number">2</span>] !== current[<span class="hljs-number">2</span>]) &#123;
-      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'该模块版本已更新，请升级'</span>);
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"该模块版本已更新，请升级"</span>);
     &#125;
   &#125;
 &#125;;</code></pre>
@@ -341,7 +404,7 @@ $ cli-test
         
 
         ，最后修改于
-        <i>2020-10-12 15:12:00</i>
+        <i>2020-10-14 15:12:00</i>
       </p>
     </div>
   </article>
