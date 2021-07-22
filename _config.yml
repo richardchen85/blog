@@ -64,6 +64,7 @@ category_map:
   JavaScript: javascript
   C#: csharp
   服务器: servers
+  性能优化: performance
 tag_map:
 
 # Date / Time format
