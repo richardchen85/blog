@@ -134,7 +134,7 @@
 <p>所以我在fis-parser-velocity插件中加了一个parse选项，如果为true会将vm模板生成html，用于开发时浏览效果，如果为false，则只会加载静态资源交由fis3-postpackager-loader处理，vm语法原样输出，用于提供给后端。</p>
 <p>于是得到以下效果：</p>
 <p>前端模板文件：index.vm</p>
-<pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+<pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"utf-8"</span>&gt;</span>
@@ -150,7 +150,7 @@
 <span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre>
 
 <p>输出结果文件名依然是：index.vm</p>
-<pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+<pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"utf-8"</span>&gt;</span>
@@ -244,7 +244,7 @@
   
 </div>
     <footer id="footer" class="inner">
-      &copy; 2021&nbsp;-&nbsp; Richard Chen
+      &copy; 2022&nbsp;-&nbsp; Richard Chen
     </footer>
   </div>
   <script src="/js/firekylin.js"></script>

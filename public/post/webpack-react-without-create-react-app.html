@@ -132,17 +132,17 @@ npm init -y</code></pre>
 <span class="hljs-built_in">module</span>.exports = &#123;
   <span class="hljs-comment">// 让 webpack 知道以哪个模块为入口，做依赖收集</span>
   <span class="hljs-comment">// 具体参考 https://webpack.js.org/concepts/#entry</span>
-  entry: <span class="hljs-string">'./src/index.js'</span>,
+  <span class="hljs-attr">entry</span>: <span class="hljs-string">'./src/index.js'</span>,
   <span class="hljs-comment">// 告诉 webpack 打包好的文件存放在哪里，以及怎么命名</span>
   <span class="hljs-comment">// 具体参考 https://webpack.js.org/concepts/#output</span>
-  output: &#123;
+  <span class="hljs-attr">output</span>: &#123;
     <span class="hljs-attr">path</span>: path.join(__dirname, <span class="hljs-string">'/dist'</span>),
     <span class="hljs-attr">filename</span>: <span class="hljs-string">'bundle.js'</span>
   &#125;,
   <span class="hljs-attr">module</span>: &#123;
     <span class="hljs-comment">// 使用 babel-loader 编译 es6/7/8、ts 和 jsx 语法</span>
     <span class="hljs-comment">// 注意：这里没有配置 preset，而是在 babel.config.js 文件里面配置</span>
-    rules: [
+    <span class="hljs-attr">rules</span>: [
       &#123;
         <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.(js|mjs|jsx|ts|tsx)$/</span>,
         <span class="hljs-attr">exclude</span>: <span class="hljs-regexp">/node_modules/</span>,
@@ -212,11 +212,11 @@ npm init -y</code></pre>
 <p>在命令行输入 <code>webpack-dev-server --mode development --open --hot</code>，该命令会自动打开浏览器预览结果，并开启了热更新，如果代码有修改，会立即反映到浏览器展现上。</p>
 <p>开发完打包上线可以使用命令 <code>webpack --mode production</code>。</p>
 <p>命令有点长，可以把它放在 <code>package.json</code> 的 <code>scripts</code> 块中，这样，可以直接运行命令 <code>npm start</code> 和 <code>npm run build</code> 来执行：</p>
-<pre><code class="hljs json">// package.json
+<pre><code class="hljs json"><span class="hljs-comment">// package.json</span>
 &#123;
-  "scripts": &#123;
-    "start": "webpack-dev-server --mode development --open --hot",
-    "build": "webpack --mode production"
+  <span class="hljs-attr">"scripts"</span>: &#123;
+    <span class="hljs-attr">"start"</span>: <span class="hljs-string">"webpack-dev-server --mode development --open --hot"</span>,
+    <span class="hljs-attr">"build"</span>: <span class="hljs-string">"webpack --mode production"</span>
   &#125;
 &#125;</code></pre>
 
@@ -299,27 +299,27 @@ npm init -y</code></pre>
 
 <span class="hljs-built_in">module</span>.exports = &#123;
   <span class="hljs-comment">// 这里 entry 是一个对象，每个页面和它的入口模块是一个 key/value 对</span>
-  entry: &#123;
+  <span class="hljs-attr">entry</span>: &#123;
     <span class="hljs-attr">index</span>: <span class="hljs-string">'./src/pages/index.js'</span>,
     <span class="hljs-attr">about</span>: <span class="hljs-string">'./src/pages/about.js'</span>
   &#125;,
   <span class="hljs-attr">output</span>: &#123;
     <span class="hljs-comment">// 这里 filename 有所改变，[name] 表示 entry 里面的 key</span>
     <span class="hljs-comment">// 表示每个页面的 bundle 文件以自己的名称命名</span>
-    filename: <span class="hljs-string">'js/[name].js'</span>
+    <span class="hljs-attr">filename</span>: <span class="hljs-string">'js/[name].js'</span>
   &#125;,
   <span class="hljs-attr">plugins</span>: [
     <span class="hljs-comment">// index 页面</span>
     <span class="hljs-keyword">new</span> HtmlWebpackPlugin(&#123;
       <span class="hljs-attr">template</span>: <span class="hljs-string">'./src/pages/index.html'</span>,
       <span class="hljs-comment">// 要注入的 entry 模块，如果不指定，会把所有 entry 模块都注入</span>
-      chunks: [<span class="hljs-string">'index'</span>]
+      <span class="hljs-attr">chunks</span>: [<span class="hljs-string">'index'</span>]
     &#125;),
     <span class="hljs-comment">// about 页面</span>
     <span class="hljs-keyword">new</span> HtmlWebpackPlugin(&#123;
       <span class="hljs-attr">template</span>: <span class="hljs-string">'./src/pages/about.html'</span>,
       <span class="hljs-comment">// about 页面的 html 文件名</span>
-      filename: <span class="hljs-string">'about.html'</span>,
+      <span class="hljs-attr">filename</span>: <span class="hljs-string">'about.html'</span>,
       <span class="hljs-attr">chunks</span>: [<span class="hljs-string">'about'</span>]
     &#125;)
   ]
@@ -335,20 +335,20 @@ npm init -y</code></pre>
     <span class="hljs-keyword">new</span> HtmlWebpackPlugin(&#123;
       <span class="hljs-attr">template</span>: <span class="hljs-string">'./src/pages/index.html'</span>,
       <span class="hljs-comment">// 注入公共模块 commons</span>
-      chunks: [<span class="hljs-string">'commons'</span>, <span class="hljs-string">'index'</span>]
+      <span class="hljs-attr">chunks</span>: [<span class="hljs-string">'commons'</span>, <span class="hljs-string">'index'</span>]
     &#125;),
     <span class="hljs-keyword">new</span> HtmlWebpackPlugin(&#123;
       <span class="hljs-attr">template</span>: <span class="hljs-string">'./src/pages/about.html'</span>,
       <span class="hljs-attr">filename</span>: <span class="hljs-string">'about.html'</span>,
       <span class="hljs-comment">// 注入公共模块 commons</span>
-      chunks: [<span class="hljs-string">'commons'</span>, <span class="hljs-string">'about'</span>]
+      <span class="hljs-attr">chunks</span>: [<span class="hljs-string">'commons'</span>, <span class="hljs-string">'about'</span>]
     &#125;)
   ],
   <span class="hljs-attr">optimization</span>: &#123;
     <span class="hljs-attr">splitChunks</span>: &#123;
       <span class="hljs-attr">cacheGroups</span>: &#123;
         <span class="hljs-comment">// 创建一个 commons 块，用于包含所有入口模块共用的代码</span>
-        commons: &#123;
+        <span class="hljs-attr">commons</span>: &#123;
           <span class="hljs-attr">name</span>: <span class="hljs-string">"commons"</span>,
           <span class="hljs-attr">chunks</span>: <span class="hljs-string">"initial"</span>,
           <span class="hljs-attr">minChunks</span>: <span class="hljs-number">2</span>
@@ -362,7 +362,7 @@ npm init -y</code></pre>
 <pre><code class="hljs javascript"><span class="hljs-keyword">new</span> MiniCssExtractPlugin(&#123;
   <span class="hljs-comment">// Options similar to the same options in webpackOptions.output</span>
   <span class="hljs-comment">// both options are optional</span>
-  filename: <span class="hljs-string">'[name].css'</span>,
+  <span class="hljs-attr">filename</span>: <span class="hljs-string">'[name].css'</span>,
   <span class="hljs-attr">chunkFilename</span>: <span class="hljs-string">'[id].css'</span>,
 &#125;)</code></pre>
 
@@ -372,7 +372,7 @@ npm init -y</code></pre>
 <pre><code class="hljs javascript">rules: [
   &#123;
     <span class="hljs-attr">enforce</span>: <span class="hljs-string">"pre"</span>, <span class="hljs-comment">// 强制在 babel 之前执行</span>
-    test: <span class="hljs-regexp">/\.(js|mjs|jsx|ts|tsx)$/</span>,
+    <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.(js|mjs|jsx|ts|tsx)$/</span>,
     <span class="hljs-attr">exclude</span>: <span class="hljs-regexp">/node_modules/</span>,
     <span class="hljs-attr">use</span>: &#123;
       <span class="hljs-attr">loader</span>: <span class="hljs-string">'eslint-loader'</span>,
@@ -382,7 +382,7 @@ npm init -y</code></pre>
         <span class="hljs-attr">baseConfig</span>: &#123;
           <span class="hljs-comment">// 同时需要安装：</span>
           <span class="hljs-comment">// babel-eslint eslint-plugin-flowtype eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react</span>
-          extends: [<span class="hljs-built_in">require</span>.resolve(<span class="hljs-string">'eslint-config-react-app'</span>)]
+          <span class="hljs-attr">extends</span>: [<span class="hljs-built_in">require</span>.resolve(<span class="hljs-string">'eslint-config-react-app'</span>)]
         &#125;
       &#125;
     &#125;
@@ -525,7 +525,7 @@ dist</code></pre>
   
 </div>
     <footer id="footer" class="inner">
-      &copy; 2021&nbsp;-&nbsp; Richard Chen
+      &copy; 2022&nbsp;-&nbsp; Richard Chen
     </footer>
   </div>
   <script src="/js/firekylin.js"></script>
