@@ -145,6 +145,29 @@ h1.intro {
   content: "\e612";
 }
 
+.highlight table {
+  width: 100%;
+}
+.highlight td.gutter,
+.highlight td.code {
+  padding: 0;
+}
+.highlight td.gutter {
+  width: 40px;
+}
+.highlight td.gutter pre {
+  margin: 0;
+  line-height: 26px;
+  text-align: center;
+  background: #eee;
+  border: 1px solid #eee;
+  font-size: 14px;
+  color: #999;
+}
+.highlight td.code ul {
+  margin-left: 0;
+}
+
 /**
  * highlight.css
  * ===================
@@ -887,7 +910,7 @@ article pre {
   padding: 0;
 }
 article .entry-content pre code {
-  font-size: 12px;
+  font-size: 14px;
   background-color: #fff;
   border: 1px solid #eee;
   padding: 0;
