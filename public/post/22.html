@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
   
@@ -10,14 +10,16 @@
   
   <meta name="description" content="关注web前端技术_搜索引擎优化_网站建设">
   <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/rss.html">
-  <link rel="stylesheet" href="/css/all.css">
+  
+<link rel="stylesheet" href="/css/all.css">
+
 
   <script>
     var prfm_config = { id: 1 };
   </script>
   <script src="//misc.chenliqiang.cn/prfm/1.0.0/perfm.min.js"></script>
   
-</head>
+<meta name="generator" content="Hexo 6.2.0"></head>
 
 <body>
   <nav id="sidebar" class="behavior_1">
@@ -32,7 +34,7 @@
         
         
         <li>
-          <a class href="/" title="首页">
+          <a class="" href="/" title="首页">
             <i class="iconfont icon-home"></i>
             <span>首页</span>
           </a>
@@ -40,7 +42,7 @@
         
         
         <li>
-          <a class href="/archives/" title="归档">
+          <a class="" href="/archives/" title="归档">
             <i class="iconfont icon-archive"></i>
             <span>归档</span>
           </a>
@@ -48,7 +50,7 @@
         
         
         <li>
-          <a class href="/page/about.html" title="关于">
+          <a class="" href="/page/about.html" title="关于">
             <i class="iconfont icon-user"></i>
             <span>关于</span>
           </a>
@@ -56,7 +58,7 @@
         
         
         <li>
-          <a class href="/links" title="友链">
+          <a class="" href="/links" title="友链">
             <i class="iconfont icon-link"></i>
             <span>友链</span>
           </a>
@@ -95,8 +97,8 @@
     </div>
     <h1 class="title">requirejs压缩工具r.js的build.js配置详解</h1>
     <div class="entry-content">
-      <p>至于requirejs大家都是很熟悉的了，它的打包工具r.js是非常好用，也非常强大的，但是建于它的配置参数比较多，这里列出一份所有参数的中文详解，方便理解和记忆。</p>
-<a id="more"></a>
+      <p>至于 requirejs 大家都是很熟悉的了，它的打包工具 r.js 是非常好用，也非常强大的，但是建于它的配置参数比较多，这里列出一份所有参数的中文详解，方便理解和记忆。</p>
+<span id="more"></span>
 <table border="0" cellpadding="0" cellspacing="0">
 <colgroup>
   <col style="width:400px">
@@ -130,10 +132,10 @@
   <tr>
     <td>
       <code><pre>
-paths: {
+paths: &#123;
   "foo.bar": "../scripts/foo/bar",
   "baz": "../another/path/baz"
-}
+&#125;
       </pre></code>
     </td>
     <td>
@@ -142,7 +144,7 @@ paths: {
   </tr>
   <tr>
     <td>
-      <code>map: {}</code>
+      <code>map: &#123;&#125;</code>
     </td>
     <td>
       <p>建立一个模块到其它模块的ID地图</p>
@@ -153,7 +155,7 @@ paths: {
       <code>packages: []</code>
     </td>
     <td>
-      <p>配置CommonJS包，查看<a href="http://requirejs.org/docs/api.html#packages" target="_blank" rel="noopener">http://requirejs.org/docs/api.html#packages</a></p>
+      <p>配置CommonJS包，查看<a target="_blank" rel="noopener" href="http://requirejs.org/docs/api.html#packages">http://requirejs.org/docs/api.html#packages</a></p>
     </td>
   </tr>
   <tr>
@@ -174,7 +176,7 @@ paths: {
   </tr>
   <tr>
     <td>
-      <code>shim: {}</code>
+      <code>shim: &#123;&#125;</code>
     </td>
     <td>
       <p>如果shim配置在requirejs运行过程中被使用的话，需要在这里重复声明，这样才能将依赖模块正确引入。最好是使用mainConfigFile指定配置文件，这样就可以只在一个地方声明。当然，如果mainConfigFile没有声明，shim配置就必须声明。</p>
@@ -185,7 +187,7 @@ paths: {
       <code>wrapShim: false</code>
     </td>
     <td>
-      <p>在2.1.11版本中，shim的依赖可以包含在define()里。具体参见：<a href="http://requirejs.org/docs/api.html#config-shim" target="_blank" rel="noopener">http://requirejs.org/docs/api.html#config-shim</a></p>
+      <p>在2.1.11版本中，shim的依赖可以包含在define()里。具体参见：<a target="_blank" rel="noopener" href="http://requirejs.org/docs/api.html#config-shim">http://requirejs.org/docs/api.html#config-shim</a></p>
     </td>
   </tr>
   <tr>
@@ -234,38 +236,38 @@ paths: {
   <tr>
     <td>
 <code><pre>
-uglify: {
+uglify: &#123;
   toplevel: true,
   ascii_only: true,
   beautify: true,
   max_line_length: 1000,
-  defines: {
+  defines: &#123;
     DEBUG: [“name”, “false”]
-  },
+  &#125;,
   no_mangle: true
-}
+&#125;
 </pre></code>
     </td>
     <td>
-      <p>如果用UglifyJS做优化，这些配置参数会被传递到UglifyJS，详情见：<a href="https://github.com/mishoo/UglifyJS" target="_blank" rel="noopener">https://github.com/mishoo/UglifyJS</a></p>
+      <p>如果用UglifyJS做优化，这些配置参数会被传递到UglifyJS，详情见：<a target="_blank" rel="noopener" href="https://github.com/mishoo/UglifyJS">https://github.com/mishoo/UglifyJS</a></p>
     </td>
   </tr>
   <tr>
     <td>
       <code><pre>
-Uglify2: {
-  output: {
+Uglify2: &#123;
+  output: &#123;
     beautify: true
-  },
-  compress: {
+  &#125;,
+  compress: &#123;
     sequences: false,
-    global_defs: {
+    global_defs: &#123;
       DEBUG: false
-    }
-  },
+    &#125;
+  &#125;,
   warnings: true,
   mangle: false
-}
+&#125;
       </pre></code>
     </td>
     <td>
@@ -275,11 +277,11 @@ Uglify2: {
   <tr>
     <td>
       <code><pre>
-closure: {
-  CompilerOption: {},
+closure: &#123;
+  CompilerOption: &#123;&#125;,
   CompilationLevel: “SIMPLE_OPTIMIZATIONS”,
   loggingLevel: “WANING”
-}
+&#125;
       </pre></code>
     </td>
     <td>
@@ -346,9 +348,9 @@ closure: {
   <tr>
     <td>
       <code><pre>
-pragmas: {
+pragmas: &#123;
   fooExclude: true
-}
+&#125;
       </pre></code>
     </td>
     <td>
@@ -361,9 +363,9 @@ pragmas: {
   <tr>
     <td>
       <code><pre>
-pragmasOnSave: {
+pragmasOnSave: &#123;
   excludeCoffeeScript: true
-}
+&#125;
       </pre></code>
     </td>
     <td>
@@ -373,23 +375,23 @@ pragmasOnSave: {
   <tr>
     <td>
       <code><pre>
-has: {
+has: &#123;
   “function-bind”: true,
   “string-trim”: false
-}
+&#125;
       </pre></code>
     </td>
     <td>
-      <p>使用”has”允许trimming代码树。基于js的特征检测：<a href="https://github.com/phiggins42/has.js" target="_blank" rel="noopener">https://github.com/phiggins42/has.js</a>。代码树修饰仅仅在使用UglifyJS或Closure Compiler压缩时发生。更多请见：<a href="http://requirejs.org/docs/optimization.html#hasjs" target="_blank" rel="noopener">http://requirejs.org/docs/optimization.html#hasjs</a></p>
+      <p>使用”has”允许trimming代码树。基于js的特征检测：<a target="_blank" rel="noopener" href="https://github.com/phiggins42/has.js">https://github.com/phiggins42/has.js</a>。代码树修饰仅仅在使用UglifyJS或Closure Compiler压缩时发生。更多请见：<a target="_blank" rel="noopener" href="http://requirejs.org/docs/optimization.html#hasjs">http://requirejs.org/docs/optimization.html#hasjs</a></p>
     </td>
   </tr>
   <tr>
     <td>
       <code><pre>
-hasOnSave: {
+hasOnSave: &#123;
   “function-bind”: true,
   “string-trim”: false
-}
+&#125;
       </pre></code>
     </td>
     <td>
@@ -401,7 +403,7 @@ hasOnSave: {
       <code>namespace: “foo”</code>
     </td>
     <td>
-      <p>允许requirejs名称空间，使require和define换作新的名字。更多见：<a href="http://requirejs.org/docs/faq-advanced.html#rename" target="_blank" rel="noopener">http://requirejs.org/docs/faq-advanced.html#rename</a></p>
+      <p>允许requirejs名称空间，使require和define换作新的名字。更多见：<a target="_blank" rel="noopener" href="http://requirejs.org/docs/faq-advanced.html#rename">http://requirejs.org/docs/faq-advanced.html#rename</a></p>
     </td>
   </tr>
   <tr>
@@ -456,31 +458,31 @@ hasOnSave: {
     <td>
       <code><pre>
 modules: [
-  {
+  &#123;
     name: “foo/bar/bop”,
     create: true,
-    override: {
-      pragmas: {
+    override: &#123;
+      pragmas: &#123;
         fooExclude: true
-      }
-    }
-  },
-  {
+      &#125;
+    &#125;
+  &#125;,
+  &#123;
     name: “foo/bar/bop”,
     include: [“foo/bar/bee”]
-  },
-  {
+  &#125;,
+  &#123;
     name: “foo/bar/bip”,
     exclude: [“foo/bar/bop”]
-  },
-  {
+  &#125;,
+  &#123;
     name: “foo/bar/bin”,
     excludeShallow: [“foo/bar/bot”]
-  },
-  {
+  &#125;,
+  &#123;
     name: “foo/barz”,
     insertRequire: [“foo/baz”]
-  }
+  &#125;
 ]
       </pre></code>
     </td>
@@ -500,7 +502,7 @@ modules: [
       <code>insertRequire: [“foo/bar/bop”]</code>
     </td>
     <td>
-      <p>如果目标模块在顶层级只调用了define没有调用require()，并且输出文件在data-main中使用，如果顶层没有require，就不会有任何模块被加载。定义insertRequire在文件尾部来执行其它模块，更多参见：<a href="https://github.com/jrburke/almond" target="_blank" rel="noopener">https://github.com/jrburke/almond</a></p>
+      <p>如果目标模块在顶层级只调用了define没有调用require()，并且输出文件在data-main中使用，如果顶层没有require，就不会有任何模块被加载。定义insertRequire在文件尾部来执行其它模块，更多参见：<a target="_blank" rel="noopener" href="https://github.com/jrburke/almond">https://github.com/jrburke/almond</a></p>
     </td>
   </tr>
   <tr>
@@ -526,7 +528,7 @@ modules: [
   </tr>
   <tr>
     <td>
-      <code>out: function( text, sourceMapText ) { }</code>
+      <code>out: function( text, sourceMapText ) &#123; &#125;</code>
     </td>
     <td>
       <p>在2.0，”out”可以是一个函数， 对单个JS文件优化可以调用requirejs.optimize()， 用out函数表示优化过后的内容不会被写到磁盘，而是传递给out函数。</p>
@@ -543,10 +545,10 @@ modules: [
   <tr>
     <td>
       <code><pre>
-wrap: {
-  start: “(function() {“,
-  end: “}())”
-}
+wrap: &#123;
+  start: “(function() &#123;“,
+  end: “&#125;())”
+&#125;
       </pre></code>
     </td>
     <td>
@@ -564,10 +566,10 @@ wrap: {
   <tr>
     <td>
       <code><pre>
-wrap: {
+wrap: &#123;
   startFile: “parts/start.frag”,
   “endFile: “parts/end.frag”
-}
+&#125;
       </pre></code>
     </td>
     <td>
@@ -577,7 +579,7 @@ wrap: {
   <tr>
     <td>
       <code><pre>
-wrap: {
+wrap: &#123;
   startFile: [
     “parts/startOne.frag”,
     “parts/startTwo.frag”
@@ -586,7 +588,7 @@ wrap: {
     “parts/endOne.frag”,
     “parts/endTwo.frag”
   ]
-}
+&#125;
       </pre></code>
     </td>
     <td>
@@ -624,7 +626,7 @@ wrap: {
   </tr>
   <tr>
     <td>
-      <code>throwWhen: { optimize: true }</code>
+      <code>throwWhen: &#123; optimize: true &#125;</code>
     </td>
     <td>
       <p>在2.1.3，有些情况下当错误发生时不会抛出异常并停止优化，你可能想让优化器在某些错误发生时停止，就可以使用这个参数</p>
@@ -633,9 +635,9 @@ wrap: {
   <tr>
     <td>
       <code><pre>
-onBuildRead: function( moduleName, path, contents) {
+onBuildRead: function( moduleName, path, contents) &#123;
   return contents.replace(/foo/g, “bar”);
-}
+&#125;
       </pre></code>
     </td>
     <td>
@@ -645,9 +647,9 @@ onBuildRead: function( moduleName, path, contents) {
   <tr>
     <td>
       <code><pre>
-onBuildWrite: function( moduleName, path, contents) {
+onBuildWrite: function( moduleName, path, contents) &#123;
   return contents.replace(/bar/g, “foo”);
-}
+&#125;
       </pre></code>
     </td>
     <td>
@@ -656,7 +658,7 @@ onBuildWrite: function( moduleName, path, contents) {
   </tr>
   <tr>
     <td>
-      <code>onModuleBundleComplete: function( data) { }</code>
+      <code>onModuleBundleComplete: function( data) &#123; &#125;</code>
     </td>
     <td>
       <p>每个JS模块集完成后执行。 模块集是指一个modules数组项。</p>
@@ -666,9 +668,9 @@ onBuildWrite: function( moduleName, path, contents) {
   <tr>
     <td>
       <code><pre>
-rawText: {
-  “some/id”: “define([‘another/id’], function () {} ); “
-}
+rawText: &#123;
+  “some/id”: “define([‘another/id’], function () &#123;&#125; ); “
+&#125;
       </pre></code>
     </td>
     <td>
@@ -712,7 +714,7 @@ rawText: {
       <code>keepAmdefine: false</code>
     </td>
     <td>
-      <p>在2.1.10， 如果是true，就不会删除amdefine，详情见：<a href="https://github.com/jrburke/amdefine" target="_blank" rel="noopener">https://github.com/jrburke/amdefine</a></p>
+      <p>在2.1.10， 如果是true，就不会删除amdefine，详情见：<a target="_blank" rel="noopener" href="https://github.com/jrburke/amdefine">https://github.com/jrburke/amdefine</a></p>
     </td>
   </tr>
   <tr>
@@ -720,7 +722,7 @@ rawText: {
       <code>allowSourceOverwrites: false</code>
     </td>
     <td>
-      <p>在2.1.11中， 作为修复BUG的一部分<a href="https://github.com/jrburke/r.js/issues/444" target="_blank" rel="noopener">https://github.com/jrburke/r.js/issues/444</a>。设置为true就允许源代码进行重写覆盖。当然，为了安全起见，请正确配置，比如你可能想设置”keepBuildDir”为true。</p>
+      <p>在2.1.11中， 作为修复BUG的一部分<a target="_blank" rel="noopener" href="https://github.com/jrburke/r.js/issues/444">https://github.com/jrburke/r.js/issues/444</a>。设置为true就允许源代码进行重写覆盖。当然，为了安全起见，请正确配置，比如你可能想设置”keepBuildDir”为true。</p>
     </td>
   </tr>
 </tbody>
@@ -770,7 +772,9 @@ rawText: {
       &copy; 2022&nbsp;-&nbsp; Richard Chen
     </footer>
   </div>
-  <script src="/js/firekylin.js"></script>
+  
+<script src="/js/firekylin.js"></script>
+
   
   <script>
     var _hmt = _hmt || [];

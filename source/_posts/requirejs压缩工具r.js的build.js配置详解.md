@@ -5,10 +5,10 @@ updated: 2019-02-03 14:21:03
 comments: 1
 categories: 前端工程化
 tags: []
-permalink: 22
+permalink: /post/22.html
 ---
 
-至于requirejs大家都是很熟悉的了，它的打包工具r.js是非常好用，也非常强大的，但是建于它的配置参数比较多，这里列出一份所有参数的中文详解，方便理解和记忆。
+至于 requirejs 大家都是很熟悉的了，它的打包工具 r.js 是非常好用，也非常强大的，但是建于它的配置参数比较多，这里列出一份所有参数的中文详解，方便理解和记忆。
 
 <!--more-->
 <table border="0" cellpadding="0" cellspacing="0">

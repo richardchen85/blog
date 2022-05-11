@@ -5,7 +5,7 @@ updated: 2019-11-25 14:26:54
 comments: 1
 categories: 前端工程化
 tags: []
-permalink: webpack-react-without-create-react-app
+permalink: /post/webpack-react-without-create-react-app.html
 ---
 
 `create-react-app` 是由 `facebook` 官方出品的用于搭建 `react app` 项目的脚手架工具，非常强大且简单易用，无需配置就能搭建一个 `react app`。但也正是由于很多东西它都已经封装好了，而且配置文件还内置在了包里，在项目中不可见，对于很多新手而言，要理解这一套东西还是比较困难。
@@ -37,7 +37,7 @@ webpack-react-startup
 
 ## 安装依赖包
 
-### 安装 react
+### 安装  react
 
 作为一个 `react` 项目，最起码要依赖两个包：`react` 和 `react-dom`。 `react` 从 0.14 版本开始，将 `react-dom` 拆分出 `react` 包，所以现在需要单独安装
 
@@ -61,7 +61,7 @@ npm i --save-dev webpack webpack-cli webpack-dev-server
 npm i --save-dev @babel/cli @babel/core @babel/preset-env @babel/preset-react @babel/preset-typescript babel-loader html-webpack-plugin style-loader css-loader file-loader
 ```
 
-`@babel/x` 插件是为了让 `webpack` 能够使用 `babel` 编译 `es6/7/8`、`TypeScript` 和 `jsx` 的语法，而 `html-webpack-plugin` 会生成一个 `html` 文件，它的内容自动引入了 `webpack` 产出的 `bundle` 文件，`style-loader` 和 `css-loader` 支持引入 `css` 文件，`file-loader` 用于支持引入图片及字体等文件。
+`@babel/x` 插件是为了让 `webpack`  能够使用 `babel` 编译 `es6/7/8`、`TypeScript` 和 `jsx` 的语法，而 `html-webpack-plugin` 会生成一个 `html` 文件，它的内容自动引入了 `webpack` 产出的 `bundle` 文件，`style-loader` 和 `css-loader` 支持引入 `css` 文件，`file-loader` 用于支持引入图片及字体等文件。
 
 依赖安装完过后，项目目录下会多一个 `node_modules` 的文件夹，用于存放安装好的依赖包文件。
 
@@ -69,22 +69,22 @@ npm i --save-dev @babel/cli @babel/core @babel/preset-env @babel/preset-react @b
 
 ### webpack.config.js
 
-`webpack` 的配置文件名叫 `webpack.config.js`，这个文件需要返回包含 `webpack` 配置项的对象。`webpack` 配置项中最常用到的是 `entry`、`output` 和 `rules`。
+`webpack` 的配置文件名  叫 `webpack.config.js`，这个文件需要返回包含 `webpack` 配置项的对象。`webpack` 配置项中最常用到的是 `entry`、`output` 和 `rules`。
 
 ```javascript
 // webpack.config.js
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   // 让 webpack 知道以哪个模块为入口，做依赖收集
   // 具体参考 https://webpack.js.org/concepts/#entry
-  entry: './src/index.js',
+  entry: "./src/index.js",
   // 告诉 webpack 打包好的文件存放在哪里，以及怎么命名
   // 具体参考 https://webpack.js.org/concepts/#output
   output: {
-    path: path.join(__dirname, '/dist'),
-    filename: 'bundle.js'
+    path: path.join(__dirname, "/dist"),
+    filename: "bundle.js",
   },
   module: {
     // 使用 babel-loader 编译 es6/7/8、ts 和 jsx 语法
@@ -94,33 +94,33 @@ module.exports = {
         test: /\.(js|mjs|jsx|ts|tsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader'
-        }
+          loader: "babel-loader",
+        },
       },
       {
         test: /.(png|jpg|svg)$/,
         use: {
-          loader: 'file-loader',
+          loader: "file-loader",
           options: {
-            name: 'img/[name].[ext]'
-          }
-        }
+            name: "img/[name].[ext]",
+          },
+        },
       },
       {
         test: /.css$/,
-        use: ['style-loader', 'css-loader']
-      }
-    ]
+        use: ["style-loader", "css-loader"],
+      },
+    ],
   },
   plugins: [
     // 这里通常想要指定自己的 html 文件模板，也可以指定生成的 html 的文件名
     // 如果不传参数，会有一个默认的模板文件
     // 具体参考 https://github.com/jantimon/html-webpack-plugin
     new HtmlWebpackPlugin({
-      template: './src/index.html'
-    })
-  ]
-}
+      template: "./src/index.html",
+    }),
+  ],
+};
 ```
 
 ### 配置 babel
@@ -129,10 +129,10 @@ module.exports = {
 
 如果想要使用一些新的语言特性，需要安装以下插件：
 
-* @babel/plugin-proposal-decorators   支持 decorators
-* @babel/plugin-proposal-class-properties  支持类属性
-* @babel/plugin-proposal-object-rest-spread  支持对象解构
-* @babel/plugin-syntax-dynamic-import 支持 import()
+- @babel/plugin-proposal-decorators 支持 decorators
+- @babel/plugin-proposal-class-properties 支持类属性
+- @babel/plugin-proposal-object-rest-spread 支持对象解构
+- @babel/plugin-syntax-dynamic-import 支持 import()
 
 ```javascript
 module.exports = function () {
@@ -140,16 +140,16 @@ module.exports = function () {
   const presets = [
     "@babel/preset-env",
     "@babel/preset-react",
-    "@babel/preset-typescript"
+    "@babel/preset-typescript",
   ];
   // 具体参考：https://babeljs.io/docs/en/plugins
   const plugins = [
     ["@babel/plugin-proposal-decorators", { legacy: true }],
     ["@babel/plugin-proposal-class-properties", { loose: true }],
-    ["@babel/plugin-proposal-object-rest-spread", { useBuiltIns: true }]
+    ["@babel/plugin-proposal-object-rest-spread", { useBuiltIns: true }],
   ];
   return { presets, plugins };
-}
+};
 ```
 
 好了，是时候开始写点 `react` 代码了。到了这一步，项目目录是这样的：
@@ -201,14 +201,14 @@ webpack-react-startup
 在 `webpack.config.js` 中配置 `devServer` 选项
 
 ```javascript
-const mockServer = require('./mock/server')
+const mockServer = require("./mock/server");
 module.exports = {
   devServer: {
     after: (app) => {
-      mockServer(app)
-    }
-  }
-}
+      mockServer(app);
+    },
+  },
+};
 ```
 
 模拟数据相关的代码：
@@ -278,7 +278,7 @@ webpack-react-startup
 └ package.json
 ```
 
-### 修改webpack.config.js
+### 修改 webpack.config.js
 
 ```javascript
 // webpack.config.js
@@ -286,37 +286,37 @@ webpack-react-startup
 module.exports = {
   // 这里 entry 是一个对象，每个页面和它的入口模块是一个 key/value 对
   entry: {
-    index: './src/pages/index.js',
-    about: './src/pages/about.js'
+    index: "./src/pages/index.js",
+    about: "./src/pages/about.js",
   },
   output: {
     // 这里 filename 有所改变，[name] 表示 entry 里面的 key
     // 表示每个页面的 bundle 文件以自己的名称命名
-    filename: 'js/[name].js'
+    filename: "js/[name].js",
   },
   plugins: [
     // index 页面
     new HtmlWebpackPlugin({
-      template: './src/pages/index.html',
+      template: "./src/pages/index.html",
       // 要注入的 entry 模块，如果不指定，会把所有 entry 模块都注入
-      chunks: ['index']
+      chunks: ["index"],
     }),
     // about 页面
     new HtmlWebpackPlugin({
-      template: './src/pages/about.html',
+      template: "./src/pages/about.html",
       // about 页面的 html 文件名
-      filename: 'about.html',
-      chunks: ['about']
-    })
-  ]
-}
+      filename: "about.html",
+      chunks: ["about"],
+    }),
+  ],
+};
 ```
 
-### 公共模块抽离
+### 公共模块  抽离
 
 使用上面的配置，执行 `npm run build` 命令后，会在 `dist` 目录找到打包后的结果。但是 `about.js` 和 `index.js` 这两个文件都很大，因为他们各自都包含了 `react` 库相关的代码。这里通常的做法是，将公共模块单独打包到一个文件，在页面中分别引用，这里要用到 `webpack` 的另一个插件 `SplitChunksPlugin`。
 
-> 注：在 `webpack` 4.0 以前是用的 `CommonsChunkPlugin`，4.0过后改用了新的 `SplitChunksPlugin`，具体参考：[https://webpack.js.org/plugins/split-chunks-plugin/](https://webpack.js.org/plugins/split-chunks-plugin/)
+> 注：在 `webpack` 4.0 以前是用的 `CommonsChunkPlugin`，4.0 过后改用了新的 `SplitChunksPlugin`，具体参考：[https://webpack.js.org/plugins/split-chunks-plugin/](https://webpack.js.org/plugins/split-chunks-plugin/)
 
 这是一个内置插件，只需要在 `webpack.config.js` 文件中写相应的配置就可以了：
 
@@ -324,16 +324,16 @@ module.exports = {
 module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/pages/index.html',
+      template: "./src/pages/index.html",
       // 注入公共模块 commons
-      chunks: ['commons', 'index']
+      chunks: ["commons", "index"],
     }),
     new HtmlWebpackPlugin({
-      template: './src/pages/about.html',
-      filename: 'about.html',
+      template: "./src/pages/about.html",
+      filename: "about.html",
       // 注入公共模块 commons
-      chunks: ['commons', 'about']
-    })
+      chunks: ["commons", "about"],
+    }),
   ],
   optimization: {
     splitChunks: {
@@ -342,12 +342,12 @@ module.exports = {
         commons: {
           name: "commons",
           chunks: "initial",
-          minChunks: 2
-        }
-      }
-    }
-  }
-}
+          minChunks: 2,
+        },
+      },
+    },
+  },
+};
 ```
 
 ## 支持将 css 导出到文件
@@ -355,12 +355,12 @@ module.exports = {
 `css` 样式默认是以创建 `style` 标签的方式，将样式直接写入文档的，但在生产环境希望将 `css` 导出到文件，可以安装 `npm install --save mini-css-extract-plugin`，然后在 `webpack.config.js` 中的 `plugins` 下增加以下配置：
 
 ```javascript
-  new MiniCssExtractPlugin({
-    // Options similar to the same options in webpackOptions.output
-    // both options are optional
-    filename: '[name].css',
-    chunkFilename: '[id].css',
-  })
+new MiniCssExtractPlugin({
+  // Options similar to the same options in webpackOptions.output
+  // both options are optional
+  filename: "[name].css",
+  chunkFilename: "[id].css",
+});
 ```
 
 当然你还可以配置 `css-loader` 的 `options` 来开启 `css modules`，也可以安装 `sass-loader` 和 `postcss-loader` 以支持样式相关的更多功能。
@@ -378,19 +378,19 @@ rules: [
     test: /\.(js|mjs|jsx|ts|tsx)$/,
     exclude: /node_modules/,
     use: {
-      loader: 'eslint-loader',
+      loader: "eslint-loader",
       options: {
         useEslintrc: false,
-        eslintPath: require.resolve('eslint'),
+        eslintPath: require.resolve("eslint"),
         baseConfig: {
           // 同时需要安装：
           // babel-eslint eslint-plugin-flowtype eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react
-          extends: [require.resolve('eslint-config-react-app')]
-        }
-      }
-    }
-  }
-]
+          extends: [require.resolve("eslint-config-react-app")],
+        },
+      },
+    },
+  },
+];
 ```
 
 ## 内置 `prettier` 自动格式化代码
@@ -399,15 +399,15 @@ rules: [
 
 为什么要自动格式化代码呢？
 
-* 统一使用一种编程风格，不必要在 code review 时讨论代码风格的问题
-* 自动格式化，省时省力
+- 统一使用一种编程风格，不必要在 code review 时讨论代码风格的问题
+- 自动格式化，省时省力
 
 使用 `prettier` 主要有以下几个原因：
 
-* 可配置化的代码格式化工具：内置了业界主流的代码格式并支持通过配置修改默认格式
-* 支持多种语言：解决了 `eslint` 只支持 `javascript` 的困扰
-* 可集成到大多数的编辑器：不必担心某个成员使用的编辑器不支持
-* 配置少：不必为了记住很多配置项页烦恼
+- 可配置化的代码格式化工具：内置了业界主流的代码格式并支持通过配置修改默认格式
+- 支持多种语言：解决了 `eslint` 只支持 `javascript` 的困扰
+- 可集成到大多数的编辑器：不必担心某个成员使用的编辑器不支持
+- 配置少：不必为了记住很多配置项页烦恼
 
 使用 `prettier` 的方案有很多种，具体可以参考官方文档：[https://prettier.io/docs/en/precommit.html](https://prettier.io/docs/en/precommit.html)，这里我推荐使用 `pretty-quick` 的方案：
 
@@ -482,7 +482,7 @@ dist
 
 部署到生产环境的代码都是要经过压缩优化的，但是在开发的时候，为了方便在浏览器 `devtool` 中定位问题，一般是不需要压缩的，所以需要将 `webpack.config.js` 中的配置分别对应开发环境和生产环境部署。
 
-首先是环境的区分，方法有很多，本文是通过命令 `webpack --mode production|development`  来区分。
+首先是环境的区分，方法有很多，本文是通过命令 `webpack --mode production|development` 来区分。
 
 ```javascript
 const argv = require('minimist')(process.argv.slice(0))
@@ -513,5 +513,5 @@ const production = argv.mode === 'production'
 
 ## 参考资料
 
-* [https://www.youtube.com/watch?v=deyxI-6C2u4](https://www.youtube.com/watch?v=deyxI-6C2u4)
-* [https://webpack.js.org/concepts/](https://webpack.js.org/concepts/)
+- [https://www.youtube.com/watch?v=deyxI-6C2u4](https://www.youtube.com/watch?v=deyxI-6C2u4)
+- [https://webpack.js.org/concepts/](https://webpack.js.org/concepts/)

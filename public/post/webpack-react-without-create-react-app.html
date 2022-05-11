@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
   
@@ -10,14 +10,16 @@
   
   <meta name="description" content="关注web前端技术_搜索引擎优化_网站建设">
   <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/rss.html">
-  <link rel="stylesheet" href="/css/all.css">
+  
+<link rel="stylesheet" href="/css/all.css">
+
 
   <script>
     var prfm_config = { id: 1 };
   </script>
   <script src="//misc.chenliqiang.cn/prfm/1.0.0/perfm.min.js"></script>
   
-</head>
+<meta name="generator" content="Hexo 6.2.0"></head>
 
 <body>
   <nav id="sidebar" class="behavior_1">
@@ -32,7 +34,7 @@
         
         
         <li>
-          <a class href="/" title="首页">
+          <a class="" href="/" title="首页">
             <i class="iconfont icon-home"></i>
             <span>首页</span>
           </a>
@@ -40,7 +42,7 @@
         
         
         <li>
-          <a class href="/archives/" title="归档">
+          <a class="" href="/archives/" title="归档">
             <i class="iconfont icon-archive"></i>
             <span>归档</span>
           </a>
@@ -48,7 +50,7 @@
         
         
         <li>
-          <a class href="/page/about.html" title="关于">
+          <a class="" href="/page/about.html" title="关于">
             <i class="iconfont icon-user"></i>
             <span>关于</span>
           </a>
@@ -56,7 +58,7 @@
         
         
         <li>
-          <a class href="/links" title="友链">
+          <a class="" href="/links" title="友链">
             <i class="iconfont icon-link"></i>
             <span>友链</span>
           </a>
@@ -96,298 +98,82 @@
     <h1 class="title">不用create-react-app搭建基于webpack的react项目</h1>
     <div class="entry-content">
       <p><code>create-react-app</code> 是由 <code>facebook</code> 官方出品的用于搭建 <code>react app</code> 项目的脚手架工具，非常强大且简单易用，无需配置就能搭建一个 <code>react app</code>。但也正是由于很多东西它都已经封装好了，而且配置文件还内置在了包里，在项目中不可见，对于很多新手而言，要理解这一套东西还是比较困难。</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <p>本人正好看了一些相关资料，这里做为笔记记录一下如何从零开始用 <code>webpack</code> 搭建一个 <code>react</code> 的项目。我默认你已经在电脑上装好了 <code>nodejs</code>，并且有基本的命令行相关知识。</p>
 <blockquote>
-<p>本文的完整示例代码可以在 <a href="https://github.com/richardchen85/webpack-react-startup" target="_blank" rel="noopener">webpack-react-startup</a> 中找到，喜欢的话请给个 Star</p>
+<p>本文的完整示例代码可以在 <a target="_blank" rel="noopener" href="https://github.com/richardchen85/webpack-react-startup">webpack-react-startup</a> 中找到，喜欢的话请给个 Star</p>
 </blockquote>
 <h2 id="创建项目目录"><a href="#创建项目目录" class="headerlink" title="创建项目目录"></a>创建项目目录</h2><p>比如我要搭建一个项目，名字叫 <code>webpack-react-startup</code></p>
-<pre><code class="hljs bash">// 创建项目目录
-mkdir webpack-react-startup
-<span class="hljs-built_in">cd</span> webpack-react-startup
-// npm 初始化，全用默认选项
-npm init -y</code></pre>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">// 创建项目目录<br><span class="hljs-built_in">mkdir</span> webpack-react-startup<br><span class="hljs-built_in">cd</span> webpack-react-startup<br>// npm 初始化，全用默认选项<br>npm init -y<br></code></pre></td></tr></table></figure>
 
 <p>现在的项目目录结构变成了这样</p>
-<pre><code class="hljs nohighlight">webpack-react-startup
-└ package.json</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs nohighlight">webpack-react-startup<br>└ package.json<br></code></pre></td></tr></table></figure>
 
-<h2 id="安装依赖包"><a href="#安装依赖包" class="headerlink" title="安装依赖包"></a>安装依赖包</h2><h3 id="安装-react"><a href="#安装-react" class="headerlink" title="安装 react"></a>安装 react</h3><p>作为一个 <code>react</code> 项目，最起码要依赖两个包：<code>react</code> 和 <code>react-dom</code>。 <code>react</code> 从 0.14 版本开始，将 <code>react-dom</code> 拆分出 <code>react</code> 包，所以现在需要单独安装</p>
-<pre><code class="hljs bash">npm i --save react react-dom</code></pre>
+<h2 id="安装依赖包"><a href="#安装依赖包" class="headerlink" title="安装依赖包"></a>安装依赖包</h2><h3 id="安装-react"><a href="#安装-react" class="headerlink" title="安装  react"></a>安装  react</h3><p>作为一个 <code>react</code> 项目，最起码要依赖两个包：<code>react</code> 和 <code>react-dom</code>。 <code>react</code> 从 0.14 版本开始，将 <code>react-dom</code> 拆分出 <code>react</code> 包，所以现在需要单独安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">npm i --save react react-dom<br></code></pre></td></tr></table></figure>
 
-<h3 id="安装-webpack"><a href="#安装-webpack" class="headerlink" title="安装 webpack"></a>安装 <code>webpack</code></h3><pre><code class="hljs bash">npm i --save-dev webpack webpack-cli webpack-dev-server</code></pre>
+<h3 id="安装-webpack"><a href="#安装-webpack" class="headerlink" title="安装 webpack"></a>安装 <code>webpack</code></h3><figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">npm i --save-dev webpack webpack-cli webpack-dev-server<br></code></pre></td></tr></table></figure>
 
 <p>这里 <code>webpack-cli</code> 作为一个命令行工具，接收一些参数并用于 <code>webpack</code> 的编译器，<code>webpack-dev-server</code> 是一个基于 <code>express</code> 的开发服务器，还提供了 <code>live reloading</code> 的功能，在开发的时候使用它还是很方便的，它还有两个 <code>hook api</code> 以方便扩展自己想要的功能，这个后面会讲到。</p>
 <h3 id="安装编译插件"><a href="#安装编译插件" class="headerlink" title="安装编译插件"></a>安装编译插件</h3><p>通常在写 <code>react</code> 应用的时候，都会用到 <code>es6/7/8</code> 和 <code>jsx</code> 的一些语法，所以需要安装能够编译这些语法的插件</p>
-<pre><code class="hljs bash">npm i --save-dev @babel/cli @babel/core @babel/preset-env @babel/preset-react @babel/preset-typescript babel-loader html-webpack-plugin style-loader css-loader file-loader</code></pre>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">npm i --save-dev @babel/cli @babel/core @babel/preset-env @babel/preset-react @babel/preset-typescript babel-loader html-webpack-plugin style-loader css-loader file-loader<br></code></pre></td></tr></table></figure>
 
-<p><code>@babel/x</code> 插件是为了让 <code>webpack</code> 能够使用 <code>babel</code> 编译 <code>es6/7/8</code>、<code>TypeScript</code> 和 <code>jsx</code> 的语法，而 <code>html-webpack-plugin</code> 会生成一个 <code>html</code> 文件，它的内容自动引入了 <code>webpack</code> 产出的 <code>bundle</code> 文件，<code>style-loader</code> 和 <code>css-loader</code> 支持引入 <code>css</code> 文件，<code>file-loader</code> 用于支持引入图片及字体等文件。</p>
+<p><code>@babel/x</code> 插件是为了让 <code>webpack</code>  能够使用 <code>babel</code> 编译 <code>es6/7/8</code>、<code>TypeScript</code> 和 <code>jsx</code> 的语法，而 <code>html-webpack-plugin</code> 会生成一个 <code>html</code> 文件，它的内容自动引入了 <code>webpack</code> 产出的 <code>bundle</code> 文件，<code>style-loader</code> 和 <code>css-loader</code> 支持引入 <code>css</code> 文件，<code>file-loader</code> 用于支持引入图片及字体等文件。</p>
 <p>依赖安装完过后，项目目录下会多一个 <code>node_modules</code> 的文件夹，用于存放安装好的依赖包文件。</p>
-<h2 id="配置-webpack"><a href="#配置-webpack" class="headerlink" title="配置 webpack"></a>配置 webpack</h2><h3 id="webpack-config-js"><a href="#webpack-config-js" class="headerlink" title="webpack.config.js"></a>webpack.config.js</h3><p><code>webpack</code> 的配置文件名叫 <code>webpack.config.js</code>，这个文件需要返回包含 <code>webpack</code> 配置项的对象。<code>webpack</code> 配置项中最常用到的是 <code>entry</code>、<code>output</code> 和 <code>rules</code>。</p>
-<pre><code class="hljs javascript"><span class="hljs-comment">// webpack.config.js</span>
-<span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>)
-<span class="hljs-keyword">const</span> HtmlWebpackPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">'html-webpack-plugin'</span>)
-
-<span class="hljs-built_in">module</span>.exports = &#123;
-  <span class="hljs-comment">// 让 webpack 知道以哪个模块为入口，做依赖收集</span>
-  <span class="hljs-comment">// 具体参考 https://webpack.js.org/concepts/#entry</span>
-  <span class="hljs-attr">entry</span>: <span class="hljs-string">'./src/index.js'</span>,
-  <span class="hljs-comment">// 告诉 webpack 打包好的文件存放在哪里，以及怎么命名</span>
-  <span class="hljs-comment">// 具体参考 https://webpack.js.org/concepts/#output</span>
-  <span class="hljs-attr">output</span>: &#123;
-    <span class="hljs-attr">path</span>: path.join(__dirname, <span class="hljs-string">'/dist'</span>),
-    <span class="hljs-attr">filename</span>: <span class="hljs-string">'bundle.js'</span>
-  &#125;,
-  <span class="hljs-attr">module</span>: &#123;
-    <span class="hljs-comment">// 使用 babel-loader 编译 es6/7/8、ts 和 jsx 语法</span>
-    <span class="hljs-comment">// 注意：这里没有配置 preset，而是在 babel.config.js 文件里面配置</span>
-    <span class="hljs-attr">rules</span>: [
-      &#123;
-        <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.(js|mjs|jsx|ts|tsx)$/</span>,
-        <span class="hljs-attr">exclude</span>: <span class="hljs-regexp">/node_modules/</span>,
-        <span class="hljs-attr">use</span>: &#123;
-          <span class="hljs-attr">loader</span>: <span class="hljs-string">'babel-loader'</span>
-        &#125;
-      &#125;,
-      &#123;
-        <span class="hljs-attr">test</span>: <span class="hljs-regexp">/.(png|jpg|svg)$/</span>,
-        <span class="hljs-attr">use</span>: &#123;
-          <span class="hljs-attr">loader</span>: <span class="hljs-string">'file-loader'</span>,
-          <span class="hljs-attr">options</span>: &#123;
-            <span class="hljs-attr">name</span>: <span class="hljs-string">'img/[name].[ext]'</span>
-          &#125;
-        &#125;
-      &#125;,
-      &#123;
-        <span class="hljs-attr">test</span>: <span class="hljs-regexp">/.css$/</span>,
-        <span class="hljs-attr">use</span>: [<span class="hljs-string">'style-loader'</span>, <span class="hljs-string">'css-loader'</span>]
-      &#125;
-    ]
-  &#125;,
-  <span class="hljs-attr">plugins</span>: [
-    <span class="hljs-comment">// 这里通常想要指定自己的 html 文件模板，也可以指定生成的 html 的文件名</span>
-    <span class="hljs-comment">// 如果不传参数，会有一个默认的模板文件</span>
-    <span class="hljs-comment">// 具体参考 https://github.com/jantimon/html-webpack-plugin</span>
-    <span class="hljs-keyword">new</span> HtmlWebpackPlugin(&#123;
-      <span class="hljs-attr">template</span>: <span class="hljs-string">'./src/index.html'</span>
-    &#125;)
-  ]
-&#125;</code></pre>
+<h2 id="配置-webpack"><a href="#配置-webpack" class="headerlink" title="配置 webpack"></a>配置 webpack</h2><h3 id="webpack-config-js"><a href="#webpack-config-js" class="headerlink" title="webpack.config.js"></a>webpack.config.js</h3><p><code>webpack</code> 的配置文件名  叫 <code>webpack.config.js</code>，这个文件需要返回包含 <code>webpack</code> 配置项的对象。<code>webpack</code> 配置项中最常用到的是 <code>entry</code>、<code>output</code> 和 <code>rules</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// webpack.config.js</span><br><span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;path&quot;</span>);<br><span class="hljs-keyword">const</span> <span class="hljs-title class_">HtmlWebpackPlugin</span> = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;html-webpack-plugin&quot;</span>);<br><br><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = &#123;<br>  <span class="hljs-comment">// 让 webpack 知道以哪个模块为入口，做依赖收集</span><br>  <span class="hljs-comment">// 具体参考 https://webpack.js.org/concepts/#entry</span><br>  <span class="hljs-attr">entry</span>: <span class="hljs-string">&quot;./src/index.js&quot;</span>,<br>  <span class="hljs-comment">// 告诉 webpack 打包好的文件存放在哪里，以及怎么命名</span><br>  <span class="hljs-comment">// 具体参考 https://webpack.js.org/concepts/#output</span><br>  <span class="hljs-attr">output</span>: &#123;<br>    <span class="hljs-attr">path</span>: path.<span class="hljs-title function_">join</span>(__dirname, <span class="hljs-string">&quot;/dist&quot;</span>),<br>    <span class="hljs-attr">filename</span>: <span class="hljs-string">&quot;bundle.js&quot;</span>,<br>  &#125;,<br>  <span class="hljs-attr">module</span>: &#123;<br>    <span class="hljs-comment">// 使用 babel-loader 编译 es6/7/8、ts 和 jsx 语法</span><br>    <span class="hljs-comment">// 注意：这里没有配置 preset，而是在 babel.config.js 文件里面配置</span><br>    <span class="hljs-attr">rules</span>: [<br>      &#123;<br>        <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.(js|mjs|jsx|ts|tsx)$/</span>,<br>        <span class="hljs-attr">exclude</span>: <span class="hljs-regexp">/node_modules/</span>,<br>        <span class="hljs-attr">use</span>: &#123;<br>          <span class="hljs-attr">loader</span>: <span class="hljs-string">&quot;babel-loader&quot;</span>,<br>        &#125;,<br>      &#125;,<br>      &#123;<br>        <span class="hljs-attr">test</span>: <span class="hljs-regexp">/.(png|jpg|svg)$/</span>,<br>        <span class="hljs-attr">use</span>: &#123;<br>          <span class="hljs-attr">loader</span>: <span class="hljs-string">&quot;file-loader&quot;</span>,<br>          <span class="hljs-attr">options</span>: &#123;<br>            <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;img/[name].[ext]&quot;</span>,<br>          &#125;,<br>        &#125;,<br>      &#125;,<br>      &#123;<br>        <span class="hljs-attr">test</span>: <span class="hljs-regexp">/.css$/</span>,<br>        <span class="hljs-attr">use</span>: [<span class="hljs-string">&quot;style-loader&quot;</span>, <span class="hljs-string">&quot;css-loader&quot;</span>],<br>      &#125;,<br>    ],<br>  &#125;,<br>  <span class="hljs-attr">plugins</span>: [<br>    <span class="hljs-comment">// 这里通常想要指定自己的 html 文件模板，也可以指定生成的 html 的文件名</span><br>    <span class="hljs-comment">// 如果不传参数，会有一个默认的模板文件</span><br>    <span class="hljs-comment">// 具体参考 https://github.com/jantimon/html-webpack-plugin</span><br>    <span class="hljs-keyword">new</span> <span class="hljs-title class_">HtmlWebpackPlugin</span>(&#123;<br>      <span class="hljs-attr">template</span>: <span class="hljs-string">&quot;./src/index.html&quot;</span>,<br>    &#125;),<br>  ],<br>&#125;;<br></code></pre></td></tr></table></figure>
 
 <h3 id="配置-babel"><a href="#配置-babel" class="headerlink" title="配置 babel"></a>配置 babel</h3><p>在项目根目录新建一个 <code>babel</code> 配置文件 <code>babal.config.js</code>，内容如下：</p>
 <p>如果想要使用一些新的语言特性，需要安装以下插件：</p>
 <ul>
-<li>@babel/plugin-proposal-decorators   支持 decorators</li>
-<li>@babel/plugin-proposal-class-properties  支持类属性</li>
-<li>@babel/plugin-proposal-object-rest-spread  支持对象解构</li>
-<li>@babel/plugin-syntax-dynamic-import 支持 import()</li>
+<li>@babel&#x2F;plugin-proposal-decorators 支持 decorators</li>
+<li>@babel&#x2F;plugin-proposal-class-properties 支持类属性</li>
+<li>@babel&#x2F;plugin-proposal-object-rest-spread 支持对象解构</li>
+<li>@babel&#x2F;plugin-syntax-dynamic-import 支持 import()</li>
 </ul>
-<pre><code class="hljs javascript"><span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-comment">// 具体参考：https://babeljs.io/docs/en/presets</span>
-  <span class="hljs-keyword">const</span> presets = [
-    <span class="hljs-string">"@babel/preset-env"</span>,
-    <span class="hljs-string">"@babel/preset-react"</span>,
-    <span class="hljs-string">"@babel/preset-typescript"</span>
-  ];
-  <span class="hljs-comment">// 具体参考：https://babeljs.io/docs/en/plugins</span>
-  <span class="hljs-keyword">const</span> plugins = [
-    [<span class="hljs-string">"@babel/plugin-proposal-decorators"</span>, &#123; <span class="hljs-attr">legacy</span>: <span class="hljs-literal">true</span> &#125;],
-    [<span class="hljs-string">"@babel/plugin-proposal-class-properties"</span>, &#123; <span class="hljs-attr">loose</span>: <span class="hljs-literal">true</span> &#125;],
-    [<span class="hljs-string">"@babel/plugin-proposal-object-rest-spread"</span>, &#123; <span class="hljs-attr">useBuiltIns</span>: <span class="hljs-literal">true</span> &#125;]
-  ];
-  <span class="hljs-keyword">return</span> &#123; presets, plugins &#125;;
-&#125;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><code class="hljs javascript"><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-comment">// 具体参考：https://babeljs.io/docs/en/presets</span><br>  <span class="hljs-keyword">const</span> presets = [<br>    <span class="hljs-string">&quot;@babel/preset-env&quot;</span>,<br>    <span class="hljs-string">&quot;@babel/preset-react&quot;</span>,<br>    <span class="hljs-string">&quot;@babel/preset-typescript&quot;</span>,<br>  ];<br>  <span class="hljs-comment">// 具体参考：https://babeljs.io/docs/en/plugins</span><br>  <span class="hljs-keyword">const</span> plugins = [<br>    [<span class="hljs-string">&quot;@babel/plugin-proposal-decorators&quot;</span>, &#123; <span class="hljs-attr">legacy</span>: <span class="hljs-literal">true</span> &#125;],<br>    [<span class="hljs-string">&quot;@babel/plugin-proposal-class-properties&quot;</span>, &#123; <span class="hljs-attr">loose</span>: <span class="hljs-literal">true</span> &#125;],<br>    [<span class="hljs-string">&quot;@babel/plugin-proposal-object-rest-spread&quot;</span>, &#123; <span class="hljs-attr">useBuiltIns</span>: <span class="hljs-literal">true</span> &#125;],<br>  ];<br>  <span class="hljs-keyword">return</span> &#123; presets, plugins &#125;;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
 <p>好了，是时候开始写点 <code>react</code> 代码了。到了这一步，项目目录是这样的：</p>
-<pre><code class="hljs nohighlight">webpack-react-startup
-├ src
-│ ├ index.html
-│ ├ App.js
-│ └ index.js
-├ babel.config.js
-├ package-lock.json
-└ package.json</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs nohighlight">webpack-react-startup<br>├ src<br>│ ├ index.html<br>│ ├ App.js<br>│ └ index.js<br>├ babel.config.js<br>├ package-lock.json<br>└ package.json<br></code></pre></td></tr></table></figure>
 
 <p>在命令行输入 <code>webpack-dev-server --mode development --open --hot</code>，该命令会自动打开浏览器预览结果，并开启了热更新，如果代码有修改，会立即反映到浏览器展现上。</p>
 <p>开发完打包上线可以使用命令 <code>webpack --mode production</code>。</p>
 <p>命令有点长，可以把它放在 <code>package.json</code> 的 <code>scripts</code> 块中，这样，可以直接运行命令 <code>npm start</code> 和 <code>npm run build</code> 来执行：</p>
-<pre><code class="hljs json"><span class="hljs-comment">// package.json</span>
-&#123;
-  <span class="hljs-attr">"scripts"</span>: &#123;
-    <span class="hljs-attr">"start"</span>: <span class="hljs-string">"webpack-dev-server --mode development --open --hot"</span>,
-    <span class="hljs-attr">"build"</span>: <span class="hljs-string">"webpack --mode production"</span>
-  &#125;
-&#125;</code></pre>
+<figure class="highlight json"><table><tr><td class="code"><pre><code class="hljs json"><span class="hljs-comment">// package.json</span><br><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;scripts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;start&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;webpack-dev-server --mode development --open --hot&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;build&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;webpack --mode production&quot;</span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
 
-<h2 id="配置-devServer"><a href="#配置-devServer" class="headerlink" title="配置 devServer"></a>配置 devServer</h2><p>在前文提到的 <code>webpack-dev-server</code> 提供了很多 <code>api</code> 可以做定制化的需求（可以参考文档：<a href="https://webpack.js.org/configuration/dev-server/" target="_blank" rel="noopener">https://webpack.js.org/configuration/dev-server/</a> ），比如本地模拟异步请求数据。</p>
+<h2 id="配置-devServer"><a href="#配置-devServer" class="headerlink" title="配置 devServer"></a>配置 devServer</h2><p>在前文提到的 <code>webpack-dev-server</code> 提供了很多 <code>api</code> 可以做定制化的需求（可以参考文档：<a target="_blank" rel="noopener" href="https://webpack.js.org/configuration/dev-server/">https://webpack.js.org/configuration/dev-server/</a> ），比如本地模拟异步请求数据。</p>
 <p>一个项目往往有很多数据需要通过请求异步接口拿到，在项目开始的时候，后端还没有为提供这些接口，这时候不得不自己造一些假的接口用于调试的代码，这时候可以使用 <code>devServer</code> 的 <code>after</code> 选项来为 <code>devServer</code> 添加自己的异步接口。</p>
 <p>首先，需要在项目里新建一个 <code>mock</code> 文件夹用于存放本地模拟数据相关的代码：</p>
-<pre><code class="hljs nohighlight">webpack-react-startup
-├ mock
-│ ├ server.js // express 中间件文件，为 devServer 添加接口路由及处理程序
-│ ├ config.js // 路由配置项，接口 URL 地址和本地数据文件的映射
-│ └ index.json // 一个接口模拟数据文件
-...</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs nohighlight">webpack-react-startup<br>├ mock<br>│ ├ server.js // express 中间件文件，为 devServer 添加接口路由及处理程序<br>│ ├ config.js // 路由配置项，接口 URL 地址和本地数据文件的映射<br>│ └ index.json // 一个接口模拟数据文件<br>...<br></code></pre></td></tr></table></figure>
 
 <p>在 <code>webpack.config.js</code> 中配置 <code>devServer</code> 选项</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">const</span> mockServer = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./mock/server'</span>)
-<span class="hljs-built_in">module</span>.exports = &#123;
-  <span class="hljs-attr">devServer</span>: &#123;
-    <span class="hljs-attr">after</span>: <span class="hljs-function">(<span class="hljs-params">app</span>) =&gt;</span> &#123;
-      mockServer(app)
-    &#125;
-  &#125;
-&#125;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> mockServer = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;./mock/server&quot;</span>);<br><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = &#123;<br>  <span class="hljs-attr">devServer</span>: &#123;<br>    <span class="hljs-attr">after</span>: <span class="hljs-function">(<span class="hljs-params">app</span>) =&gt;</span> &#123;<br>      <span class="hljs-title function_">mockServer</span>(app);<br>    &#125;,<br>  &#125;,<br>&#125;;<br></code></pre></td></tr></table></figure>
 
 <p>模拟数据相关的代码：</p>
-<pre><code class="hljs javascript"><span class="hljs-comment">// mock/config.js</span>
-<span class="hljs-built_in">module</span>.exports = &#123;
-  <span class="hljs-string">'/api/index'</span>: &#123;
-    <span class="hljs-attr">local</span>: <span class="hljs-string">'/index.json'</span>
-  &#125;
-&#125;
-
-<span class="hljs-comment">// mock/server.js</span>
-<span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>)
-<span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>)
-<span class="hljs-keyword">const</span> config = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./config'</span>)
-
-<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">app</span>) </span>&#123;
-  <span class="hljs-built_in">Object</span>.keys(config).forEach(<span class="hljs-function"><span class="hljs-params">key</span> =&gt;</span> &#123;
-    app.use(key, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">req, res</span>) </span>&#123;
-      <span class="hljs-keyword">const</span> filename = path.join(__dirname, config[key].local)
-      <span class="hljs-keyword">if</span> (filename.match(<span class="hljs-regexp">/\.json$/</span>)) &#123;
-        <span class="hljs-comment">// json 文件直接读取内容返回</span>
-        res.json(<span class="hljs-built_in">JSON</span>.parse(fs.readFileSync(filename)))
-      &#125; <span class="hljs-keyword">else</span> &#123;
-        <span class="hljs-comment">// js 文件被当作中间件引入</span>
-        <span class="hljs-comment">// 引入前删除掉该文件的缓存，如果文件内容修改，不用重启 devServer</span>
-        <span class="hljs-keyword">delete</span> <span class="hljs-built_in">require</span>.cache[filename]
-        <span class="hljs-built_in">require</span>(filename)(req, res)
-      &#125;
-    &#125;)
-  &#125;)
-&#125;
-
-<span class="hljs-comment">// index.json</span>
-&#123;
-  <span class="hljs-string">"success"</span>: <span class="hljs-literal">true</span>,
-  <span class="hljs-string">"data"</span>: &#123;
-    <span class="hljs-string">"key"</span>: <span class="hljs-string">"value"</span>
-  &#125;
-&#125;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// mock/config.js</span><br><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = &#123;<br>  <span class="hljs-string">&#x27;/api/index&#x27;</span>: &#123;<br>    <span class="hljs-attr">local</span>: <span class="hljs-string">&#x27;/index.json&#x27;</span><br>  &#125;<br>&#125;<br><br><span class="hljs-comment">// mock/server.js</span><br><span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;fs&#x27;</span>)<br><span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>)<br><span class="hljs-keyword">const</span> config = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./config&#x27;</span>)<br><br><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params">app</span>) &#123;<br>  <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">keys</span>(config).<span class="hljs-title function_">forEach</span>(<span class="hljs-function"><span class="hljs-params">key</span> =&gt;</span> &#123;<br>    app.<span class="hljs-title function_">use</span>(key, <span class="hljs-keyword">function</span> (<span class="hljs-params">req, res</span>) &#123;<br>      <span class="hljs-keyword">const</span> filename = path.<span class="hljs-title function_">join</span>(__dirname, config[key].<span class="hljs-property">local</span>)<br>      <span class="hljs-keyword">if</span> (filename.<span class="hljs-title function_">match</span>(<span class="hljs-regexp">/\.json$/</span>)) &#123;<br>        <span class="hljs-comment">// json 文件直接读取内容返回</span><br>        res.<span class="hljs-title function_">json</span>(<span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(fs.<span class="hljs-title function_">readFileSync</span>(filename)))<br>      &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-comment">// js 文件被当作中间件引入</span><br>        <span class="hljs-comment">// 引入前删除掉该文件的缓存，如果文件内容修改，不用重启 devServer</span><br>        <span class="hljs-keyword">delete</span> <span class="hljs-built_in">require</span>.<span class="hljs-property">cache</span>[filename]<br>        <span class="hljs-built_in">require</span>(filename)(req, res)<br>      &#125;<br>    &#125;)<br>  &#125;)<br>&#125;<br><br><span class="hljs-comment">// index.json</span><br>&#123;<br>  <span class="hljs-string">&quot;success&quot;</span>: <span class="hljs-literal">true</span>,<br>  <span class="hljs-string">&quot;data&quot;</span>: &#123;<br>    <span class="hljs-string">&quot;key&quot;</span>: <span class="hljs-string">&quot;value&quot;</span><br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>除了可以自己模拟接口外，<code>devServer</code> 还提供了 <code>proxy</code> 可以代理远端的接口，这个适合于后端已经准备好接口，需要进行前后端联调的时候，从本地请求远端的接口。</p>
 <h2 id="多页应用配置"><a href="#多页应用配置" class="headerlink" title="多页应用配置"></a>多页应用配置</h2><p>如果要配置多页应用，需要对上面的配置进行改造，主要包括 <code>entry</code>、<code>output</code> 和 <code>HtmlWebpackPlugin</code> 等几项。比如增加一个 <code>about</code> 页面。</p>
 <h3 id="修改目录结构"><a href="#修改目录结构" class="headerlink" title="修改目录结构"></a>修改目录结构</h3><p>首先来调整一下目录结构，这样看起来更清晰易懂一点：</p>
-<pre><code class="hljs nohighlight">webpack-react-startup
-├ src
-| ├ components // 放置 react 组件
-│ │ ├ App.js
-│ │ └ About.js
-| └ pages // 放置各页面及入口模块
-│   ├ about.html
-│   ├ about.js
-│   ├ index.html
-│   └ index.js
-├ babel.config.js
-├ package-lock.json
-└ package.json</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs nohighlight">webpack-react-startup<br>├ src<br>| ├ components // 放置 react 组件<br>│ │ ├ App.js<br>│ │ └ About.js<br>| └ pages // 放置各页面及入口模块<br>│   ├ about.html<br>│   ├ about.js<br>│   ├ index.html<br>│   └ index.js<br>├ babel.config.js<br>├ package-lock.json<br>└ package.json<br></code></pre></td></tr></table></figure>
 
-<h3 id="修改webpack-config-js"><a href="#修改webpack-config-js" class="headerlink" title="修改webpack.config.js"></a>修改webpack.config.js</h3><pre><code class="hljs javascript"><span class="hljs-comment">// webpack.config.js</span>
+<h3 id="修改-webpack-config-js"><a href="#修改-webpack-config-js" class="headerlink" title="修改 webpack.config.js"></a>修改 webpack.config.js</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// webpack.config.js</span><br><br><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = &#123;<br>  <span class="hljs-comment">// 这里 entry 是一个对象，每个页面和它的入口模块是一个 key/value 对</span><br>  <span class="hljs-attr">entry</span>: &#123;<br>    <span class="hljs-attr">index</span>: <span class="hljs-string">&quot;./src/pages/index.js&quot;</span>,<br>    <span class="hljs-attr">about</span>: <span class="hljs-string">&quot;./src/pages/about.js&quot;</span>,<br>  &#125;,<br>  <span class="hljs-attr">output</span>: &#123;<br>    <span class="hljs-comment">// 这里 filename 有所改变，[name] 表示 entry 里面的 key</span><br>    <span class="hljs-comment">// 表示每个页面的 bundle 文件以自己的名称命名</span><br>    <span class="hljs-attr">filename</span>: <span class="hljs-string">&quot;js/[name].js&quot;</span>,<br>  &#125;,<br>  <span class="hljs-attr">plugins</span>: [<br>    <span class="hljs-comment">// index 页面</span><br>    <span class="hljs-keyword">new</span> <span class="hljs-title class_">HtmlWebpackPlugin</span>(&#123;<br>      <span class="hljs-attr">template</span>: <span class="hljs-string">&quot;./src/pages/index.html&quot;</span>,<br>      <span class="hljs-comment">// 要注入的 entry 模块，如果不指定，会把所有 entry 模块都注入</span><br>      <span class="hljs-attr">chunks</span>: [<span class="hljs-string">&quot;index&quot;</span>],<br>    &#125;),<br>    <span class="hljs-comment">// about 页面</span><br>    <span class="hljs-keyword">new</span> <span class="hljs-title class_">HtmlWebpackPlugin</span>(&#123;<br>      <span class="hljs-attr">template</span>: <span class="hljs-string">&quot;./src/pages/about.html&quot;</span>,<br>      <span class="hljs-comment">// about 页面的 html 文件名</span><br>      <span class="hljs-attr">filename</span>: <span class="hljs-string">&quot;about.html&quot;</span>,<br>      <span class="hljs-attr">chunks</span>: [<span class="hljs-string">&quot;about&quot;</span>],<br>    &#125;),<br>  ],<br>&#125;;<br></code></pre></td></tr></table></figure>
 
-<span class="hljs-built_in">module</span>.exports = &#123;
-  <span class="hljs-comment">// 这里 entry 是一个对象，每个页面和它的入口模块是一个 key/value 对</span>
-  <span class="hljs-attr">entry</span>: &#123;
-    <span class="hljs-attr">index</span>: <span class="hljs-string">'./src/pages/index.js'</span>,
-    <span class="hljs-attr">about</span>: <span class="hljs-string">'./src/pages/about.js'</span>
-  &#125;,
-  <span class="hljs-attr">output</span>: &#123;
-    <span class="hljs-comment">// 这里 filename 有所改变，[name] 表示 entry 里面的 key</span>
-    <span class="hljs-comment">// 表示每个页面的 bundle 文件以自己的名称命名</span>
-    <span class="hljs-attr">filename</span>: <span class="hljs-string">'js/[name].js'</span>
-  &#125;,
-  <span class="hljs-attr">plugins</span>: [
-    <span class="hljs-comment">// index 页面</span>
-    <span class="hljs-keyword">new</span> HtmlWebpackPlugin(&#123;
-      <span class="hljs-attr">template</span>: <span class="hljs-string">'./src/pages/index.html'</span>,
-      <span class="hljs-comment">// 要注入的 entry 模块，如果不指定，会把所有 entry 模块都注入</span>
-      <span class="hljs-attr">chunks</span>: [<span class="hljs-string">'index'</span>]
-    &#125;),
-    <span class="hljs-comment">// about 页面</span>
-    <span class="hljs-keyword">new</span> HtmlWebpackPlugin(&#123;
-      <span class="hljs-attr">template</span>: <span class="hljs-string">'./src/pages/about.html'</span>,
-      <span class="hljs-comment">// about 页面的 html 文件名</span>
-      <span class="hljs-attr">filename</span>: <span class="hljs-string">'about.html'</span>,
-      <span class="hljs-attr">chunks</span>: [<span class="hljs-string">'about'</span>]
-    &#125;)
-  ]
-&#125;</code></pre>
-
-<h3 id="公共模块抽离"><a href="#公共模块抽离" class="headerlink" title="公共模块抽离"></a>公共模块抽离</h3><p>使用上面的配置，执行 <code>npm run build</code> 命令后，会在 <code>dist</code> 目录找到打包后的结果。但是 <code>about.js</code> 和 <code>index.js</code> 这两个文件都很大，因为他们各自都包含了 <code>react</code> 库相关的代码。这里通常的做法是，将公共模块单独打包到一个文件，在页面中分别引用，这里要用到 <code>webpack</code> 的另一个插件 <code>SplitChunksPlugin</code>。</p>
+<h3 id="公共模块-抽离"><a href="#公共模块-抽离" class="headerlink" title="公共模块  抽离"></a>公共模块  抽离</h3><p>使用上面的配置，执行 <code>npm run build</code> 命令后，会在 <code>dist</code> 目录找到打包后的结果。但是 <code>about.js</code> 和 <code>index.js</code> 这两个文件都很大，因为他们各自都包含了 <code>react</code> 库相关的代码。这里通常的做法是，将公共模块单独打包到一个文件，在页面中分别引用，这里要用到 <code>webpack</code> 的另一个插件 <code>SplitChunksPlugin</code>。</p>
 <blockquote>
-<p>注：在 <code>webpack</code> 4.0 以前是用的 <code>CommonsChunkPlugin</code>，4.0过后改用了新的 <code>SplitChunksPlugin</code>，具体参考：<a href="https://webpack.js.org/plugins/split-chunks-plugin/" target="_blank" rel="noopener">https://webpack.js.org/plugins/split-chunks-plugin/</a></p>
+<p>注：在 <code>webpack</code> 4.0 以前是用的 <code>CommonsChunkPlugin</code>，4.0 过后改用了新的 <code>SplitChunksPlugin</code>，具体参考：<a target="_blank" rel="noopener" href="https://webpack.js.org/plugins/split-chunks-plugin/">https://webpack.js.org/plugins/split-chunks-plugin/</a></p>
 </blockquote>
 <p>这是一个内置插件，只需要在 <code>webpack.config.js</code> 文件中写相应的配置就可以了：</p>
-<pre><code class="hljs javascript"><span class="hljs-built_in">module</span>.exports = &#123;
-  <span class="hljs-attr">plugins</span>: [
-    <span class="hljs-keyword">new</span> HtmlWebpackPlugin(&#123;
-      <span class="hljs-attr">template</span>: <span class="hljs-string">'./src/pages/index.html'</span>,
-      <span class="hljs-comment">// 注入公共模块 commons</span>
-      <span class="hljs-attr">chunks</span>: [<span class="hljs-string">'commons'</span>, <span class="hljs-string">'index'</span>]
-    &#125;),
-    <span class="hljs-keyword">new</span> HtmlWebpackPlugin(&#123;
-      <span class="hljs-attr">template</span>: <span class="hljs-string">'./src/pages/about.html'</span>,
-      <span class="hljs-attr">filename</span>: <span class="hljs-string">'about.html'</span>,
-      <span class="hljs-comment">// 注入公共模块 commons</span>
-      <span class="hljs-attr">chunks</span>: [<span class="hljs-string">'commons'</span>, <span class="hljs-string">'about'</span>]
-    &#125;)
-  ],
-  <span class="hljs-attr">optimization</span>: &#123;
-    <span class="hljs-attr">splitChunks</span>: &#123;
-      <span class="hljs-attr">cacheGroups</span>: &#123;
-        <span class="hljs-comment">// 创建一个 commons 块，用于包含所有入口模块共用的代码</span>
-        <span class="hljs-attr">commons</span>: &#123;
-          <span class="hljs-attr">name</span>: <span class="hljs-string">"commons"</span>,
-          <span class="hljs-attr">chunks</span>: <span class="hljs-string">"initial"</span>,
-          <span class="hljs-attr">minChunks</span>: <span class="hljs-number">2</span>
-        &#125;
-      &#125;
-    &#125;
-  &#125;
-&#125;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><code class="hljs javascript"><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = &#123;<br>  <span class="hljs-attr">plugins</span>: [<br>    <span class="hljs-keyword">new</span> <span class="hljs-title class_">HtmlWebpackPlugin</span>(&#123;<br>      <span class="hljs-attr">template</span>: <span class="hljs-string">&quot;./src/pages/index.html&quot;</span>,<br>      <span class="hljs-comment">// 注入公共模块 commons</span><br>      <span class="hljs-attr">chunks</span>: [<span class="hljs-string">&quot;commons&quot;</span>, <span class="hljs-string">&quot;index&quot;</span>],<br>    &#125;),<br>    <span class="hljs-keyword">new</span> <span class="hljs-title class_">HtmlWebpackPlugin</span>(&#123;<br>      <span class="hljs-attr">template</span>: <span class="hljs-string">&quot;./src/pages/about.html&quot;</span>,<br>      <span class="hljs-attr">filename</span>: <span class="hljs-string">&quot;about.html&quot;</span>,<br>      <span class="hljs-comment">// 注入公共模块 commons</span><br>      <span class="hljs-attr">chunks</span>: [<span class="hljs-string">&quot;commons&quot;</span>, <span class="hljs-string">&quot;about&quot;</span>],<br>    &#125;),<br>  ],<br>  <span class="hljs-attr">optimization</span>: &#123;<br>    <span class="hljs-attr">splitChunks</span>: &#123;<br>      <span class="hljs-attr">cacheGroups</span>: &#123;<br>        <span class="hljs-comment">// 创建一个 commons 块，用于包含所有入口模块共用的代码</span><br>        <span class="hljs-attr">commons</span>: &#123;<br>          <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;commons&quot;</span>,<br>          <span class="hljs-attr">chunks</span>: <span class="hljs-string">&quot;initial&quot;</span>,<br>          <span class="hljs-attr">minChunks</span>: <span class="hljs-number">2</span>,<br>        &#125;,<br>      &#125;,<br>    &#125;,<br>  &#125;,<br>&#125;;<br></code></pre></td></tr></table></figure>
 
 <h2 id="支持将-css-导出到文件"><a href="#支持将-css-导出到文件" class="headerlink" title="支持将 css 导出到文件"></a>支持将 css 导出到文件</h2><p><code>css</code> 样式默认是以创建 <code>style</code> 标签的方式，将样式直接写入文档的，但在生产环境希望将 <code>css</code> 导出到文件，可以安装 <code>npm install --save mini-css-extract-plugin</code>，然后在 <code>webpack.config.js</code> 中的 <code>plugins</code> 下增加以下配置：</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">new</span> MiniCssExtractPlugin(&#123;
-  <span class="hljs-comment">// Options similar to the same options in webpackOptions.output</span>
-  <span class="hljs-comment">// both options are optional</span>
-  <span class="hljs-attr">filename</span>: <span class="hljs-string">'[name].css'</span>,
-  <span class="hljs-attr">chunkFilename</span>: <span class="hljs-string">'[id].css'</span>,
-&#125;)</code></pre>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">new</span> <span class="hljs-title class_">MiniCssExtractPlugin</span>(&#123;<br>  <span class="hljs-comment">// Options similar to the same options in webpackOptions.output</span><br>  <span class="hljs-comment">// both options are optional</span><br>  <span class="hljs-attr">filename</span>: <span class="hljs-string">&quot;[name].css&quot;</span>,<br>  <span class="hljs-attr">chunkFilename</span>: <span class="hljs-string">&quot;[id].css&quot;</span>,<br>&#125;);<br></code></pre></td></tr></table></figure>
 
 <p>当然你还可以配置 <code>css-loader</code> 的 <code>options</code> 来开启 <code>css modules</code>，也可以安装 <code>sass-loader</code> 和 <code>postcss-loader</code> 以支持样式相关的更多功能。</p>
 <p>以上就是关于如何用 <code>webpack</code> 搭建一个 <code>react</code> 应用的方法，现在就可以开心地写 <code>react</code> 代码了。接下来，谈谈部署相关的事情。</p>
 <h2 id="内置-eslint"><a href="#内置-eslint" class="headerlink" title="内置 eslint"></a>内置 <code>eslint</code></h2><p>代码风格检查也是非常必要的，还可以预先发现一些 bug，首先安装依赖 <code>npm install --save-dev eslint-loader eslint eslint-config-react-app @typescript-eslint/eslint-plugin @typescript-eslint/parser</code>，然后增加 <code>rule</code> 配置：</p>
-<pre><code class="hljs javascript">rules: [
-  &#123;
-    <span class="hljs-attr">enforce</span>: <span class="hljs-string">"pre"</span>, <span class="hljs-comment">// 强制在 babel 之前执行</span>
-    <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.(js|mjs|jsx|ts|tsx)$/</span>,
-    <span class="hljs-attr">exclude</span>: <span class="hljs-regexp">/node_modules/</span>,
-    <span class="hljs-attr">use</span>: &#123;
-      <span class="hljs-attr">loader</span>: <span class="hljs-string">'eslint-loader'</span>,
-      <span class="hljs-attr">options</span>: &#123;
-        <span class="hljs-attr">useEslintrc</span>: <span class="hljs-literal">false</span>,
-        <span class="hljs-attr">eslintPath</span>: <span class="hljs-built_in">require</span>.resolve(<span class="hljs-string">'eslint'</span>),
-        <span class="hljs-attr">baseConfig</span>: &#123;
-          <span class="hljs-comment">// 同时需要安装：</span>
-          <span class="hljs-comment">// babel-eslint eslint-plugin-flowtype eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react</span>
-          <span class="hljs-attr">extends</span>: [<span class="hljs-built_in">require</span>.resolve(<span class="hljs-string">'eslint-config-react-app'</span>)]
-        &#125;
-      &#125;
-    &#125;
-  &#125;
-]</code></pre>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><code class="hljs javascript"><span class="hljs-attr">rules</span>: [<br>  &#123;<br>    <span class="hljs-attr">enforce</span>: <span class="hljs-string">&quot;pre&quot;</span>, <span class="hljs-comment">// 强制在 babel 之前执行</span><br>    <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.(js|mjs|jsx|ts|tsx)$/</span>,<br>    <span class="hljs-attr">exclude</span>: <span class="hljs-regexp">/node_modules/</span>,<br>    <span class="hljs-attr">use</span>: &#123;<br>      <span class="hljs-attr">loader</span>: <span class="hljs-string">&quot;eslint-loader&quot;</span>,<br>      <span class="hljs-attr">options</span>: &#123;<br>        <span class="hljs-attr">useEslintrc</span>: <span class="hljs-literal">false</span>,<br>        <span class="hljs-attr">eslintPath</span>: <span class="hljs-built_in">require</span>.<span class="hljs-title function_">resolve</span>(<span class="hljs-string">&quot;eslint&quot;</span>),<br>        <span class="hljs-attr">baseConfig</span>: &#123;<br>          <span class="hljs-comment">// 同时需要安装：</span><br>          <span class="hljs-comment">// babel-eslint eslint-plugin-flowtype eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react</span><br>          <span class="hljs-attr">extends</span>: [<span class="hljs-built_in">require</span>.<span class="hljs-title function_">resolve</span>(<span class="hljs-string">&quot;eslint-config-react-app&quot;</span>)],<br>        &#125;,<br>      &#125;,<br>    &#125;,<br>  &#125;,<br>];<br></code></pre></td></tr></table></figure>
 
 <h2 id="内置-prettier-自动格式化代码"><a href="#内置-prettier-自动格式化代码" class="headerlink" title="内置 prettier 自动格式化代码"></a>内置 <code>prettier</code> 自动格式化代码</h2><p>虽然已经有了 <code>eslint</code>，但每个人编码习惯不一样，代码格式也不一样，即使使用 <code>eslint --fix</code> 也只能格式化 <code>javascript</code> 的代码，为了使每个开发人员提交的代码都有统一的格式，就需要引入另一个工具：<code>prettier</code>。</p>
 <p>为什么要自动格式化代码呢？</p>
@@ -402,86 +188,30 @@ npm init -y</code></pre>
 <li>可集成到大多数的编辑器：不必担心某个成员使用的编辑器不支持</li>
 <li>配置少：不必为了记住很多配置项页烦恼</li>
 </ul>
-<p>使用 <code>prettier</code> 的方案有很多种，具体可以参考官方文档：<a href="https://prettier.io/docs/en/precommit.html" target="_blank" rel="noopener">https://prettier.io/docs/en/precommit.html</a>，这里我推荐使用 <code>pretty-quick</code> 的方案：</p>
-<pre><code class="hljs bash">yarn add prettier pretty-quick husky --dev</code></pre>
+<p>使用 <code>prettier</code> 的方案有很多种，具体可以参考官方文档：<a target="_blank" rel="noopener" href="https://prettier.io/docs/en/precommit.html">https://prettier.io/docs/en/precommit.html</a>，这里我推荐使用 <code>pretty-quick</code> 的方案：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">yarn add prettier pretty-quick husky --dev<br></code></pre></td></tr></table></figure>
 
 <p>在项目根目录创建 <code>.prettierignore</code> 文件：</p>
-<pre><code class="hljs nohighlight">**/*.md
-**/*.svg
-**/*.ejs
-**/*.html
-.editorconfig
-.gitignore
-.prettierignore
-
-# ide
-.idea
-.vscode
-
-# npm
-npm-error.log
-package.json
-package-lock.json
-yarn.lock
-yarn-error.log
-
-# folder
-dist</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs nohighlight">**/*.md<br>**/*.svg<br>**/*.ejs<br>**/*.html<br>.editorconfig<br>.gitignore<br>.prettierignore<br><br># ide<br>.idea<br>.vscode<br><br># npm<br>npm-error.log<br>package.json<br>package-lock.json<br>yarn.lock<br>yarn-error.log<br><br># folder<br>dist<br></code></pre></td></tr></table></figure>
 
 <p>在项目根目录创建 <code>.prettierrc</code> 文件：</p>
-<pre><code class="hljs json">&#123;
-  <span class="hljs-attr">"singleQuote"</span>: <span class="hljs-literal">true</span>,
-  <span class="hljs-attr">"trailingComma"</span>: <span class="hljs-string">"all"</span>,
-  <span class="hljs-attr">"overrides"</span>: [
-    &#123;
-      <span class="hljs-attr">"files"</span>: <span class="hljs-string">".prettierrc"</span>,
-      <span class="hljs-attr">"options"</span>: &#123; <span class="hljs-attr">"parser"</span>: <span class="hljs-string">"json"</span> &#125;
-    &#125;
-  ]
-&#125;</code></pre>
+<figure class="highlight json"><table><tr><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;singleQuote&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">true</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;trailingComma&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;all&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;overrides&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>    <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;files&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;.prettierrc&quot;</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;options&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span> <span class="hljs-attr">&quot;parser&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;json&quot;</span> <span class="hljs-punctuation">&#125;</span><br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">]</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
 
 <p>配置 <code>package.json</code>：</p>
-<pre><code class="hljs json">&#123;
-  <span class="hljs-attr">"husky"</span>: &#123;
-    <span class="hljs-attr">"hooks"</span>: &#123;
-      <span class="hljs-attr">"pre-commit"</span>: <span class="hljs-string">"pretty-quick --staged"</span>
-    &#125;
-  &#125;
-&#125;</code></pre>
+<figure class="highlight json"><table><tr><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;husky&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;hooks&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;pre-commit&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;pretty-quick --staged&quot;</span><br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
 
 <p>配置好过后，<code>prettier</code> 会在每次成员执行 <code>git commit</code> 时将代码格式化，这样就保证了提交到代码库里的代码都是经过格式化过后的代码了。</p>
 <h2 id="支持-TypeScript"><a href="#支持-TypeScript" class="headerlink" title="支持 TypeScript"></a>支持 TypeScript</h2><p>虽然前面 <code>babel-loader</code> 和 <code>eslint</code> 的配置都有 <code>.ts/tsx</code> 的扩展名，但要想编译 <code>TypeScript</code> 文件还需要安装 <code>npm install --save-dev typescript</code> 模块。</p>
 <p>安装 <code>react</code> 声明文件： <code>npm install --save-dev @types/react @types/react-dom</code>。</p>
 <p>如果要自定义 <code>TypeScript</code> 配置，可以在项目根目录新建文件 <code>tsconfig.json</code>。</p>
 <h2 id="部署配置"><a href="#部署配置" class="headerlink" title="部署配置"></a>部署配置</h2><p>部署到生产环境的代码都是要经过压缩优化的，但是在开发的时候，为了方便在浏览器 <code>devtool</code> 中定位问题，一般是不需要压缩的，所以需要将 <code>webpack.config.js</code> 中的配置分别对应开发环境和生产环境部署。</p>
-<p>首先是环境的区分，方法有很多，本文是通过命令 <code>webpack --mode production|development</code>  来区分。</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">const</span> argv = <span class="hljs-built_in">require</span>(<span class="hljs-string">'minimist'</span>)(process.argv.slice(<span class="hljs-number">0</span>))
-<span class="hljs-keyword">const</span> production = argv.mode === <span class="hljs-string">'production'</span>
+<p>首先是环境的区分，方法有很多，本文是通过命令 <code>webpack --mode production|development</code> 来区分。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> argv = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;minimist&#x27;</span>)(process.<span class="hljs-property">argv</span>.<span class="hljs-title function_">slice</span>(<span class="hljs-number">0</span>))<br><span class="hljs-keyword">const</span> production = argv.<span class="hljs-property">mode</span> === <span class="hljs-string">&#x27;production&#x27;</span><br><br>&#123;<br>  <span class="hljs-attr">optimization</span>: &#123;<br>    <span class="hljs-attr">minimize</span>: production,<br>    <span class="hljs-attr">minimizer</span>: [<br>      <span class="hljs-keyword">new</span> <span class="hljs-title class_">TerserPlugin</span>(&#123;<br>        <span class="hljs-attr">terserOptions</span>: &#123;<br>          <span class="hljs-attr">parse</span>: &#123; <span class="hljs-attr">ecma</span>: <span class="hljs-number">8</span>, &#125;,<br>          <span class="hljs-attr">compress</span>: &#123; <span class="hljs-attr">ecma</span>: <span class="hljs-number">5</span>, <span class="hljs-attr">warnings</span>: <span class="hljs-literal">false</span>, <span class="hljs-attr">comparisons</span>: <span class="hljs-literal">false</span>, <span class="hljs-attr">inline</span>: <span class="hljs-number">2</span>, &#125;,<br>          <span class="hljs-attr">mangle</span>: &#123; <span class="hljs-attr">safari10</span>: <span class="hljs-literal">true</span>, &#125;,<br>          <span class="hljs-attr">output</span>: &#123; <span class="hljs-attr">ecma</span>: <span class="hljs-number">5</span>, <span class="hljs-attr">comments</span>: <span class="hljs-literal">false</span>, <span class="hljs-attr">ascii_only</span>: <span class="hljs-literal">true</span>, &#125;,<br>        &#125;,<br>        <span class="hljs-attr">parallel</span>: <span class="hljs-literal">true</span>,<br>        <span class="hljs-attr">cache</span>: <span class="hljs-literal">true</span>,<br>        <span class="hljs-attr">sourceMap</span>: shouldUseSourceMap,<br>      &#125;),<br>      <span class="hljs-keyword">new</span> <span class="hljs-title class_">OptimizeCSSAssetsPlugin</span>(&#123;&#125;)<br>    ],<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-&#123;
-  <span class="hljs-attr">optimization</span>: &#123;
-    <span class="hljs-attr">minimize</span>: production,
-    <span class="hljs-attr">minimizer</span>: [
-      <span class="hljs-keyword">new</span> TerserPlugin(&#123;
-        <span class="hljs-attr">terserOptions</span>: &#123;
-          <span class="hljs-attr">parse</span>: &#123; <span class="hljs-attr">ecma</span>: <span class="hljs-number">8</span>, &#125;,
-          <span class="hljs-attr">compress</span>: &#123; <span class="hljs-attr">ecma</span>: <span class="hljs-number">5</span>, <span class="hljs-attr">warnings</span>: <span class="hljs-literal">false</span>, <span class="hljs-attr">comparisons</span>: <span class="hljs-literal">false</span>, <span class="hljs-attr">inline</span>: <span class="hljs-number">2</span>, &#125;,
-          <span class="hljs-attr">mangle</span>: &#123; <span class="hljs-attr">safari10</span>: <span class="hljs-literal">true</span>, &#125;,
-          <span class="hljs-attr">output</span>: &#123; <span class="hljs-attr">ecma</span>: <span class="hljs-number">5</span>, <span class="hljs-attr">comments</span>: <span class="hljs-literal">false</span>, <span class="hljs-attr">ascii_only</span>: <span class="hljs-literal">true</span>, &#125;,
-        &#125;,
-        <span class="hljs-attr">parallel</span>: <span class="hljs-literal">true</span>,
-        <span class="hljs-attr">cache</span>: <span class="hljs-literal">true</span>,
-        <span class="hljs-attr">sourceMap</span>: shouldUseSourceMap,
-      &#125;),
-      <span class="hljs-keyword">new</span> OptimizeCSSAssetsPlugin(&#123;&#125;)
-    ],
-  &#125;
-&#125;</code></pre>
-
-<p>好了，整个配置到这里就结束了，完整的示例放在了 <a href="https://github.com/richardchen85/webpack-react-startup" target="_blank" rel="noopener">webpack-react-startup</a>，欢迎查看及指正，既然已经看完了，说明你对本文很感兴趣，顺便给个 Star 吧。</p>
+<p>好了，整个配置到这里就结束了，完整的示例放在了 <a target="_blank" rel="noopener" href="https://github.com/richardchen85/webpack-react-startup">webpack-react-startup</a>，欢迎查看及指正，既然已经看完了，说明你对本文很感兴趣，顺便给个 Star 吧。</p>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a href="https://www.youtube.com/watch?v=deyxI-6C2u4" target="_blank" rel="noopener">https://www.youtube.com/watch?v=deyxI-6C2u4</a></li>
-<li><a href="https://webpack.js.org/concepts/" target="_blank" rel="noopener">https://webpack.js.org/concepts/</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=deyxI-6C2u4">https://www.youtube.com/watch?v=deyxI-6C2u4</a></li>
+<li><a target="_blank" rel="noopener" href="https://webpack.js.org/concepts/">https://webpack.js.org/concepts/</a></li>
 </ul>
 
     </div>
@@ -528,7 +258,9 @@ dist</code></pre>
       &copy; 2022&nbsp;-&nbsp; Richard Chen
     </footer>
   </div>
-  <script src="/js/firekylin.js"></script>
+  
+<script src="/js/firekylin.js"></script>
+
   
   <script>
     var _hmt = _hmt || [];

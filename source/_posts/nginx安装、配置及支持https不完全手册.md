@@ -5,12 +5,13 @@ updated: 2019-05-15 13:52:29
 comments: 1
 categories: 服务器
 tags: []
-permalink: nginx-install-config-supoort-https
+permalink: /post/nginx-install-config-supoort-https.html
 ---
 
 `nginx` 已经成为 `web` 开发者不可或缺的工具，虽然平时我们用到的服务器，运维都已经帮我们安装配置好了 `nginx` ，但作为开发人员，掌握如何搭建和配置服务器环境，能让我们的工作更加得心应手。
 
 <!--more-->
+
 ## 安装 nginx
 
 `nginx` 安装方式有两种，一种是直接通过包管理工具（如：`yum` 或 `apt-get`）安装，另一种方式是通过编译源码安装。这里我们选择自由度更高（当然也更麻烦）的编译源码安装。
@@ -253,6 +254,6 @@ crond restart
 
 ## 参考资料
 
-* [http://nginx.org/en/docs/](http://nginx.org/en/docs/)
-* [https://letsencrypt.org/getting-started/](https://letsencrypt.org/getting-started/)
-* [https://certbot.eff.org/](https://certbot.eff.org/)
+- [http://nginx.org/en/docs/](http://nginx.org/en/docs/)
+- [https://letsencrypt.org/getting-started/](https://letsencrypt.org/getting-started/)
+- [https://certbot.eff.org/](https://certbot.eff.org/)

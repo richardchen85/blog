@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
   
@@ -10,14 +10,16 @@
   
   <meta name="description" content="关注web前端技术_搜索引擎优化_网站建设">
   <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/rss.html">
-  <link rel="stylesheet" href="/css/all.css">
+  
+<link rel="stylesheet" href="/css/all.css">
+
 
   <script>
     var prfm_config = { id: 1 };
   </script>
   <script src="//misc.chenliqiang.cn/prfm/1.0.0/perfm.min.js"></script>
   
-</head>
+<meta name="generator" content="Hexo 6.2.0"></head>
 
 <body>
   <nav id="sidebar" class="behavior_1">
@@ -32,7 +34,7 @@
         
         
         <li>
-          <a class href="/" title="首页">
+          <a class="" href="/" title="首页">
             <i class="iconfont icon-home"></i>
             <span>首页</span>
           </a>
@@ -40,7 +42,7 @@
         
         
         <li>
-          <a class href="/archives/" title="归档">
+          <a class="" href="/archives/" title="归档">
             <i class="iconfont icon-archive"></i>
             <span>归档</span>
           </a>
@@ -48,7 +50,7 @@
         
         
         <li>
-          <a class href="/page/about.html" title="关于">
+          <a class="" href="/page/about.html" title="关于">
             <i class="iconfont icon-user"></i>
             <span>关于</span>
           </a>
@@ -56,7 +58,7 @@
         
         
         <li>
-          <a class href="/links" title="友链">
+          <a class="" href="/links" title="友链">
             <i class="iconfont icon-link"></i>
             <span>友链</span>
           </a>
@@ -97,7 +99,7 @@
     <div class="entry-content">
       <p>window 对象是 BOM 的核心，可以控制窗口、框架和弹出窗口，也扮演着 ECMAScript 中 Global 对象的角色。</p>
 <p>定义全局变量与在 window 对象上直接定义属性的差别：全局变量不能通过 delete 操作符删除，而定义在 window 对象上的属性是可以的。</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h2 id="窗口和框架"><a href="#窗口和框架" class="headerlink" title="窗口和框架"></a>窗口和框架</h2><ul>
 <li>窗口切换：top、self、parent</li>
@@ -119,22 +121,22 @@
 </tr>
 <tr>
 <td>host</td>
-<td><a href="http://www.wrox.com:80" target="_blank" rel="noopener">www.wrox.com:80</a></td>
+<td><a target="_blank" rel="noopener" href="http://www.wrox.com/">www.wrox.com:80</a></td>
 <td>服务器名称和端口号（如果有）</td>
 </tr>
 <tr>
 <td>hostname</td>
-<td><a href="http://www.wrox.com" target="_blank" rel="noopener">www.wrox.com</a></td>
-<td>不带端口号的服务器名称</td>
+<td><a target="_blank" rel="noopener" href="http://www.wrox.com/">www.wrox.com</a></td>
+<td>不带  端口号的服务器名称</td>
 </tr>
 <tr>
 <td>href</td>
-<td><a href="http://www.wrox.com/xx/" target="_blank" rel="noopener">http://www.wrox.com/xx/</a></td>
+<td><a target="_blank" rel="noopener" href="http://www.wrox.com/xx/">http://www.wrox.com/xx/</a></td>
 <td>返回当前加载的完整 URL，同 location.toString()</td>
 </tr>
 <tr>
 <td>pathname</td>
-<td>/WileyCDA/</td>
+<td>&#x2F;WileyCDA&#x2F;</td>
 <td>返回 URL 中的目录和（或）文件名</td>
 </tr>
 <tr>
@@ -149,18 +151,18 @@
 </tr>
 <tr>
 <td>search</td>
-<td>?q=javascript</td>
+<td>?q&#x3D;javascript</td>
 <td>返回以问号开头的 URL 的查询字符串</td>
 </tr>
 <tr>
 <td>origin</td>
-<td><a href="http://www.wrox.com" target="_blank" rel="noopener">http://www.wrox.com</a></td>
+<td><a target="_blank" rel="noopener" href="http://www.wrox.com/">http://www.wrox.com</a></td>
 <td>返回 URL 的源信息</td>
 </tr>
 </tbody></table>
-<p>每次修改 location 的属性（hash除外），页面都会以新 URL 重新加载。</p>
+<p>每次修改 location 的属性（hash 除外），页面都会以新 URL 重新加载。</p>
 <h3 id="location-的方法"><a href="#location-的方法" class="headerlink" title="location 的方法"></a>location 的方法</h3><ul>
-<li>assign(url)： 打开新 URL 并在浏览器的历史记录中生成一条记录</li>
+<li>assign(url)： 打开新 URL 并在  浏览器的历史记录中生成一条记录</li>
 <li>replace(url)：导航到新的 URL，但不生成浏览器记录</li>
 <li>reload(true|false)：为 false 可能从缓存加载，为 true 从服务器重新加载， 调用之后不阻塞后面的代码，所以最好放在代码最后一行</li>
 </ul>
@@ -181,7 +183,7 @@
 </tr>
 <tr>
 <td>appVersion</td>
-<td>“5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36”</td>
+<td>“5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit&#x2F;537.36 (KHTML, like Gecko) Chrome&#x2F;71.0.3578.98 Safari&#x2F;537.36”</td>
 </tr>
 <tr>
 <td>connection</td>
@@ -257,7 +259,7 @@
 </tr>
 <tr>
 <td>userAgent</td>
-<td>“Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36”</td>
+<td>“Mozilla&#x2F;5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit&#x2F;537.36 (KHTML, like Gecko) Chrome&#x2F;71.0.3578.98 Safari&#x2F;537.36”</td>
 </tr>
 <tr>
 <td>vendor</td>
@@ -313,7 +315,7 @@
 </tr>
 </tbody></table>
 <h2 id="history-对象"><a href="#history-对象" class="headerlink" title="history 对象"></a>history 对象</h2><ul>
-<li>go(number|url)：在历史记录中随意跳转，正数向前，负数向后，url 跳转到历史记录中包含该字符串的第一个位置</li>
+<li>go(number|url)：在历史记录中  随意跳转，正数向前，负数向后，url 跳转到历史记录中包含该字符串的第一个位置</li>
 <li>back()：后退</li>
 <li>forward()：前进</li>
 </ul>
@@ -362,7 +364,9 @@
       &copy; 2022&nbsp;-&nbsp; Richard Chen
     </footer>
   </div>
-  <script src="/js/firekylin.js"></script>
+  
+<script src="/js/firekylin.js"></script>
+
   
   <script>
     var _hmt = _hmt || [];

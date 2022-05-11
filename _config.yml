@@ -41,7 +41,7 @@ future: true
 highlight:
   enable: true
   auto_detect: false
-  line_number: false
+  line_number: true
   hljs: true
   tab_replace:
 

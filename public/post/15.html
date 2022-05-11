@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
   
@@ -10,14 +10,16 @@
   
   <meta name="description" content="关注web前端技术_搜索引擎优化_网站建设">
   <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/rss.html">
-  <link rel="stylesheet" href="/css/all.css">
+  
+<link rel="stylesheet" href="/css/all.css">
+
 
   <script>
     var prfm_config = { id: 1 };
   </script>
   <script src="//misc.chenliqiang.cn/prfm/1.0.0/perfm.min.js"></script>
   
-</head>
+<meta name="generator" content="Hexo 6.2.0"></head>
 
 <body>
   <nav id="sidebar" class="behavior_1">
@@ -32,7 +34,7 @@
         
         
         <li>
-          <a class href="/" title="首页">
+          <a class="" href="/" title="首页">
             <i class="iconfont icon-home"></i>
             <span>首页</span>
           </a>
@@ -40,7 +42,7 @@
         
         
         <li>
-          <a class href="/archives/" title="归档">
+          <a class="" href="/archives/" title="归档">
             <i class="iconfont icon-archive"></i>
             <span>归档</span>
           </a>
@@ -48,7 +50,7 @@
         
         
         <li>
-          <a class href="/page/about.html" title="关于">
+          <a class="" href="/page/about.html" title="关于">
             <i class="iconfont icon-user"></i>
             <span>关于</span>
           </a>
@@ -56,7 +58,7 @@
         
         
         <li>
-          <a class href="/links" title="友链">
+          <a class="" href="/links" title="友链">
             <i class="iconfont icon-link"></i>
             <span>友链</span>
           </a>
@@ -95,96 +97,62 @@
     </div>
     <h1 class="title">如何写出切实有效的javascript代码</h1>
     <div class="entry-content">
-      <p>1、使用变量之前先申明它，未使用var申明的变量默认为全局变量，有可能造成冲突。</p>
+      <p>1、使用变量之前先申明它，未使用 var 申明的变量默认为全局变量，有可能造成冲突。</p>
 <p>2、使用分号“;”结束一语句。</p>
-<a id="more"></a>
+<span id="more"></span>
 
-<p>3、避免使用全局变量——用命名空间代替，这样可以避免与其它js库冲突。</p>
+<p>3、避免使用全局变量——用命名空间代替，这样可以避免与其它 js 库冲突。</p>
 <p>4、考虑使用一种变量命名规范，比如匈牙利标记法。</p>
-<p>5、避免使用难以阅读和理解的语言结构，比如eval()。</p>
+<p>5、避免使用难以阅读和理解的语言结构，比如 eval()。</p>
 <p>6、尽量使用内置的函数和库，这样你就不需要额外去写代码，另外它们能在浏览器的本地代码得以实现，效率要高很多。</p>
 <p>7、匿名函数就是以参数的形式传递的函数或者在行内定义的没有名字的函数。你可以直接定义和分配给任何变量。</p>
-<p>8、在循环中善用continue跳过不必要的步骤。</p>
-<p>9、记住object也是关联数组，obj.property 和 obj[“property”]的写法是一样的。关联数组的key是被转换成字符串的，所以obj[3+4]和obj[“7”]的写法是一样的。</p>
+<p>8、在循环中善用 continue 跳过不必要的步骤。</p>
+<p>9、记住 object 也是关联数组，obj.property 和 obj[“property”]的写法是一样的。关联数组的 key 是被转换成字符串的，所以 obj[3+4]和 obj[“7”]的写法是一样的。</p>
 <p>10、在循环中要注意对象的修改，像数字这样的原始值传递给函数的是它本身的复制品，在函数内修改它的值对它本身没有任何影响。对象和数组却是按引用传递的，如果你在函数内部修改了它的值，也会影响到对象或者数组本身。</p>
 <p>11、避免使用”with”语句，用一个临时变量来转存对象。</p>
-<p>12、避免使用eval()和Function构造函数，用匿名函数代替。</p>
+<p>12、避免使用 eval()和 Function 构造函数，用匿名函数代替。</p>
 <blockquote>
 <p>Avoid using the eval() and Function constructors</p>
 </blockquote>
-<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">addMethodToObj</span>(<span class="hljs-params">oObject, oProperty, sFunctionCode</span>) </span>&#123;
-    oObject[oProperty] = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Function</span>(oFunctionCode);
-&#125;
-
-addMethodToObj(oMyObj, <span class="hljs-string">'rotate90'</span>, <span class="hljs-string">'this.angle=(this.angle+90)%360);</span></code></pre>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">addMethodToObj</span>(<span class="hljs-params">oObject, oProperty, sFunctionCode</span>) &#123;<br>    oObject[oProperty] = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Function</span>(oFunctionCode);<br>&#125;<br><br><span class="hljs-title function_">addMethodToObj</span>(oMyObj, <span class="hljs-string">&#x27;rotate90&#x27;</span>, <span class="hljs-string">&#x27;this.angle=(this.angle+90)%360);</span><br></code></pre></td></tr></table></figure>
 
 <blockquote>
 <p>Use and anonymous function instead</p>
 </blockquote>
-<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">addMethodObj</span>(<span class="hljs-params">oObject, oProperty, fFunctionCode</span>) </span>&#123;
-    oObject[oProperty] = fFunctionCode;
-&#125;
+<figure class="highlight javascript"><table><tr><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">addMethodObj</span>(<span class="hljs-params">oObject, oProperty, fFunctionCode</span>) &#123;<br>  oObject[oProperty] = fFunctionCode;<br>&#125;<br><br><span class="hljs-title function_">addMethodToObj</span>(oMyObj, <span class="hljs-string">&quot;rotate90&quot;</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">angle</span> = (<span class="hljs-variable language_">this</span>.<span class="hljs-property">angle</span> + <span class="hljs-number">90</span>) % <span class="hljs-number">360</span>;<br>&#125;);<br></code></pre></td></tr></table></figure>
 
-addMethodToObj(oMyObj, <span class="hljs-string">'rotate90'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-keyword">this</span>.angle = (<span class="hljs-keyword">this</span>.angle + <span class="hljs-number">90</span>) % <span class="hljs-number">360</span>;
-&#125;);</code></pre>
-
-<p>13、不要传递字符串给setTimeout和setInterval，传递函数来代替。</p>
+<p>13、不要传递字符串给 setTimeout 和 setInterval，传递函数来代替。</p>
 <blockquote>
 <p>Don’t pass strings to setTimeout() or setInterval()</p>
 </blockquote>
-<pre><code class="hljs javascript">setInterval(<span class="hljs-string">'displayData()'</span>, <span class="hljs-number">1000</span>);
-setTimeout(<span class="hljs-string">'moveElementBy(x);x+=5;'</span>, <span class="hljs-number">1000</span>);</code></pre>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><code class="hljs javascript"><span class="hljs-built_in">setInterval</span>(<span class="hljs-string">&quot;displayData()&quot;</span>, <span class="hljs-number">1000</span>);<br><span class="hljs-built_in">setTimeout</span>(<span class="hljs-string">&quot;moveElementBy(x);x+=5;&quot;</span>, <span class="hljs-number">1000</span>);<br></code></pre></td></tr></table></figure>
 
 <blockquote>
 <p>Pass functions instead</p>
 </blockquote>
-<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">displayData</span>(<span class="hljs-params"></span>) </span>&#123; <span class="hljs-comment">/*...*/</span> &#125;;
-setInterval(displayData, <span class="hljs-number">1000</span>);
+<figure class="highlight javascript"><table><tr><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">displayData</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-comment">/*...*/</span><br>&#125;<br><span class="hljs-built_in">setInterval</span>(displayData, <span class="hljs-number">1000</span>);<br><br><span class="hljs-built_in">setTimeout</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-title function_">moveElementBy</span>(x);<br>  x += <span class="hljs-number">5</span>;<br>&#125;);<br></code></pre></td></tr></table></figure>
 
-setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    moveElementBy(x);
-    x += <span class="hljs-number">5</span>;
-&#125;);</code></pre>
-
-<p>14、用”+=”符号代替连续的”+”号。</p>
+<p>14、用”+&#x3D;”符号代替连续的”+”号。</p>
 <blockquote>
 <p>Use string concatenation instead of the “+” operator</p>
 </blockquote>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> sNewStr = <span class="hljs-string">""</span>;
-sNewStr += <span class="hljs-string">"str x "</span> + <span class="hljs-string">"str y"</span> + <span class="hljs-string">"str z"</span>; <span class="hljs-comment">// causes temp string creation</span></code></pre>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> sNewStr = <span class="hljs-string">&quot;&quot;</span>;<br>sNewStr += <span class="hljs-string">&quot;str x &quot;</span> + <span class="hljs-string">&quot;str y&quot;</span> + <span class="hljs-string">&quot;str z&quot;</span>; <span class="hljs-comment">// causes temp string creation</span><br></code></pre></td></tr></table></figure>
 
 <blockquote>
-<p>Use “+=” string concatenation operator</p>
+<p>Use “+&#x3D;” string concatenation operator</p>
 </blockquote>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> sNewStr = <span class="hljs-string">""</span>;
-sNewStr += <span class="hljs-string">"str x"</span>;
-sNewStr += <span class="hljs-string">"str y"</span>;
-sNewStr += <span class="hljs-string">"str z"</span>;
-<span class="hljs-comment">// ...</span></code></pre>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> sNewStr = <span class="hljs-string">&quot;&quot;</span>;<br>sNewStr += <span class="hljs-string">&quot;str x&quot;</span>;<br>sNewStr += <span class="hljs-string">&quot;str y&quot;</span>;<br>sNewStr += <span class="hljs-string">&quot;str z&quot;</span>;<br><span class="hljs-comment">// ...</span><br></code></pre></td></tr></table></figure>
 
-<p>15、在操作大量HTML标记的时候，使用innerHTML属性代替DOM操作。</p>
-<p>浏览器解析HTML代码的效率很高，所以用innerHTML的方式将HTML插入文档的方式比用DOM操作的方式要快。</p>
-<pre><code class="hljs javascript">element.innerHTML = <span class="hljs-string">"&lt;div&gt;&lt;p&gt;This is some text inside a paragraph and a div and being assigned to an element&lt;/p&gt;&lt;/div&gt;"</span>;</code></pre>
+<p>15、在操作大量 HTML 标记的时候，使用 innerHTML 属性代替 DOM 操作。</p>
+<p>浏览器解析 HTML 代码的效率很高，所以用 innerHTML 的方式将 HTML 插入文档的方式比用 DOM 操作的方式要快。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><code class="hljs javascript">element.<span class="hljs-property">innerHTML</span> =<br>  <span class="hljs-string">&quot;&lt;div&gt;&lt;p&gt;This is some text inside a paragraph and a div and being assigned to an element&lt;/p&gt;&lt;/div&gt;&quot;</span>;<br></code></pre></td></tr></table></figure>
 
-<p>16、避免一次性进行大规模的DOM改变。</p>
-<p>改变DOM元素会导致文档流重新解析，可以临时创建一个对象，在这个对象中操作所有的改变，最后将结果插入文档。</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> oOrignElem = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'myDiv'</span>);
-<span class="hljs-keyword">var</span> oClone = oOrignElem.cloneNode(<span class="hljs-literal">true</span>);
-oClone.setAttribute(<span class="hljs-string">'style'</span>, <span class="hljs-string">'width:50%'</span>);
-
-<span class="hljs-keyword">var</span> oNewElem = <span class="hljs-literal">null</span>, sContent = <span class="hljs-string">""</span>;
-<span class="hljs-keyword">var</span> cStrs = asStrings.length; <span class="hljs-comment">// supose this is a big array</span>
-<span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; cStrs; i++) &#123;
-    oNewElem = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'p'</span>);
-    sContent = <span class="hljs-built_in">document</span>.createTextNode(asStrings[i]);
-    oNewElem.appendChild(sContent);
-    cloned.appendChild(oNewElem);
-&#125;
-oOrignElem.parentNode.replaceChild(oClone, oOrignElem);</code></pre>
+<p>16、避免一次性进行大规模的 DOM 改变。</p>
+<p>改变 DOM 元素会导致文档流重新解析，可以临时创建一个对象，在这个对象中操作所有的改变，最后将结果插入文档。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> oOrignElem = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;myDiv&quot;</span>);<br><span class="hljs-keyword">var</span> oClone = oOrignElem.<span class="hljs-title function_">cloneNode</span>(<span class="hljs-literal">true</span>);<br>oClone.<span class="hljs-title function_">setAttribute</span>(<span class="hljs-string">&quot;style&quot;</span>, <span class="hljs-string">&quot;width:50%&quot;</span>);<br><br><span class="hljs-keyword">var</span> oNewElem = <span class="hljs-literal">null</span>,<br>  sContent = <span class="hljs-string">&quot;&quot;</span>;<br><span class="hljs-keyword">var</span> cStrs = asStrings.<span class="hljs-property">length</span>; <span class="hljs-comment">// supose this is a big array</span><br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; cStrs; i++) &#123;<br>  oNewElem = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">&quot;p&quot;</span>);<br>  sContent = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createTextNode</span>(asStrings[i]);<br>  oNewElem.<span class="hljs-title function_">appendChild</span>(sContent);<br>  cloned.<span class="hljs-title function_">appendChild</span>(oNewElem);<br>&#125;<br>oOrignElem.<span class="hljs-property">parentNode</span>.<span class="hljs-title function_">replaceChild</span>(oClone, oOrignElem);<br></code></pre></td></tr></table></figure>
 
 <p>17、用命名空间创建可重用的模块，避免模块间的冲突。</p>
-<p>JavaScript原生不支持创建模块，所以你需要用到JavaScript的对象来仿冒命名空间。</p>
+<p>JavaScript 原生不支持创建模块，所以你需要用到 JavaScript 的对象来仿冒命名空间。</p>
 <p>更多内容将继续更新……</p>
 
     </div>
@@ -231,7 +199,9 @@ oOrignElem.parentNode.replaceChild(oClone, oOrignElem);</code></pre>
       &copy; 2022&nbsp;-&nbsp; Richard Chen
     </footer>
   </div>
-  <script src="/js/firekylin.js"></script>
+  
+<script src="/js/firekylin.js"></script>
+
   
   <script>
     var _hmt = _hmt || [];

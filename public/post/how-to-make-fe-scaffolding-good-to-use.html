@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
   
@@ -10,14 +10,16 @@
   
   <meta name="description" content="关注web前端技术_搜索引擎优化_网站建设">
   <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/rss.html">
-  <link rel="stylesheet" href="/css/all.css">
+  
+<link rel="stylesheet" href="/css/all.css">
+
 
   <script>
     var prfm_config = { id: 1 };
   </script>
   <script src="//misc.chenliqiang.cn/prfm/1.0.0/perfm.min.js"></script>
   
-</head>
+<meta name="generator" content="Hexo 6.2.0"></head>
 
 <body>
   <nav id="sidebar" class="behavior_1">
@@ -32,7 +34,7 @@
         
         
         <li>
-          <a class href="/" title="首页">
+          <a class="" href="/" title="首页">
             <i class="iconfont icon-home"></i>
             <span>首页</span>
           </a>
@@ -40,7 +42,7 @@
         
         
         <li>
-          <a class href="/archives/" title="归档">
+          <a class="" href="/archives/" title="归档">
             <i class="iconfont icon-archive"></i>
             <span>归档</span>
           </a>
@@ -48,7 +50,7 @@
         
         
         <li>
-          <a class href="/page/about.html" title="关于">
+          <a class="" href="/page/about.html" title="关于">
             <i class="iconfont icon-user"></i>
             <span>关于</span>
           </a>
@@ -56,7 +58,7 @@
         
         
         <li>
-          <a class href="/links" title="友链">
+          <a class="" href="/links" title="友链">
             <i class="iconfont icon-link"></i>
             <span>友链</span>
           </a>
@@ -96,11 +98,11 @@
     <h1 class="title">搭建一套好用的前端构建工具的方法</h1>
     <div class="entry-content">
       <p>最近一直在折腾构建工具，主要针对以前的工程进行改造，尝试着能搭建一套比较好用的构建工具，在这个过程中也做了一些新的实践。下面我就来谈谈在这次改造中的心得体会，内容不局限于某一款构建工具，不管用 <code>webpack</code> 、 <code>JDF</code>、<code>gulp</code> 、<code>grunt</code> 还是我比较喜欢的 <code>fis</code>，都可以很容易地实现。</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h2 id="容易上手"><a href="#容易上手" class="headerlink" title="容易上手"></a>容易上手</h2><p>好用的第一步就是容易上手。不管是新手还是老鸟，使用工具的目的都是为了解放双手，提高效率，所以一款好用的构建工具在使用上一定要简单，特别在多人协作的时候，其他开发人员可以快速上手，减少沟通成本。</p>
 <p>我认为容易上手可以体现在几个方面：</p>
-<h3 id="1-方便安装"><a href="#1-方便安装" class="headerlink" title="1. 方便安装"></a>1. 方便安装</h3><pre><code class="hljs nohighlight">npm install or setup.exe</code></pre>
+<h3 id="1-方便安装"><a href="#1-方便安装" class="headerlink" title="1. 方便安装"></a>1. 方便安装</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs nohighlight">npm install or setup.exe<br></code></pre></td></tr></table></figure>
 
 <p>最好运行一条命令或者一个安装包就可以装好整个工具</p>
 <h3 id="2-配置简单"><a href="#2-配置简单" class="headerlink" title="2. 配置简单"></a>2. 配置简单</h3><p>提倡<code>约定大于配置</code>的原则，用很少的配置或者不需要配置就可以先 run 起来，如果需要修改其中某些项，可以创建一个配置文件覆盖默认配置项。</p>
@@ -116,28 +118,14 @@
 <p>关于 <code>git hook</code> 推荐一个模块 <code>husky</code>，安装过后会自动创建 <code>hook</code> 文件到 <code>.git</code> 目录，你只需要在 <code>package.json</code> 的 <code>script</code> 中添加 <code>precommit</code> 和 <code>prepush</code> 就可以了。</p>
 <h3 id="2-常用的代码编译插件"><a href="#2-常用的代码编译插件" class="headerlink" title="2. 常用的代码编译插件"></a>2. 常用的代码编译插件</h3><p>工程中也许会用到 <code>Sass</code>、<code>Less</code>、<code>postcss</code>、<code>babel</code> 等编译插件，根据项目的需要集成进来。</p>
 <h3 id="3-模块化"><a href="#3-模块化" class="headerlink" title="3. 模块化"></a>3. 模块化</h3><p>模块化解决了 <code>js</code> 的独立作用域及依赖管理问题，让代码组织更简单，已经成为了前端在开发的标配。</p>
-<h3 id="4-组件化"><a href="#4-组件化" class="headerlink" title="4. 组件化"></a>4. 组件化</h3><pre><code class="hljs nohighlight">widget
- └ header
-   ├ header.vm
-   ├ header.js
-   ├ header.png
-   └ header.css</code></pre>
+<h3 id="4-组件化"><a href="#4-组件化" class="headerlink" title="4. 组件化"></a>4. 组件化</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs nohighlight">widget<br> └ header<br>   ├ header.vm<br>   ├ header.js<br>   ├ header.png<br>   └ header.css<br></code></pre></td></tr></table></figure>
 
 <p>组件化就是将页面的各个部分拆分成小部件，按文件夹组织代码和资源，代码相对独立，方便多人开发、维护和复用。</p>
 <h3 id="5-数据模拟"><a href="#5-数据模拟" class="headerlink" title="5. 数据模拟"></a>5. 数据模拟</h3><p>在后端接口还没准备好的时候，前端往往需要自己模拟数据来开发页面和交互，所以能够方便地模拟数据是构建工具的必备功能之一。我通常的做法是使用 <code>express</code> 启一个简单的 <code>web server</code>来实现。</p>
 <p>数据模拟分为 <code>异步接口数据模拟</code> 和 <code>页面渲染数据模拟</code>。</p>
 <h4 id="5-1-异步接口数据模拟"><a href="#5-1-异步接口数据模拟" class="headerlink" title="5.1 异步接口数据模拟"></a>5.1 异步接口数据模拟</h4><p>异步接口的数据模拟需要考虑两种场景：一是本地开发，二是与后端联调。</p>
 <p>假设有如下一个 <code>URL</code> 映射表，<code>key</code> 表示前端请求的地址匹配，<code>local</code> 表示本地数据模拟文件，可以是一个简单的 <code>json</code> 文件，也可以是 <code>express</code> 中间件的 <code>js</code> 文件，<code>server</code> 表示远端服务器的接口地址。</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">const</span> mockConfig = &#123;
-    <span class="hljs-string">'^/api/index'</span>: &#123;
-        <span class="hljs-attr">local</span>: <span class="hljs-string">'/mock/index.json'</span>,
-        <span class="hljs-attr">server</span>: <span class="hljs-string">'/api/index.html'</span>
-    &#125;,
-    <span class="hljs-string">'^/api/list'</span>: &#123;
-        <span class="hljs-attr">local</span>: <span class="hljs-string">'/mock/list.js'</span>,
-        <span class="hljs-attr">server</span>: <span class="hljs-string">'/api/list.html'</span>
-    &#125;
-&#125;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> mockConfig = &#123;<br>  <span class="hljs-string">&quot;^/api/index&quot;</span>: &#123;<br>    <span class="hljs-attr">local</span>: <span class="hljs-string">&quot;/mock/index.json&quot;</span>,<br>    <span class="hljs-attr">server</span>: <span class="hljs-string">&quot;/api/index.html&quot;</span>,<br>  &#125;,<br>  <span class="hljs-string">&quot;^/api/list&quot;</span>: &#123;<br>    <span class="hljs-attr">local</span>: <span class="hljs-string">&quot;/mock/list.js&quot;</span>,<br>    <span class="hljs-attr">server</span>: <span class="hljs-string">&quot;/api/list.html&quot;</span>,<br>  &#125;,<br>&#125;;<br></code></pre></td></tr></table></figure>
 
 <ul>
 <li><code>本地开发时</code>：编写 <code>express</code> 中间件读取表中匹配的 <code>local</code> 值，如果是 <code>json</code> 就读取文件内容，如果是 <code>js</code> 文件，就当作 <code>express</code> 的中间件使用。</li>
@@ -147,23 +135,19 @@
 <p>注意：<code>nodejs</code> 在 <code>require</code> 一个模块后会缓存起来，除非重启 <code>express</code>，想要数据文件不被缓存，先 <code>delete require.cache[xxx]</code> 再 <code>require</code> 进来</p>
 </blockquote>
 <h4 id="5-2-页面渲染数据模拟"><a href="#5-2-页面渲染数据模拟" class="headerlink" title="5.2 页面渲染数据模拟"></a>5.2 页面渲染数据模拟</h4><p>模拟页面渲染时的数据需要用到模板引擎，<code>express</code> 支持很多模板引擎，可以充分模拟服务端渲染页面时的数据模拟。数据来源可以是和模拟文件同名的 <code>.mock</code> 文件，比如如下一个文件结构：</p>
-<pre><code class="hljs nohighlight">project
- ├ common.mock // 全局模拟数据
- └ page
-   ├ index.vm
-   └ index.mock  // index.vm 的模拟数据</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs nohighlight">project<br> ├ common.mock // 全局模拟数据<br> └ page<br>   ├ index.vm<br>   └ index.mock  // index.vm 的模拟数据<br></code></pre></td></tr></table></figure>
 
 <p>当渲染 <code>index.vm</code> 的时候，首先读取全局模拟数据文件 <code>common.mock</code>，再读取模板对应的模拟数据文件 <code>index.mock</code>，合并起来作为模板引擎的数据来源。</p>
 <blockquote>
 <p>注：目前大多数的后端模板引擎都有 <code>nodejs</code> 版本的实现，比如 <code>JAVA</code> 中常用的 <code>velocity</code>，可以将其集成到 <code>express</code> 中模拟 <code>JAVA</code> 的模板渲染，由前端接管模板的编写，做到前后端的模板共用。</p>
 </blockquote>
-<h2 id="部署体验"><a href="#部署体验" class="headerlink" title="部署体验"></a>部署体验</h2><p>部署是最后一步，也是比较麻烦的一步。构建工具需要考虑性能优化、与IDE集成、与开发流程对接等。</p>
+<h2 id="部署体验"><a href="#部署体验" class="headerlink" title="部署体验"></a>部署体验</h2><p>部署是最后一步，也是比较麻烦的一步。构建工具需要考虑性能优化、与 IDE 集成、与开发流程对接等。</p>
 <h3 id="1-性能优化"><a href="#1-性能优化" class="headerlink" title="1. 性能优化"></a>1. 性能优化</h3><ul>
 <li>静态资源的压缩、合并、内嵌</li>
-<li>替换被引用资源的生产路径、添加CDN域名</li>
-<li>非覆盖式的版本发布（推荐文件名加md5后缀）</li>
+<li>替换被引用资源的生产路径、添加 CDN 域名</li>
+<li>非覆盖式的版本发布（推荐文件名加 md5 后缀）</li>
 </ul>
-<h3 id="2-与IDE集成"><a href="#2-与IDE集成" class="headerlink" title="2. 与IDE集成"></a>2. 与IDE集成</h3><p>大多数IDE都支持主流的构建工具，即使有不支持的，也可以使用 <code>npm script</code> 来执行任务。</p>
+<h3 id="2-与-IDE-集成"><a href="#2-与-IDE-集成" class="headerlink" title="2. 与 IDE 集成"></a>2. 与 IDE 集成</h3><p>大多数 IDE 都支持主流的构建工具，即使有不支持的，也可以使用 <code>npm script</code> 来执行任务。</p>
 <h3 id="3-与开发流程对接"><a href="#3-与开发流程对接" class="headerlink" title="3. 与开发流程对接"></a>3. 与开发流程对接</h3><p>各团队可能有自己的一套开发流程，比如我们这边是：本地开发联调、视觉走查、前后端联调、测试环境测试、预发布环境测试，上线。</p>
 <ul>
 <li>本地开发时要同时支持本地和本地，本地和远端的联调</li>
@@ -217,7 +201,9 @@
       &copy; 2022&nbsp;-&nbsp; Richard Chen
     </footer>
   </div>
-  <script src="/js/firekylin.js"></script>
+  
+<script src="/js/firekylin.js"></script>
+
   
   <script>
     var _hmt = _hmt || [];

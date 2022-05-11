@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
   
@@ -10,14 +10,16 @@
   
   <meta name="description" content="关注web前端技术_搜索引擎优化_网站建设">
   <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/rss.html">
-  <link rel="stylesheet" href="/css/all.css">
+  
+<link rel="stylesheet" href="/css/all.css">
+
 
   <script>
     var prfm_config = { id: 1 };
   </script>
   <script src="//misc.chenliqiang.cn/prfm/1.0.0/perfm.min.js"></script>
   
-</head>
+<meta name="generator" content="Hexo 6.2.0"></head>
 
 <body>
   <nav id="sidebar" class="behavior_1">
@@ -32,7 +34,7 @@
         
         
         <li>
-          <a class href="/" title="首页">
+          <a class="" href="/" title="首页">
             <i class="iconfont icon-home"></i>
             <span>首页</span>
           </a>
@@ -40,7 +42,7 @@
         
         
         <li>
-          <a class href="/archives/" title="归档">
+          <a class="" href="/archives/" title="归档">
             <i class="iconfont icon-archive"></i>
             <span>归档</span>
           </a>
@@ -48,7 +50,7 @@
         
         
         <li>
-          <a class href="/page/about.html" title="关于">
+          <a class="" href="/page/about.html" title="关于">
             <i class="iconfont icon-user"></i>
             <span>关于</span>
           </a>
@@ -56,7 +58,7 @@
         
         
         <li>
-          <a class href="/links" title="友链">
+          <a class="" href="/links" title="友链">
             <i class="iconfont icon-link"></i>
             <span>友链</span>
           </a>
@@ -95,17 +97,15 @@
     </div>
     <h1 class="title">C#.Net中使用WebBrowser请记得及时释放页面及缓存</h1>
     <div class="entry-content">
-      <p>最近在一个C#.NET项目中，需要一个WebBrowser去打开网页并显示其内容。操作很简单，这里就不具体说了，程序运行得很好，没有任何问题，于是放到服务器上。过了几天，悲剧发生了。</p>
-<a id="more"></a>
+      <p>最近在一个 C#.NET 项目中，需要一个 WebBrowser 去打开网页并显示其内容。操作很简单，这里就不具体说了，程序运行得很好，没有任何问题，于是放到服务器上。过了几天，悲剧发生了。</p>
+<span id="more"></span>
 
-<p>几天过后，发现服务器没响应了，远程连接上去一看，提示内存不足，于是查看任务管理器，那个.net程序占用了1G多内存。想了好久，程序也不大，内存占用不该那么高啊，突然灵光一现，是不是用了WebBrowser打开网页，但是没释放呢，就像你在浏览器中打开一个网页不关闭一样，如果这个网页各种JS各种统计代码，那它不是会一直运行，一直加载新内容啊，内在占用不高才怪。</p>
-<p>原因找到了，在代码里将WebBrowser下载完网页内容过后，随即将它的页面释放，编译过后放到服务器，再过了几天，回到服务器上一看，妥妥的，内存占用小了好多。</p>
+<p>几天过后，发现服务器没响应了，远程连接上去一看，提示内存不足，于是查看任务管理器，那个.net 程序占用了 1G 多内存。想了好久，程序也不大，内存占用不该那么高啊，突然灵光一现，是不是用了 WebBrowser 打开网页，但是没释放呢，就像你在浏览器中打开一个网页不关闭一样，如果这个网页各种 JS 各种统计代码，那它不是会一直运行，一直加载新内容啊，内在占用不高才怪。</p>
+<p>原因找到了，在代码里将 WebBrowser 下载完网页内容过后，随即将它的页面释放，编译过后放到服务器，再过了几天，回到服务器上一看，妥妥的，内存占用小了好多。</p>
 <p>具体方法如下：</p>
-<pre><code class="hljs c#">webBrowser.Url = null;
-webBrowser.Document.OpenNew(false);
-webBrowser = null;</code></pre>
+<figure class="highlight c#"><table><tr><td class="code"><pre><code class="hljs c#">webBrowser.Url = <span class="hljs-literal">null</span>;<br>webBrowser.Document.OpenNew(<span class="hljs-literal">false</span>);<br>webBrowser = <span class="hljs-literal">null</span>;<br></code></pre></td></tr></table></figure>
 
-<p>当然如果在当时申明了某些变量来保存网页的内容，也将变量设置为NULL吧。</p>
+<p>当然如果在当时申明了某些变量来保存网页的内容，也将变量设置为 NULL 吧。</p>
 
     </div>
     <p>本文链接：<a href="/post/20.html">https://www.chenliqiang.cn/post/20.html</a></p>
@@ -151,7 +151,9 @@ webBrowser = null;</code></pre>
       &copy; 2022&nbsp;-&nbsp; Richard Chen
     </footer>
   </div>
-  <script src="/js/firekylin.js"></script>
+  
+<script src="/js/firekylin.js"></script>
+
   
   <script>
     var _hmt = _hmt || [];
