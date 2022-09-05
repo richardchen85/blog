@@ -1,39 +1,32 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
-  <%
-    var title = page.title;
+  <% var title=page.title; if (is_home()) { title=config.title; } else if (is_archive()) { title=__('archive_a'); if
+    (is_month()){ title +=': ' + page.year + '/' + page.month; } else if (is_year()){ title +=': ' + page.year; } } else
+    if (is_category()){ title=__('category') + ': ' + page.category; } else if (is_tag()){ title=__('tag') + ': ' +
+    page.tag; } %>
+    <title>
+      <% if (title) { %>
+        <%= title %> | <% } %>
+            <%= config.author %>
+    </title>
+    <% if (config.keywords) { %>
+      <meta name="keywords" content="<%= page.keywords || config.keywords %>">
+      <% } %>
+        <% if (config.description) { %>
+          <meta name="description" content="<%= page.description || config.description %>">
+          <% } %>
+            <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/rss.html">
+            <%- css('css/all') %>
 
-    if (is_home()) {
-      title = config.title;
-    } else if (is_archive()) {
-      title = __('archive_a');
-      if (is_month()){
-        title += ': ' + page.year + '/' + page.month;
-      } else if (is_year()){
-        title += ': ' + page.year;
-      }
-    } else if (is_category()){
-      title = __('category') + ': ' + page.category;
-    } else if (is_tag()){
-      title = __('tag') + ': ' + page.tag;
-    }
-  %>
-  <title><% if (title) { %><%= title %> | <% } %><%= config.author %></title>
-  <% if (config.keywords) { %>
-  <meta name="keywords" content="<%= page.keywords || config.keywords %>"><% } %>
-  <% if (config.description) { %>
-  <meta name="description" content="<%= page.description || config.description %>"><% } %>
-  <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/rss.html">
-  <%- css('css/all') %>
+              <script>
+                var prfm_config = { id: 1 };
+              </script>
+              <script src="//misc.chenliqiang.cn/prfm/1.0.0/perfm.min.js"></script>
 
-  <script>
-    var prfm_config = { id: 1 };
-  </script>
-  <script src="//misc.chenliqiang.cn/prfm/1.0.0/perfm.min.js"></script>
-  
 </head>
 
 <body>
@@ -43,71 +36,78 @@
         <a href="/">
           <img src="<%= config.logo_url %>" alt="<%= config.title %>">
         </a>
-        <span><%= config.author %></span>
+        <span>
+          <%= config.author %>
+        </span>
       </div>
       <ul class="buttons">
         <% for (let i in theme.menu) { %>
-        <% let menu = theme.menu[i]; %>
-        <li>
-          <a class="" href="<%- menu.path %>" title="<%= menu.page %>">
-            <i class="iconfont icon-<%= menu.icon %>"></i>
-            <span><%= menu.page %></span>
-          </a>
-        </li>
-        <% } %>
+          <% let menu=theme.menu[i]; %>
+            <li>
+              <a class="" href="<%- menu.path %>" title="<%= menu.page %>">
+                <i class="iconfont icon-<%= menu.icon %>"></i>
+                <span>
+                  <%= menu.page %>
+                </span>
+              </a>
+            </li>
+            <% } %>
       </ul>
       <ul class="buttons">
         <li>
           <% if (config.github_url) { %>
-          <a class="inline" rel="nofollow" target="_blank" href="<%- config.github_url %>">
-            <i class="iconfont icon-github-v" title="GitHub"></i>
-          </a>
-          <% } %>
-          <% if (config.twitter_url) { %>
-          <% if (config.twitter_url.indexOf('twitter.com') > -1) { %>
-          <a class="inline" rel="nofollow" target="_blank" href="<%- config.twitter_url %>">
-            <i class="iconfont icon-twitter-v" title="Twitter"></i>
-          </a>
-          <% } %>
-          <% if (config.twitter_url.indexOf('weibo.com') > -1) { %>
-          <a class="inline" rel="nofollow" target="_blank" href="<%- config.twitter_url %>">
-            <i class="iconfont icon-weibo" title="weibo"></i>
-          </a>
-          <% } %>
-          <% } %>
-          <a class="inline" href="/rss.html">
-            <i class="iconfont icon-rss-v" title="RSS"></i>
-          </a>
-          <a class="inline" href="/search.html">
-            <i class="iconfont icon-search" title="Search"></i>
-          </a>
+            <a class="inline" rel="nofollow" target="_blank" href="<%- config.github_url %>">
+              <i class="iconfont icon-github-v" title="GitHub"></i>
+            </a>
+            <% } %>
+              <% if (config.twitter_url) { %>
+                <% if (config.twitter_url.indexOf('twitter.com')> -1) { %>
+                  <a class="inline" rel="nofollow" target="_blank" href="<%- config.twitter_url %>">
+                    <i class="iconfont icon-twitter-v" title="Twitter"></i>
+                  </a>
+                  <% } %>
+                    <% if (config.twitter_url.indexOf('weibo.com')> -1) { %>
+                      <a class="inline" rel="nofollow" target="_blank" href="<%- config.twitter_url %>">
+                        <i class="iconfont icon-weibo" title="weibo"></i>
+                      </a>
+                      <% } %>
+                        <% } %>
+                          <a class="inline" href="/rss.html">
+                            <i class="iconfont icon-rss-v" title="RSS"></i>
+                          </a>
+                          <a class="inline" href="/search.html">
+                            <i class="iconfont icon-search" title="Search"></i>
+                          </a>
         </li>
       </ul>
     </div>
   </nav>
   <div id="header">
     <div class="btn-bar"><i></i></div>
-    <h1><a href="/"><%= config.title %></a></h1>
+    <h1><a href="/">
+        <%= config.title %>
+      </a></h1>
     <a class="me" href="/page/about.html"><img src="<%= config.logo_url %>" alt="<%= config.author %>"></a>
   </div>
   <div id="sidebar-mask"></div>
   <div id="main">
     <%- body %>
-    <footer id="footer" class="inner">
-      &copy; <%= date(new Date(), 'YYYY') %>&nbsp;-&nbsp; <%= config.author || config.title %>
-    </footer>
+      <footer id="footer" class="inner">
+        &copy; <%= date(new Date(), 'YYYY' ) %>&nbsp;-&nbsp; <%= config.author || config.title %> 蜀ICP备12007224号-2
+      </footer>
   </div>
   <%- js('js/firekylin') %>
-  
-  <script>
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?78b5e2f61bcb1be04b8e24101cc27f17";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
+
+    <script>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?78b5e2f61bcb1be04b8e24101cc27f17";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
 
 </body>
+
 </html>
