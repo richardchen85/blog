@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+  
+    <title>
+      
+        脚手架内置esbuild踩坑记录 | 
+            Richard Chen
+    </title>
+    
+      <meta name="keywords" content="webpack,脚手架,esbuild">
+      
+        
+          <meta name="description" content="记录一下自研的基于webpack的脚手架内置esbuild时所踩的坑">
+          
+            <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/rss.html">
+            
+<link rel="stylesheet" href="/css/all.css">
+
+
+              <script>
+                var prfm_config = { id: 1 };
+              </script>
+              <script src="//misc.chenliqiang.cn/prfm/1.0.0/perfm.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <nav id="sidebar" class="behavior_1">
+    <div class="wrap">
+      <div class="profile">
+        <a href="/">
+          <img src="https://misc.chenliqiang.cn/blog/logo.png" alt="关注WEB前端技术_搜索引擎优化_网站建设">
+        </a>
+        <span>
+          Richard Chen
+        </span>
+      </div>
+      <ul class="buttons">
+        
+          
+            <li>
+              <a class="" href="/" title="首页">
+                <i class="iconfont icon-home"></i>
+                <span>
+                  首页
+                </span>
+              </a>
+            </li>
+            
+          
+            <li>
+              <a class="" href="/archives/" title="归档">
+                <i class="iconfont icon-archive"></i>
+                <span>
+                  归档
+                </span>
+              </a>
+            </li>
+            
+          
+            <li>
+              <a class="" href="/page/about.html" title="关于">
+                <i class="iconfont icon-user"></i>
+                <span>
+                  关于
+                </span>
+              </a>
+            </li>
+            
+          
+            <li>
+              <a class="" href="/links" title="友链">
+                <i class="iconfont icon-link"></i>
+                <span>
+                  友链
+                </span>
+              </a>
+            </li>
+            
+      </ul>
+      <ul class="buttons">
+        <li>
+          
+            <a class="inline" rel="nofollow" target="_blank" href="https://github.com/richardchen85">
+              <i class="iconfont icon-github-v" title="GitHub"></i>
+            </a>
+            
+              
+                          <a class="inline" href="/rss.html">
+                            <i class="iconfont icon-rss-v" title="RSS"></i>
+                          </a>
+                          <a class="inline" href="/search.html">
+                            <i class="iconfont icon-search" title="Search"></i>
+                          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div id="header">
+    <div class="btn-bar"><i></i></div>
+    <h1><a href="/">
+        关注WEB前端技术_搜索引擎优化_网站建设
+      </a></h1>
+    <a class="me" href="/page/about.html"><img src="https://misc.chenliqiang.cn/blog/logo.png" alt="Richard Chen"></a>
+  </div>
+  <div id="sidebar-mask"></div>
+  <div id="main">
+    <div id="page-post">
+  <article class="post detail">
+    <div class="meta">
+      <div class="date">08月13, 2024</div>
+    </div>
+    <h1 class="title">脚手架内置esbuild踩坑记录</h1>
+    <div class="entry-content">
+      <p>随着项目越来越大后，咱们脚手架使用 <code>babel</code> 进行代码编译感觉越来越慢。为了提升编译速度，尝试了一下使用 <code>esbuild</code> 后发现速度提升明显，于是决定将 <code>esbuild</code> 正式集成到脚手架中。</p>
+<span id="more"></span>
+
+<h2 id="主要内容"><a href="#主要内容" class="headerlink" title="主要内容"></a>主要内容</h2><ul>
+<li>为什么要使用 esbuild</li>
+<li>如何集成</li>
+<li>遇到的问题及解决方案</li>
+</ul>
+<h2 id="为什么要使用-esbuild"><a href="#为什么要使用-esbuild" class="headerlink" title="为什么要使用 esbuild ?"></a>为什么要使用 esbuild ?</h2><ul>
+<li>esbuild 基于 go 实现，构建速度非常快（官网声称比 webpack5 快 10-100 倍）</li>
+<li>目前 esbuild 生态已相对成熟，基本满足替换目前使用的 babel 的条件</li>
+<li>项目越来越大后，使用 babel 确实感觉比较慢，并且经过对比测试后，使用 esbuild 在编译时间确实有提升</li>
+</ul>
+<h2 id="如何集成？"><a href="#如何集成？" class="headerlink" title="如何集成？"></a>如何集成？</h2><p>直接使用 esbuild-loader 代替目前的 babel-loader 即可。<br>从 <a href="mailto:&#x6f;&#108;&#97;&#x2d;&#99;&#x6c;&#x69;&#x40;&#x33;&#46;&#55;&#x2e;&#120;">&#x6f;&#108;&#97;&#x2d;&#99;&#x6c;&#x69;&#x40;&#x33;&#46;&#55;&#x2e;&#120;</a> 开始同时支持 babel 和 esbuild，通过 .olarc.js 配置 esbuild: true 开启 esbuild 编译</p>
+<blockquote>
+<p>需要注意的是：esbuild 目前只能产出 es2015 代码，所以不兼容 IE 浏览器，若有兼容需求请慎用</p>
+</blockquote>
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><h3 id="1-原有的-autoCssModule-功能会失效"><a href="#1-原有的-autoCssModule-功能会失效" class="headerlink" title="1. 原有的 autoCssModule 功能会失效"></a>1. 原有的 autoCssModule 功能会失效</h3><h4 id="失效原因"><a href="#失效原因" class="headerlink" title="失效原因"></a>失效原因</h4><p><code>autoCSSModules</code> 功能主要是通过 js 代码中引用 css 文件的方式来自动判断是否启用 cssModule 功能，比如 <code>import &#39;./index.css&#39;</code> 这种写法就是普通 css 引用，<code>import styles from &#39;./index.css&#39;</code> 就是以 cssModule 的方式引用。</p>
+<p>当编译工具发现以 cssModule 方式引用时，会自动将代码改写成 <code>import styles from &#39;./index.css?modules&#39;</code>，这样在 webpack 的 css-loader 配置中可以匹配到 <code>?modules</code> 参数并开启 cssModule 功能。<br>自动改写代码原来是基于 babel 的插件实现，esbuild-loader 不支持自定义插件，于是只能在 esbuild-loader 编译完成后来处理这部分改动。</p>
+<h4 id="如何解决从"><a href="#如何解决从" class="headerlink" title="如何解决从"></a>如何解决从</h4><p>webpack 的 loader 入手，在 esbuild-loader 后增加一个 loader 来处理 esbuild 编译完成后的代码。</p>
+<p>使用 <code>es-module-lexer</code> 对代码进行分析，提取出需要开启 cssModule 的 css 引用方法。<code>es-module-lexer</code> 会分析出代码具体在文件中的位置。</p>
+<p>使用 <code>magic-string</code> 将对应位置引用的 css 文件加上 <code>?modules</code> 后缀。<code>magic-string</code> 是一个文本内容维护工具，支持对文本内容进行各种修改，最终生成修改后的结果并支持输出 <code>source-map</code> 的一个工具。</p>
+<h3 id="2-原有的-transformImports-功能会失效"><a href="#2-原有的-transformImports-功能会失效" class="headerlink" title="2. 原有的 transformImports 功能会失效"></a>2. 原有的 transformImports 功能会失效</h3><h4 id="失效原因-1"><a href="#失效原因-1" class="headerlink" title="失效原因"></a>失效原因</h4><p>原有功能是使用了 babel 的一个插件 <code>babel-plugin-transform-imports</code>。这个插件的主要作用是将 es6 模块的整体引入改写为部分引入，减少了打包后的代码依赖项。例如通过如下配置：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-attr">transformImports</span>: &#123;<br>  <span class="hljs-string">&#x27;@jd/jmtd&#x27;</span>: &#123;<br>    <span class="hljs-attr">transform</span>: <span class="hljs-function">(<span class="hljs-params">importName</span>) =&gt;</span> <span class="hljs-string">`@jd/jmtd/es/<span class="hljs-subst">$&#123;importName&#125;</span>`</span>,<br>  &#125;,<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>可以将代码里 <code>import &#123; Button &#125; from &#39;@jd/jmtd&#39;</code> 改写成 <code>import Button from &#39;@jd/jmtd/es/Button&#39;</code>。两者的区别就是，前者会引入 <code>&#39;@jd/jmtd/index.js&#39;</code>，导致整个组件库的代码都会被引入进来，而后者只会去引用 Button 组件。</p>
+<p>同 csModule 一样，由于 esbuild-loader 不支持自定义插件，无法在 esbuild 编译对代码进行改写，所以 transformImports 功能会失效。</p>
+<h4 id="如何解决"><a href="#如何解决" class="headerlink" title="如何解决"></a>如何解决</h4><p>和 cssModule 的处理方法类似，通过 webpack 的 loader 来处理 esbuild 编译过后的代码。同样使用 <code>es-module-lexer</code> 和 <code>magic-string</code>，根据 .olarc.js 配置文件中的 transformImports 配置内容，对代码文件内引用的模块进行匹配，符合条件的模块引用代码会被重写为逐条引入的写法。</p>
+<h3 id="3-sourceMap-定位飘移"><a href="#3-sourceMap-定位飘移" class="headerlink" title="3. sourceMap 定位飘移"></a>3. sourceMap 定位飘移</h3><p>当使用 webpack loader 对 esbuild 编译后内容进行修改过后，会导致 esbuild 产生的 sourceMap 和源码内容定位不准确的问题。原因就是在进行 transfromImports 修改过后，文件内容的行数可能会发生变化。</p>
+<p>要解决这个问题，主要思路就是读取 esbuild 产生的 sourceMap 内容，并且将要重写的那部分代码的映射关系删除掉，重新添加新的映射关系。</p>
+<p>这里需要用到一个工具叫 <code>source-map</code>。它可以读取已有的 sourceMap 内容并且支持对它进行再次修改，最后再生成一个最新的 sourceMap 内容。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>对 transform-imports 支持已经抽离成了一个 npm 包，源码可以查看 <a target="_blank" rel="noopener" href="https://github.com/olajs/transform-imports-loader">transform-imports-loader</a></p>
+
+    </div>
+    <p>本文链接：<a href="/post/webpack-scaffold-use-esbuild.html">https://www.chenliqiang.cn/post/webpack-scaffold-use-esbuild.html</a></p>
+    <p>-- <acronym title="End of File">EOF</acronym> --</p>
+
+    <div class="post-info">
+      <p>
+        作者
+        Richard Chen
+        发表于
+        <i>2024-08-13 15:12:00</i>
+
+        
+        ，添加在分类
+        
+        <a href="/cate/fe-engineering/" data-cate="前端工程化">
+          <code class="notebook">前端工程化</code>
+        </a>
+        
+        下
+        
+
+        
+
+        ，最后修改于
+        <i>2024-08-13 15:12:00</i>
+      </p>
+    </div>
+  </article>
+  
+  <nav class="pagination">
+    
+
+    
+    <a href="/post/how-to-build-react-state-management-tool.html" class="next">如何打造一款简单易用的 React 状态管理工具 &raquo;</a>
+    
+  </nav>
+  
+</div>
+      <footer id="footer" class="inner">
+        &copy; 2024&nbsp;-&nbsp; Richard Chen <a
+              href="https://beian.miit.gov.cn" target="_blank">蜀ICP备12007224号-2</a>
+      </footer>
+  </div>
+  
+<script src="/js/firekylin.js"></script>
+
+
+    <script>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?78b5e2f61bcb1be04b8e24101cc27f17";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+
+</body>
+
+</html>

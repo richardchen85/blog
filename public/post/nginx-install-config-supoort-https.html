@@ -26,7 +26,7 @@
               </script>
               <script src="//misc.chenliqiang.cn/prfm/1.0.0/perfm.min.js"></script>
 
-<meta name="generator" content="Hexo 6.2.0"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <body>
   <nav id="sidebar" class="behavior_1">
@@ -127,7 +127,7 @@
 
 <p>到此，安装就已经完成了，你可以到 <code>/export/servers/nginx/</code> 目录看到安装好的 <code>nginx</code> 的文件。</p>
 <h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="nginx-自启动"><a href="#nginx-自启动" class="headerlink" title="nginx 自启动"></a>nginx 自启动</h3><p>安装完成过后，首先我们要配置的就是让 <code>nginx</code> 随系统自动启动：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 编辑 /etc/rc.local 文件（这里需要 root 权限）</span><br>sudo vi /etc/rc.local<br><span class="hljs-comment"># 在文件中添加如下内容</span><br>/export/servers/nginx/sbin/nginx<br><span class="hljs-comment"># 然后保存退出</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 编辑 /etc/rc.local 文件（这里需要 root 权限）</span><br><span class="hljs-built_in">sudo</span> vi /etc/rc.local<br><span class="hljs-comment"># 在文件中添加如下内容</span><br>/export/servers/nginx/sbin/nginx<br><span class="hljs-comment"># 然后保存退出</span><br></code></pre></td></tr></table></figure>
 
 <blockquote>
 <p>注意：从 centos7 开始，开机时默认将不执行 &#x2F;etc&#x2F;rc.local，如果想要让它执行，必须更改该文件的权限 <code>chmod +x /etc/rc.d/rc.local</code>。当然也可以通过增加 systemctl service 的方式来实现。</p>
@@ -219,7 +219,7 @@
   
 </div>
       <footer id="footer" class="inner">
-        &copy; 2022&nbsp;-&nbsp; Richard Chen <a
+        &copy; 2024&nbsp;-&nbsp; Richard Chen <a
               href="https://beian.miit.gov.cn" target="_blank">蜀ICP备12007224号-2</a>
       </footer>
   </div>
