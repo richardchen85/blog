@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+  
+    <title>
+      
+        支持 Cascader 异步数据源多选回显的方案 | 
+            Richard Chen
+    </title>
+    
+      <meta name="keywords" content="antd,cascader">
+      
+        
+          <meta name="description" content="介绍在使用 Cascader 组件时遇到的异步数据源多选场景下的数据回显方案">
+          
+            <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/rss.html">
+            
+<link rel="stylesheet" href="/css/all.css">
+
+
+              <script>
+                var prfm_config = { id: 1 };
+              </script>
+              <script src="//misc.chenliqiang.cn/prfm/1.0.0/perfm.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <nav id="sidebar" class="behavior_1">
+    <div class="wrap">
+      <div class="profile">
+        <a href="/">
+          <img src="https://misc.chenliqiang.cn/blog/logo.png" alt="关注WEB前端技术_搜索引擎优化_网站建设">
+        </a>
+        <span>
+          Richard Chen
+        </span>
+      </div>
+      <ul class="buttons">
+        
+          
+            <li>
+              <a class="" href="/" title="首页">
+                <i class="iconfont icon-home"></i>
+                <span>
+                  首页
+                </span>
+              </a>
+            </li>
+            
+          
+            <li>
+              <a class="" href="/archives/" title="归档">
+                <i class="iconfont icon-archive"></i>
+                <span>
+                  归档
+                </span>
+              </a>
+            </li>
+            
+          
+            <li>
+              <a class="" href="/page/about.html" title="关于">
+                <i class="iconfont icon-user"></i>
+                <span>
+                  关于
+                </span>
+              </a>
+            </li>
+            
+          
+            <li>
+              <a class="" href="/links" title="友链">
+                <i class="iconfont icon-link"></i>
+                <span>
+                  友链
+                </span>
+              </a>
+            </li>
+            
+      </ul>
+      <ul class="buttons">
+        <li>
+          
+            <a class="inline" rel="nofollow" target="_blank" href="https://github.com/richardchen85">
+              <i class="iconfont icon-github-v" title="GitHub"></i>
+            </a>
+            
+              
+                          <a class="inline" href="/rss.html">
+                            <i class="iconfont icon-rss-v" title="RSS"></i>
+                          </a>
+                          <a class="inline" href="/search.html">
+                            <i class="iconfont icon-search" title="Search"></i>
+                          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div id="header">
+    <div class="btn-bar"><i></i></div>
+    <h1><a href="/">
+        关注WEB前端技术_搜索引擎优化_网站建设
+      </a></h1>
+    <a class="me" href="/page/about.html"><img src="https://misc.chenliqiang.cn/blog/logo.png" alt="Richard Chen"></a>
+  </div>
+  <div id="sidebar-mask"></div>
+  <div id="main">
+    <div id="page-post">
+  <article class="post detail">
+    <div class="meta">
+      <div class="date">02月25, 2025</div>
+    </div>
+    <h1 class="title">支持 Cascader 异步数据源多选回显的方案</h1>
+    <div class="entry-content">
+      <p>在开发需求中需要实现部门的级联多选功能，但目前部门树接口无法支持一次性拉取全量树结构，只能按层级异步加载，并且这个需求中有对已创建数据进行编辑的功能，这就涉及到在编辑的时候需要正常回显到 Cascader 组件中。</p>
+<span id="more"></span>
+
+<h2 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h2><p>目前能想到的方案就是：在编辑时，先将所有已选中的部门数据请求下来作为 Cascader 组件的数据源，这样在编辑初始化时能保证组件能正确回显，在用户对部门进行重新选择时，再按需异步加载未加载完的部门数据。</p>
+<p>具体实现如下：</p>
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><code class="hljs tsx"><span class="hljs-comment">// AsyncCascader.tsx</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>, &#123; useEffect, useState &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;<br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Cascader</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;antd&quot;</span>;<br><span class="hljs-keyword">import</span> &#123; rootDeptCode &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;../config&quot;</span>;<br><span class="hljs-keyword">import</span> api, &#123; <span class="hljs-title class_">DepartmentItem</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;../api&quot;</span>;<br><span class="hljs-keyword">import</span> &#123; mergeDeptList, loadDeptTree &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./utils&quot;</span>;<br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">AsyncCascader</span>(<span class="hljs-params">props</span>) &#123;<br>  <span class="hljs-keyword">const</span> [state, setState] = <span class="hljs-title function_">useState</span>(&#123;<br>    <span class="hljs-attr">departmentList</span>: [] <span class="hljs-keyword">as</span> <span class="hljs-title class_">DepartmentItem</span>[],<br>  &#125;);<br><br>  <span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-comment">// 组件初始化，先请求第一层级的部门数据</span><br>    api.<span class="hljs-title function_">deptList</span>(&#123; <span class="hljs-attr">code</span>: rootDeptCode, <span class="hljs-attr">level</span>: <span class="hljs-number">1</span> &#125;).<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">deptList</span>) =&gt;</span> &#123;<br>      <span class="hljs-comment">// 编辑模式下再次请求已选中的部门数据</span><br>      <span class="hljs-keyword">if</span> (props.<span class="hljs-property">data</span>) &#123;<br>        <span class="hljs-title function_">loadDeptTree</span>(deptList, props.<span class="hljs-property">data</span>).<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span> &#123;<br>          <span class="hljs-title function_">setState</span>(<span class="hljs-function">(<span class="hljs-params">old</span>) =&gt;</span> (&#123; ...old, <span class="hljs-attr">departmentList</span>: res &#125;));<br>        &#125;);<br>      &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-title function_">setState</span>(<span class="hljs-function">(<span class="hljs-params">old</span>) =&gt;</span> (&#123; ...old, <span class="hljs-attr">departmentList</span>: deptList &#125;));<br>      &#125;<br>    &#125;);<br>  &#125;, [props.<span class="hljs-property">data</span>]);<br><br>  <span class="hljs-comment">// 异步加载部门数据</span><br>  <span class="hljs-keyword">const</span> <span class="hljs-title function_">fetchDeptData</span> = (<span class="hljs-params"><span class="hljs-attr">selectedOptions</span>: <span class="hljs-title class_">DepartmentItem</span>[]</span>) =&gt; &#123;<br>    <span class="hljs-keyword">const</span> target = selectedOptions[selectedOptions.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>];<br><br>    <span class="hljs-comment">// 已加载过就不用重新加载了</span><br>    <span class="hljs-keyword">if</span> (target.<span class="hljs-property">children</span> &amp;&amp; target.<span class="hljs-property">children</span>.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span>;<br><br>    target.<span class="hljs-property">loading</span> = <span class="hljs-literal">true</span>;<br>    api.<span class="hljs-title function_">deptList</span>(&#123; <span class="hljs-attr">code</span>: target.<span class="hljs-property">code</span> &#125;).<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">deptList</span>) =&gt;</span> &#123;<br>      target.<span class="hljs-property">loading</span> = <span class="hljs-literal">false</span>;<br>      <span class="hljs-keyword">const</span> newDeptList = <span class="hljs-title function_">mergeDeptList</span>(<br>        state.<span class="hljs-property">departmentList</span>,<br>        selectedOptions,<br>        deptList<br>      );<br>      <span class="hljs-title function_">setState</span>(<span class="hljs-function">(<span class="hljs-params">old</span>) =&gt;</span> (&#123; ...old, <span class="hljs-attr">departmentList</span>: newDeptList &#125;));<br>    &#125;);<br>  &#125;;<br><br>  <span class="hljs-keyword">return</span> (<br>    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Cascader</span></span></span><br><span class="hljs-tag"><span class="language-xml">      <span class="hljs-attr">options</span>=<span class="hljs-string">&#123;state.departmentList&#125;</span></span></span><br><span class="hljs-tag"><span class="language-xml">      <span class="hljs-attr">fieldNames</span>=<span class="hljs-string">&#123;&#123;</span> <span class="hljs-attr">label:</span> &quot;<span class="hljs-attr">name</span>&quot;, <span class="hljs-attr">value:</span> &quot;<span class="hljs-attr">code</span>&quot; &#125;&#125;</span></span><br><span class="hljs-tag"><span class="language-xml">      <span class="hljs-attr">loadData</span>=<span class="hljs-string">&#123;fetchDeptData&#125;</span></span></span><br><span class="hljs-tag"><span class="language-xml">      <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;请选择部门&quot;</span></span></span><br><span class="hljs-tag"><span class="language-xml">      <span class="hljs-attr">changeOnSelect</span></span></span><br><span class="hljs-tag"><span class="language-xml">      <span class="hljs-attr">multiple</span></span></span><br><span class="hljs-tag"><span class="language-xml">      <span class="hljs-attr">maxTagCount</span>=<span class="hljs-string">&#123;6&#125;</span></span></span><br><span class="hljs-tag"><span class="language-xml">    /&gt;</span></span><br>  );<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-comment">// utils.ts</span><br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 根据 path 将子部门数据添加到部门 tree 中对应的部门下</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">mergeDeptList</span> = (<span class="hljs-params"></span><br><span class="hljs-params">  <span class="hljs-attr">tree</span>: <span class="hljs-title class_">DepartmentItem</span>[],</span><br><span class="hljs-params">  <span class="hljs-attr">path</span>: <span class="hljs-title class_">DepartmentItem</span>[],</span><br><span class="hljs-params">  <span class="hljs-attr">children</span>: <span class="hljs-title class_">DepartmentItem</span>[]</span><br><span class="hljs-params"></span>) =&gt; &#123;<br>  <span class="hljs-keyword">return</span> tree.<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">if</span> (item.<span class="hljs-property">code</span> === path[<span class="hljs-number">0</span>].<span class="hljs-property">code</span>) &#123;<br>      <span class="hljs-keyword">return</span> &#123;<br>        ...item,<br>        <span class="hljs-attr">children</span>:<br>          path.<span class="hljs-property">length</span> === <span class="hljs-number">1</span><br>            ? children<br>            : <span class="hljs-title function_">mergeDeptList</span>(item.<span class="hljs-property">children</span> || [], path.<span class="hljs-title function_">slice</span>(<span class="hljs-number">1</span>), children),<br>      &#125;;<br>    &#125;<br>    <span class="hljs-keyword">return</span> item;<br>  &#125;);<br>&#125;;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 向部门树中指定的部门插入其子部门数据</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">insertToDeptTree</span> = (<span class="hljs-params"></span><br><span class="hljs-params">  <span class="hljs-attr">tree</span>: <span class="hljs-title class_">DepartmentItem</span>[],</span><br><span class="hljs-params">  <span class="hljs-attr">code</span>: <span class="hljs-built_in">string</span>,</span><br><span class="hljs-params">  <span class="hljs-attr">children</span>: <span class="hljs-title class_">DepartmentItem</span>[]</span><br><span class="hljs-params"></span>) =&gt; &#123;<br>  <span class="hljs-keyword">let</span> inserted = <span class="hljs-literal">false</span>;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> item <span class="hljs-keyword">of</span> tree) &#123;<br>    <span class="hljs-keyword">if</span> (item.<span class="hljs-property">code</span> === code) &#123;<br>      item.<span class="hljs-property">children</span> = children;<br>      inserted = <span class="hljs-literal">true</span>;<br>    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (item.<span class="hljs-property">children</span> &amp;&amp; item.<span class="hljs-property">children</span>.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) &#123;<br>      inserted = <span class="hljs-title function_">insertToDeptTree</span>(item.<span class="hljs-property">children</span>, code, children);<br>    &#125;<br>    <span class="hljs-keyword">if</span> (inserted) &#123;<br>      <span class="hljs-keyword">break</span>;<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">return</span> inserted;<br>&#125;;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 请求已选中的所有部门数据</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">loadDeptTree</span>(<span class="hljs-params">deptList, selectedValue</span>) &#123;<br>  <span class="hljs-comment">// 保存部门 code 对应的子部门数据</span><br>  <span class="hljs-keyword">const</span> <span class="hljs-attr">deptMap</span>: &#123; [<span class="hljs-attr">key</span>: <span class="hljs-built_in">string</span>]: <span class="hljs-title class_">DepartmentItem</span>[] &#125; = &#123;&#125;;<br><br>  <span class="hljs-comment">// 选出需要加载的部门 code 并去重</span><br>  <span class="hljs-keyword">let</span> <span class="hljs-attr">codeArray</span>: <span class="hljs-built_in">string</span>[] = [];<br>  <span class="hljs-keyword">if</span> (<span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(selectedValue)) &#123;<br>    codeArray = [<br>      ...<span class="hljs-keyword">new</span> <span class="hljs-title class_">Set</span>(<br>        valueArray<br>          <span class="hljs-comment">// 按部门层级升序排列，保证按层级从大到小加载部门数据</span><br>          .<span class="hljs-title function_">sort</span>(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> a.<span class="hljs-property">length</span> - b.<span class="hljs-property">length</span>)<br>          <span class="hljs-comment">// 去除末级部门，末级部门不需要加载子部门</span><br>          .<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> item.<span class="hljs-title function_">slice</span>(<span class="hljs-number">0</span>, item.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>))<br>          .<span class="hljs-title function_">filter</span>(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> item.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>)<br>          .<span class="hljs-title function_">reduce</span>(<span class="hljs-function">(<span class="hljs-params">prev, curr</span>) =&gt;</span> prev.<span class="hljs-title function_">concat</span>(curr), [])<br>      ),<br>    ];<br>  &#125;<br><br>  <span class="hljs-comment">// 指加载指定部门 code 的子部门数据</span><br>  <span class="hljs-keyword">if</span> (codeArray.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) &#123;<br>    <span class="hljs-comment">// 注意：这里的并发量跟选中的数量有关，如果数量太大需要考虑分批请求</span><br>    <span class="hljs-keyword">await</span> <span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">all</span>(<br>      codeArray.<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">code</span>) =&gt;</span><br>        api.<span class="hljs-title function_">deptList</span>(&#123; code &#125;).<span class="hljs-title function_">catch</span>(<span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> &#123;<br>          <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(e);<br>          <span class="hljs-keyword">return</span> [];<br>        &#125;)<br>      )<br>    ).<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">resultArray</span>) =&gt;</span> &#123;<br>      codeArray.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">code, index</span>) =&gt;</span> &#123;<br>        deptMap[code] = resultArray[index];<br>      &#125;);<br>    &#125;);<br>  &#125;<br><br>  <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">keys</span>(deptMap).<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">key</span>) =&gt;</span> &#123;<br>    <span class="hljs-title function_">insertToDeptTree</span>(deptList, key, deptMap[key]);<br>  &#125;);<br><br>  <span class="hljs-keyword">return</span> deptList;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+    </div>
+    <p>本文链接：<a href="/post/antd-async-cascader-edit.html">https://www.chenliqiang.cn/post/antd-async-cascader-edit.html</a></p>
+    <p>-- <acronym title="End of File">EOF</acronym> --</p>
+
+    <div class="post-info">
+      <p>
+        作者
+        Richard Chen
+        发表于
+        <i>2025-02-25 11:34:00</i>
+
+        
+        ，添加在分类
+        
+        <a href="/cate/antd/" data-cate="antd">
+          <code class="notebook">antd</code>
+        </a>
+        
+        下
+        
+
+        
+
+        ，最后修改于
+        <i>2025-02-25 11:34:00</i>
+      </p>
+    </div>
+  </article>
+  
+  <nav class="pagination">
+    
+
+    
+    <a href="/post/webpack-scaffold-use-esbuild.html" class="next">脚手架内置esbuild踩坑记录 &raquo;</a>
+    
+  </nav>
+  
+</div>
+      <footer id="footer" class="inner">
+        &copy; 2025&nbsp;-&nbsp; Richard Chen <a
+              href="https://beian.miit.gov.cn" target="_blank">蜀ICP备12007224号-2</a>
+      </footer>
+  </div>
+  
+<script src="/js/firekylin.js"></script>
+
+
+    <script>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?78b5e2f61bcb1be04b8e24101cc27f17";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+
+</body>
+
+</html>

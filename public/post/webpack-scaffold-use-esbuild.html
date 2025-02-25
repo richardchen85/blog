@@ -129,7 +129,7 @@
 <li>目前 esbuild 生态已相对成熟，基本满足替换目前使用的 babel 的条件</li>
 <li>项目越来越大后，使用 babel 确实感觉比较慢，并且经过对比测试后，使用 esbuild 在编译时间确实有提升</li>
 </ul>
-<h2 id="如何集成？"><a href="#如何集成？" class="headerlink" title="如何集成？"></a>如何集成？</h2><p>直接使用 esbuild-loader 代替目前的 babel-loader 即可。<br>从 <a href="mailto:&#x6f;&#108;&#97;&#x2d;&#99;&#x6c;&#x69;&#x40;&#x33;&#46;&#55;&#x2e;&#120;">&#x6f;&#108;&#97;&#x2d;&#99;&#x6c;&#x69;&#x40;&#x33;&#46;&#55;&#x2e;&#120;</a> 开始同时支持 babel 和 esbuild，通过 .olarc.js 配置 esbuild: true 开启 esbuild 编译</p>
+<h2 id="如何集成？"><a href="#如何集成？" class="headerlink" title="如何集成？"></a>如何集成？</h2><p>直接使用 esbuild-loader 代替目前的 babel-loader 即可。<br>从 <a href="mailto:&#111;&#x6c;&#97;&#x2d;&#99;&#108;&#x69;&#x40;&#51;&#46;&#55;&#46;&#x78;">&#111;&#x6c;&#97;&#x2d;&#99;&#108;&#x69;&#x40;&#51;&#46;&#55;&#46;&#x78;</a> 开始同时支持 babel 和 esbuild，通过 .olarc.js 配置 esbuild: true 开启 esbuild 编译</p>
 <blockquote>
 <p>需要注意的是：esbuild 目前只能产出 es2015 代码，所以不兼容 IE 浏览器，若有兼容需求请慎用</p>
 </blockquote>
@@ -147,6 +147,8 @@
 <h3 id="3-sourceMap-定位飘移"><a href="#3-sourceMap-定位飘移" class="headerlink" title="3. sourceMap 定位飘移"></a>3. sourceMap 定位飘移</h3><p>当使用 webpack loader 对 esbuild 编译后内容进行修改过后，会导致 esbuild 产生的 sourceMap 和源码内容定位不准确的问题。原因就是在进行 transfromImports 修改过后，文件内容的行数可能会发生变化。</p>
 <p>要解决这个问题，主要思路就是读取 esbuild 产生的 sourceMap 内容，并且将要重写的那部分代码的映射关系删除掉，重新添加新的映射关系。</p>
 <p>这里需要用到一个工具叫 <code>source-map</code>。它可以读取已有的 sourceMap 内容并且支持对它进行再次修改，最后再生成一个最新的 sourceMap 内容。</p>
+<h3 id="4-使用了-esbuild-过后，单测行覆盖率有下降"><a href="#4-使用了-esbuild-过后，单测行覆盖率有下降" class="headerlink" title="4. 使用了 esbuild 过后，单测行覆盖率有下降"></a>4. 使用了 esbuild 过后，单测行覆盖率有下降</h3><p>当在 .olarc.js 中配置了 esbuild: true 时，表示使用 esbuild 来进行代码编译。esbuild 的产出物默认会去掉所有代码里的注释，包括可能的单测忽略项（即使用了 &#x2F;_ istanbul ignore xxx _&#x2F; 等注释），导致整个单测行覆盖率下降。</p>
+<p>解决方法：esbuild 为我们提供了一个保持注释的指令，即在注释里加上 @preserve，例如当我们要忽略掉某个文件时，可以使用 <code>/* istanbul ignore file @preserve */</code>。以此类推，忽略其它类型的注释也直接加上 @preserve 即可。</p>
 <h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>对 transform-imports 支持已经抽离成了一个 npm 包，源码可以查看 <a target="_blank" rel="noopener" href="https://github.com/olajs/transform-imports-loader">transform-imports-loader</a></p>
 
     </div>
@@ -180,6 +182,8 @@
   
   <nav class="pagination">
     
+    <a href="/post/antd-async-cascader-edit.html" class="prev">&laquo; 支持 Cascader 异步数据源多选回显的方案</a>
+    
 
     
     <a href="/post/how-to-build-react-state-management-tool.html" class="next">如何打造一款简单易用的 React 状态管理工具 &raquo;</a>
@@ -188,7 +192,7 @@
   
 </div>
       <footer id="footer" class="inner">
-        &copy; 2024&nbsp;-&nbsp; Richard Chen <a
+        &copy; 2025&nbsp;-&nbsp; Richard Chen <a
               href="https://beian.miit.gov.cn" target="_blank">蜀ICP备12007224号-2</a>
       </footer>
   </div>
