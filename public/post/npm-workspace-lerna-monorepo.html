@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+  
+    <title>
+      
+        使用 npm workspaces + lerna 管理 monorepo | 
+            Richard Chen
+    </title>
+    
+      <meta name="keywords" content="npm,lerna,workspaces,monorepo">
+      
+        
+          <meta name="description" content="介绍如何使用 npm workspaces + lerna 管理 monorepo 项目仓库">
+          
+            <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/rss.html">
+            
+<link rel="stylesheet" href="/css/all.css">
+
+
+              <script>
+                var prfm_config = { id: 1 };
+              </script>
+              <script src="//misc.chenliqiang.cn/prfm/1.0.0/perfm.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <nav id="sidebar" class="behavior_1">
+    <div class="wrap">
+      <div class="profile">
+        <a href="/">
+          <img src="https://misc.chenliqiang.cn/blog/logo.png" alt="关注WEB前端技术_搜索引擎优化_网站建设">
+        </a>
+        <span>
+          Richard Chen
+        </span>
+      </div>
+      <ul class="buttons">
+        
+          
+            <li>
+              <a class="" href="/" title="首页">
+                <i class="iconfont icon-home"></i>
+                <span>
+                  首页
+                </span>
+              </a>
+            </li>
+            
+          
+            <li>
+              <a class="" href="/archives/" title="归档">
+                <i class="iconfont icon-archive"></i>
+                <span>
+                  归档
+                </span>
+              </a>
+            </li>
+            
+          
+            <li>
+              <a class="" href="/page/about.html" title="关于">
+                <i class="iconfont icon-user"></i>
+                <span>
+                  关于
+                </span>
+              </a>
+            </li>
+            
+          
+            <li>
+              <a class="" href="/links" title="友链">
+                <i class="iconfont icon-link"></i>
+                <span>
+                  友链
+                </span>
+              </a>
+            </li>
+            
+      </ul>
+      <ul class="buttons">
+        <li>
+          
+            <a class="inline" rel="nofollow" target="_blank" href="https://github.com/richardchen85">
+              <i class="iconfont icon-github-v" title="GitHub"></i>
+            </a>
+            
+              
+                          <a class="inline" href="/rss.html">
+                            <i class="iconfont icon-rss-v" title="RSS"></i>
+                          </a>
+                          <a class="inline" href="/search.html">
+                            <i class="iconfont icon-search" title="Search"></i>
+                          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div id="header">
+    <div class="btn-bar"><i></i></div>
+    <h1><a href="/">
+        关注WEB前端技术_搜索引擎优化_网站建设
+      </a></h1>
+    <a class="me" href="/page/about.html"><img src="https://misc.chenliqiang.cn/blog/logo.png" alt="Richard Chen"></a>
+  </div>
+  <div id="sidebar-mask"></div>
+  <div id="main">
+    <div id="page-post">
+  <article class="post detail">
+    <div class="meta">
+      <div class="date">06月09, 2026</div>
+    </div>
+    <h1 class="title">使用 npm workspaces + lerna 管理 monorepo</h1>
+    <div class="entry-content">
+      <p>在之前尝试将项目中使用到的 lerna 升级到 v6 时发现，使用 lerna bootstrap 初始化项目时报错：bootstrap 等 npm 内置支持的几个命令已经不再可用。因为从 <a href="mailto:&#x6e;&#x70;&#109;&#64;&#55;&#x2e;&#x78;">&#x6e;&#x70;&#109;&#64;&#55;&#x2e;&#x78;</a> 开始引入了 workspaces 功能，它允许你在一个单一的仓库中组织和管理多个相关的 npm 包，从而简化了多包项目的开发和维护。</p>
+<span id="more"></span>
+
+<h2 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h2><ul>
+<li><strong>集中管理依赖</strong>：可以在根目录的 <code>package.json</code> 中定义所有包的依赖，避免重复安装。</li>
+<li><strong>跨包引用</strong>：可以轻松地在工作区内的包之间引用和依赖。</li>
+<li><strong>统一脚本执行</strong>：可以在根目录执行脚本，自动在所有子包中运行。</li>
+</ul>
+<p>其中第1点替代了 lerna bootstrap 的能力，在项目根目录执行 npm install 时，npm 会同时安装根目录和子包的所有依赖，并且会根据规则<strong>将子包共同依赖的包安装在项目根目录，同时会将每个子包都以 npm link 的方式安装到项目根目录。</strong> 这样有以下几个优势：</p>
+<ul>
+<li><strong>避免重复安装</strong>：各子包共同的依赖项集中安装在项目根目录，可以减少各子包重复在各自目录重复安装，因为 node.js 等模块管理工具在引用 npm 包的时候，是自下而上查找的方式。</li>
+<li><strong>方便子包跨包依赖</strong>：各子包相互依赖也不需要安装了，会直接引用到通过 npm link 到根目录 node_modules 中的子包。</li>
+</ul>
+<h2 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h2><h3 id="创建工作区"><a href="#创建工作区" class="headerlink" title="创建工作区"></a>创建工作区</h3><p>首先，创建一个新的项目目录，并在其中初始化一个新的 npm 项目：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-built_in">mkdir</span> my-workspace<br><span class="hljs-built_in">cd</span> my-workspace<br>npm init -y<br></code></pre></td></tr></table></figure>
+
+<h3 id="配置-package-json"><a href="#配置-package-json" class="headerlink" title="配置 package.json"></a>配置 <code>package.json</code></h3><p>在根目录的 <code>package.json</code> 中添加 <code>workspaces</code> 字段，指定工作区的包路径：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;my-workspace&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1.0.0&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;private&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;workspaces&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>    <span class="hljs-string">&quot;packages/*&quot;</span><br>  <span class="hljs-punctuation">]</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="创建子包"><a href="#创建子包" class="headerlink" title="创建子包"></a>创建子包</h3><p>在 <code>packages</code> 目录下创建多个子包：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-built_in">mkdir</span> -p packages/package-a<br><span class="hljs-built_in">mkdir</span> -p packages/package-b<br><span class="hljs-built_in">cd</span> packages/package-a<br>npm init -y<br><span class="hljs-built_in">cd</span> ../package-b<br>npm init -y<br></code></pre></td></tr></table></figure>
+
+<h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><p>在根目录运行 <code>npm install</code>，npm 会自动安装所有子包的依赖，并在根目录创建一个统一的 <code>node_modules</code> 目录。</p>
+<h3 id="跨包引用"><a href="#跨包引用" class="headerlink" title="跨包引用"></a>跨包引用</h3><p>在子包的 <code>package.json</code> 中，可以通过 <code>workspace:</code> 前缀来引用其他子包，也可以直接写其他子包的最新版本，lerna 在执行 lerna version 命令时会自动更新依赖的版本：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;package-a&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1.0.0&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;dependencies&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;package-b&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;workspace:*&quot;</span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="运行脚本"><a href="#运行脚本" class="headerlink" title="运行脚本"></a>运行脚本</h3><p>可以在根目录运行脚本，npm 会自动在所有子包中执行：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">npm run <span class="hljs-built_in">test</span> --workspaces<br></code></pre></td></tr></table></figure>
+
+<h2 id="结合-lerna"><a href="#结合-lerna" class="headerlink" title="结合 lerna"></a>结合 lerna</h2><p>lerna 从 4.0 开始支持 npm workspaces 功能，从而简化了依赖管理和脚本执行。但其它方面比如修改版本及发版方面还是可以使用 lerna 来完成。具体的使用可以参考：4a-bdp-draw 或 4a-bdp-common 代码库。</p>
+
+    </div>
+    <p>本文链接：<a href="/post/npm-workspace-lerna-monorepo.html">https://www.chenliqiang.cn/post/npm-workspace-lerna-monorepo.html</a></p>
+    <p>-- <acronym title="End of File">EOF</acronym> --</p>
+
+    <div class="post-info">
+      <p>
+        作者
+        Richard Chen
+        发表于
+        <i>2026-06-09 18:00:00</i>
+
+        
+        ，添加在分类
+        
+        <a href="/cate/fe-engineering/" data-cate="前端工程化">
+          <code class="notebook">前端工程化</code>
+        </a>
+        
+        下
+        
+
+        
+
+        ，最后修改于
+        <i>2026-06-09 18:00:00</i>
+      </p>
+    </div>
+  </article>
+  
+  <nav class="pagination">
+    
+    <a href="/post/nginx-proxy-dns-resolution.html" class="prev">&laquo; 配置 nginx 代理的 DNS 动态解析</a>
+    
+
+    
+    <a href="/post/antd-async-cascader-edit.html" class="next">支持 Cascader 异步数据源多选回显的方案 &raquo;</a>
+    
+  </nav>
+  
+</div>
+      <footer id="footer" class="inner">
+        &copy; 2026&nbsp;-&nbsp; Richard Chen <a
+              href="https://beian.miit.gov.cn" target="_blank">蜀ICP备12007224号-2</a>
+      </footer>
+  </div>
+  
+<script src="/js/firekylin.js"></script>
+
+
+    <script>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?78b5e2f61bcb1be04b8e24101cc27f17";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+
+</body>
+
+</html>
